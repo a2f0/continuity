@@ -37,6 +37,7 @@ bun run check               # everything CI runs
 | `src/export/` | tearleads seed, Google Contacts CSV, and vCard writers |
 | `src/genesis/` | Builds `genesis/` and compares it with what is on disk |
 | `src/portraits/` | Portrait prompts, provenance, and image generation |
+| `src/site/`, `site/` | Static asset gallery builder, stylesheet, and headers |
 | `assets/fonts/` | Vendored OFL and Apache fonts, with their licenses |
 | `assets/portraits/` | One canonical portrait per character, with provenance |
 | `genesis/` | Generated output; never edit it by hand |
@@ -100,6 +101,35 @@ document expires; renew it in canon and regenerate.
 
 See [docs/tearleads.md](docs/tearleads.md) for the seed contract and how
 tearleads pins and consumes this repository.
+
+## Asset gallery
+
+[continuity.tearleads.com](https://continuity.tearleads.com) shows the cast,
+portraits, specimen documents, notes, and downloads on one scrollable page.
+The HTML and every asset response carry `noindex` directives.
+
+```sh
+bun run site:dev       # build the gallery and preview it with Wrangler
+bun run site:build     # copy verified genesis assets and build dist/index.html
+bun run site:deploy    # rebuild and publish the tearleads-continuity Worker
+```
+
+Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` for deployment, or use
+Wrangler's authenticated session. The gallery is static HTML and CSS, built
+from the committed `genesis/` snapshot; run `bun run check` before publishing.
+`src/site/` builds the page and `site/` contains its stylesheet and headers.
+
+The hostname belongs to `terraform/stacks/prod/website` in the
+[tearleads repository](https://github.com/a2f0/tearleads). For its first setup,
+publish the Worker here, then plan and apply the hostname there:
+
+```sh
+terraform/scripts/run-website-stack.sh prod plan -out=/path/to/gallery.tfplan
+terraform/scripts/run-website-stack.sh prod apply /path/to/gallery.tfplan
+```
+
+Later asset deployments need only Wrangler. `workers.dev` and preview URLs
+are disabled.
 
 ## Development
 

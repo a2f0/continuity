@@ -10,7 +10,8 @@ attribution footers. Do not create GitHub issues without an explicit request.
 - `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed skills,
   binary placement, Knip, and TypeScript.
 - `bun run check`: `check:fast`, tests, canon consistency, and a full re-render
-  proving `genesis/` matches canon byte for byte. The pre-push hook runs it.
+  proving `genesis/` matches canon byte for byte, then the static gallery build.
+  The pre-push hook runs it.
 - `bun run canon:check`: continuity rules alone, plus portrait status.
 - `bun run genesis:check`: the re-render alone (about 20 seconds).
 

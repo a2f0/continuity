@@ -83,6 +83,10 @@ jobs:
         if: ${{ !cancelled() }}
         run: bun run genesis:check
 
+      - name: Build asset gallery
+        if: ${{ !cancelled() }}
+        run: bun run site:build
+
   gate:
     name: CI gate
     if: always()
