@@ -1,10 +1,17 @@
 import { assetUrl, escapeHtml as e } from "./html";
 import type { Gallery, Person } from "./types";
 
-function documentImage(person: Person, path: string, label: string): string {
+function documentImage(
+  person: Person,
+  path: string,
+  label: string,
+  gallery: Gallery,
+): string {
+  const image = gallery.assets.find((asset) => asset.path === path)?.image;
+  if (!image) throw new Error(`Missing image dimensions for ${path}`);
   return `<figure class="document">
     <a href="${assetUrl(path)}" aria-label="Open ${e(person.displayName)}: ${e(label)}">
-      <img src="${assetUrl(path)}" alt="${e(person.displayName)} — ${e(label)}, fictional specimen" loading="lazy" decoding="async" width="1600" height="1100">
+      <img src="${assetUrl(path)}" alt="${e(person.displayName)} — ${e(label)}, fictional specimen" loading="lazy" decoding="async" width="${image.width}" height="${image.height}">
     </a>
     <figcaption class="document-caption"><span>${e(label)}</span><a href="${assetUrl(path)}" download>Download JPG <span aria-hidden="true">↗</span></a></figcaption>
   </figure>`;
@@ -53,7 +60,7 @@ function character(person: Person, index: number, gallery: Gallery): string {
       </a>
     </div>
     <div class="person-story"><p>${e(person.bio)}</p>${details(person)}</div>
-    <div class="documents">${documents.map(([path, label]) => (path ? documentImage(person, path, label) : "")).join("")}</div>
+    <div class="documents">${documents.map(([path, label]) => (path ? documentImage(person, path, label, gallery) : "")).join("")}</div>
     <div class="relationships"><span class="eyebrow">Connected to</span>${relationships}</div>
   </article>`;
 }

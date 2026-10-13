@@ -32,6 +32,8 @@ inspect failures with `bun run agent:logs <path>`.
   helpers.
 - Keep tests beside the behavior they exercise. Use `genesis:check` to prove
   rendering refactors preserve output without regenerating tracked binaries.
+- `src/site/` packages the `genesis/` snapshot and static assets. Read facts
+  from that snapshot; do not load `canon/world.ts` or render documents there.
 
 ## Canon and generated output
 

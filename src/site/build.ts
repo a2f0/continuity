@@ -9,6 +9,7 @@ import {
 import { join } from "node:path";
 import type { SeedSpec } from "../export/tearleadsSeed";
 import { repoPath } from "../paths";
+import { imageSize } from "../render/imageSize";
 import { galleryPage } from "./page";
 import type { Asset, Gallery, Snapshot } from "./types";
 
@@ -17,7 +18,7 @@ export function readGallery(root: string): Gallery {
   const manifest = JSON.parse(manifestBytes.toString("utf8")) as {
     files: readonly (Asset & { sha256: string })[];
   };
-  for (const asset of manifest.files) {
+  const assets = manifest.files.map((asset): Asset => {
     const bytes = readFileSync(join(root, asset.path));
     const digest = createHash("sha256").update(bytes).digest("hex");
     if (bytes.length !== asset.bytes || digest !== asset.sha256) {
@@ -25,7 +26,10 @@ export function readGallery(root: string): Gallery {
         `genesis/${asset.path} differs from its manifest. Run bun run genesis.`,
       );
     }
-  }
+    return /\.(jpg|png)$/.test(asset.path)
+      ? { ...asset, image: imageSize(bytes) }
+      : asset;
+  });
   const canon = JSON.parse(
     readFileSync(join(root, "canon.json"), "utf8"),
   ) as Snapshot;
@@ -35,10 +39,7 @@ export function readGallery(root: string): Gallery {
   return {
     canon,
     notes: seed.notes,
-    assets: [
-      ...manifest.files,
-      { path: "manifest.json", bytes: manifestBytes.length },
-    ],
+    assets: [...assets, { path: "manifest.json", bytes: manifestBytes.length }],
   };
 }
 

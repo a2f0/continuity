@@ -6,6 +6,7 @@ export type Person = Snapshot["characters"][number];
 export interface Asset {
   readonly path: string;
   readonly bytes: number;
+  readonly image?: { readonly width: number; readonly height: number };
 }
 
 export interface Gallery {

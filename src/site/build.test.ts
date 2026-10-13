@@ -48,6 +48,25 @@ describe("asset gallery", () => {
         readFileSync(join(output, decodeURIComponent(path))).length,
       ).toBeGreaterThan(0);
     }
+    const stylesheet = readFileSync(join(output, "style.css"), "utf8");
+    for (const match of stylesheet.matchAll(/url\("(\/[^"#]+)"\)/g)) {
+      const path = match[1];
+      if (!path) throw new Error("Missing stylesheet asset path");
+      expect(
+        readFileSync(join(output, decodeURIComponent(path))).length,
+      ).toBeGreaterThan(0);
+    }
+  });
+
+  test("reserves each document image's actual dimensions before it loads", () => {
+    for (const asset of gallery.assets.filter((file) =>
+      file.path.startsWith("documents/"),
+    )) {
+      if (!asset.image) throw new Error("Missing document dimensions");
+      expect(html).toContain(
+        `width="${asset.image.width}" height="${asset.image.height}"`,
+      );
+    }
   });
 
   test("opts the page and assets out of indexing", () => {
