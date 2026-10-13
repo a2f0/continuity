@@ -1,6 +1,8 @@
 import { ageOn } from "../dates";
 import type { Character, RelationshipKind, World } from "../types";
 
+// validateWorld checks every birth date and the story date before these rules run.
+
 // 555-0100 through 555-0199 is the NANP range reserved for fiction.
 const PHONE_PATTERN = /^\(\d{3}\) 555-01\d{2}$/;
 // RFC 2606 reserves these names for documentation and examples.

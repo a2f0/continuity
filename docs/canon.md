@@ -22,7 +22,8 @@ The schema lives in `src/canon/types.ts`. Canon stores facts, and
 - passport expiration: the day before the anniversary of issue;
 - display names, height and weight formats.
 
-`src/render/mrz.ts` computes the passport's machine readable zone and check digits.
+`src/render/mrz.ts` computes the passport's machine readable zone and check
+digits.
 
 Storing a derived value would let it drift, so the schema has no field for one.
 

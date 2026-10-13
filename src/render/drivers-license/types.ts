@@ -6,6 +6,7 @@ import type {
 } from "../../canon/types";
 import type { Portrait } from "../portrait";
 
+// AAMVA-numbered fields on an original design supplied by a fictional issuer.
 export interface LicenseInput {
   readonly character: Character;
   readonly license: DriversLicense;

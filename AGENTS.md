@@ -20,13 +20,15 @@ inspect failures with `bun run agent:logs <path>`.
 ## Code organization
 
 - Keep `src/canon/` independent of rendering, exports, and the concrete
-  `canon/world.ts`. Pass `World` into functions; load the world in CLI entrypoints.
+  `canon/world.ts`. Pass `World` into functions; load the world in CLI
+  entrypoints.
 - `src/genesis/` coordinates renderers and exporters. Renderers take explicit
   inputs and must not import the genesis builder or cache canon-dependent state
   across builds.
 - Split modules by behavior: canon rules live in `src/canon/validation/`, and
   document layouts in `src/render/drivers-license/` and `src/render/passport/`.
-  Import the implementing module directly; avoid barrel files and catch-all helpers.
+  Import the implementing module directly; avoid barrel files and catch-all
+  helpers.
 - Keep tests beside the behavior they exercise. Use `genesis:check` to prove
   rendering refactors preserve output without regenerating tracked binaries.
 
