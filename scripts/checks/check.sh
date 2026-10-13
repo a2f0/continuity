@@ -18,3 +18,6 @@ bun run canon:check
 
 echo "Checking genesis output..."
 bun run genesis:check
+
+echo "Building asset gallery..."
+bun run site:build

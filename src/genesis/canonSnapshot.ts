@@ -45,7 +45,7 @@ function documents(world: World, character: Character) {
 export function canonSnapshot(
   world: World,
   assets: ReadonlyMap<string, CharacterAssets>,
-): unknown {
+) {
   return {
     asOf: world.asOf,
     owner: world.device.owner,
