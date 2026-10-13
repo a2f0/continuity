@@ -103,7 +103,7 @@
           "expires": "2033-06-01"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/maya-reyes.png",
         "driversLicenseFront": "documents/maya-reyes/drivers-license-front.jpg",
@@ -197,7 +197,7 @@
           "expires": "2029-11-02"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/daniel-okafor.png",
         "driversLicenseFront": "documents/daniel-okafor/drivers-license-front.jpg",
@@ -279,7 +279,7 @@
           "expires": "2031-11-29"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/rosa-reyes.png",
         "driversLicenseFront": "documents/rosa-reyes/drivers-license-front.jpg",
@@ -354,7 +354,7 @@
           "expires": "2030-06-02"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/theo-reyes.png",
         "driversLicenseFront": "documents/theo-reyes/drivers-license-front.jpg",
@@ -430,7 +430,7 @@
           "expires": "2033-09-09"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/priya-natarajan.png",
         "driversLicenseFront": "documents/priya-natarajan/drivers-license-front.jpg",
@@ -511,7 +511,7 @@
           "expires": "2028-12-19"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/sam-whitfield.png",
         "driversLicenseFront": "documents/sam-whitfield/drivers-license-front.jpg",
@@ -594,7 +594,7 @@
           "expires": "2030-04-03"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/hana-kobayashi.png",
         "driversLicenseFront": "documents/hana-kobayashi/drivers-license-front.jpg",
@@ -670,7 +670,7 @@
           "expires": "2031-08-27"
         }
       },
-      "portrait": "placeholder",
+      "portrait": "photo",
       "files": {
         "avatar": "avatars/marcus-bell.png",
         "driversLicenseFront": "documents/marcus-bell/drivers-license-front.jpg",

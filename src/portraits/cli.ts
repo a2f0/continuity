@@ -1,12 +1,18 @@
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
 import { parseArgs } from "node:util";
 import { world } from "../../canon/world";
 import { findCharacter } from "../canon/derive";
 import type { Character } from "../canon/types";
-import { imageSize } from "../render/imageSize";
-import { portraitPath, portraitSidecarPath } from "../render/portrait";
+import {
+  loadPortrait,
+  portraitPath,
+  portraitSidecarPath,
+} from "../render/portrait";
+import { portraitJpeg } from "./jpeg";
 import { generateImage } from "./openai";
+import { framingPreview } from "./preview";
 import { portraitPrompt, promptDigest } from "./prompt";
 import {
   type PortraitSidecar,
@@ -24,9 +30,13 @@ import {
 //                                       outdated) portraits; needs OPENAI_API_KEY
 //   bun run portraits import <id> <file> [--model <name>]
 //                                       adopt an image made elsewhere, e.g. by
-//                                       pasting the prompt into ChatGPT
+//                                       Codex's image_gen tool or ChatGPT
+//   bun run portraits preview [<id>...] [--out <dir>]
+//                                       write framing contact sheets to check
+//                                       the face box and the crops cut from it
 //
 // Then run `bun run genesis` to re-render every artifact from the new faces.
+// The portrait-fidelity skill walks through generating and reviewing faces.
 
 const MODEL = process.env.CONTINUITY_IMAGE_MODEL ?? "gpt-image-2";
 const SIZE = "1024x1536";
@@ -38,18 +48,15 @@ function today(): string {
 
 function save(
   character: Character,
-  bytes: Uint8Array,
+  original: Uint8Array,
   sidecar: Omit<PortraitSidecar, "imageSha256">,
 ): void {
-  const { mimeType } = imageSize(bytes);
-  const extension = mimeType === "image/png" ? "png" : "jpg";
-  const other = extension === "png" ? "jpg" : "png";
+  const bytes = portraitJpeg(original);
+  const path = portraitPath(character.id, "jpg");
   // Git does not track the empty directory, so a fresh clone lacks it.
-  mkdirSync(dirname(portraitPath(character.id, extension)), {
-    recursive: true,
-  });
-  rmSync(portraitPath(character.id, other), { force: true });
-  writeFileSync(portraitPath(character.id, extension), bytes);
+  mkdirSync(dirname(path), { recursive: true });
+  rmSync(portraitPath(character.id, "png"), { force: true });
+  writeFileSync(path, bytes);
   const previous = readSidecar(character.id);
   const record: PortraitSidecar = {
     ...sidecar,
@@ -62,7 +69,20 @@ function save(
     portraitSidecarPath(character.id),
     `${JSON.stringify(record, null, 2)}\n`,
   );
-  console.log(`Wrote ${portraitPath(character.id, extension)}`);
+  console.log(`Wrote ${path}`);
+}
+
+function preview(ids: readonly string[], out: string): void {
+  const targets =
+    ids.length > 0
+      ? ids.map((id) => findCharacter(world, id))
+      : world.characters;
+  mkdirSync(out, { recursive: true });
+  for (const character of targets) {
+    const path = join(out, `${character.id}.png`);
+    writeFileSync(path, framingPreview(loadPortrait(character)));
+    console.log(`Wrote ${path}`);
+  }
 }
 
 function status(): void {
@@ -118,7 +138,6 @@ async function generate(
 function importImage(id: string, file: string, model: string): void {
   const character = findCharacter(world, id);
   const bytes = new Uint8Array(readFileSync(file));
-  imageSize(bytes);
   const prompt = portraitPrompt(world, character);
   save(character, bytes, {
     character: character.id,
@@ -134,6 +153,10 @@ const { positionals, values } = parseArgs({
   options: {
     force: { type: "boolean", default: false },
     model: { type: "string", default: "manual" },
+    out: {
+      type: "string",
+      default: join(tmpdir(), "continuity-portrait-previews"),
+    },
     stale: { type: "boolean", default: false },
   },
 });
@@ -150,6 +173,9 @@ switch (command) {
     break;
   case "generate":
     await generate(rest, { force: values.force, stale: values.stale });
+    break;
+  case "preview":
+    preview(rest, values.out);
     break;
   case "import": {
     const [id, file] = rest;

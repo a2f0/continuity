@@ -7,8 +7,8 @@ attribution footers. Do not create GitHub issues without an explicit request.
 
 ## Validation
 
-- `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed skills,
-  binary placement, Knip, and TypeScript.
+- `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed and
+  project skills, binary placement, Knip, and TypeScript.
 - `bun run check`: `check:fast`, tests, canon consistency, and a full re-render
   proving `genesis/` matches canon byte for byte, then the static gallery build.
   The pre-push hook runs it.
@@ -45,6 +45,9 @@ inspect failures with `bun run agent:logs <path>`.
   are computed in `src/canon/derive.ts` and `src/render/mrz.ts`. A note that
   mentions a canon fact should read it through its context function (see
   `canon/device/notes.ts`).
+- Make and replace portraits with the `portrait-fidelity` skill. Faces must be
+  photographs of people who do not exist, reviewed against canon and framed
+  before `bun run genesis`.
 - Character IDs are permanent. Never rename or reuse one; tearleads and other
   consumers key on them.
 - Rendering must stay deterministic: no system fonts, clocks, or unseeded
@@ -69,7 +72,9 @@ with `bun run agent-tool`. Title, required-check, and version policy is in
 `agent-tool.json`. The shared `cross-agent-review`, `open-pr`, `squash-merge`,
 `ship-pr`, `reset`, and `update-dependencies` skills are managed copies in
 `.agents/skills` and `.claude/skills`, tracked by `.agent-tool-skills.json`. Do
-not edit them; change the shared skill upstream instead. After changing the
+not edit them; change the shared skill upstream instead. Project-owned skills,
+such as `portrait-fidelity`, live byte for byte in both directories;
+`bun run lint:skills` fails when the copies differ. After changing the
 pin, run `bun run agents:sync` and commit the lockfile, skills, and manifest
 together. `bun run agents:check`, part of `check:fast`, fails on missing,
 outdated, or edited managed skills.

@@ -54,8 +54,8 @@ character, document, device, and identifier rules in `src/canon/validation/`:
    new kebab-case `id`.
 2. Add reciprocal relationships on both sides.
 3. Add it to `canon/world.ts`, and to the address book if the owner knows them.
-4. Run `bun run canon:check`, then `bun run portraits generate <id>` (or
-   import a portrait), then `bun run genesis`.
+4. Run `bun run canon:check`, make a portrait with the `portrait-fidelity`
+   skill, then run `bun run genesis`.
 
 ### Renew a document
 

@@ -1,0 +1,13 @@
+{
+  "character": "maya-reyes",
+  "generatedOn": "2026-10-13",
+  "model": "codex-image-gen",
+  "prompt": "Unretouched passport photograph of a fictional person in their mid 30s: Latina woman with warm olive-tan skin, long dark brown wavy hair falling past her shoulders, brown eyes, thick dark eyebrows, small gold stud earrings, natural makeup, a gentle closed-mouth smile, wearing a slate blue blouse. No glasses. Vertical 2:3 frame: head and shoulders, centered, facing the camera straight on, eyes open and looking into the lens, with clear space above the head and the tops of both shoulders in frame. Shot on a full-frame camera with an 85mm lens at f/8 under even, soft studio light with no harsh shadows, against a plain light gray-blue backdrop, in sharp focus. Real skin with visible pores, fine lines, and small blemishes true to the person's age, individual strands of hair with a few flyaways, natural catchlights, slight natural asymmetry, and true-to-life color. It must read as an ordinary photo of a real person: not an illustration, painting, cartoon, 3D render, or CGI, and not airbrushed or beauty-filtered. No text, logos, watermarks, borders, or props.",
+  "promptSha256": "c956490a6ea434d5f9dbc423527e01eeac4e38709fd6d1157a4b3d575a121a56",
+  "imageSha256": "9b4d2e3f8fea7e36661c9efa1f255368b6ce4e3f1f02fde31a3f71b1f156cbc5",
+  "framing": {
+    "cx": 0.5,
+    "cy": 0.345,
+    "height": 0.42
+  }
+}
