@@ -73,10 +73,14 @@ jobs:
       - name: Run tests
         run: bun run test
 
+      # Report every signal: a failing test must not hide a rendering
+      # difference between platforms.
       - name: Check canon
+        if: ${{ !cancelled() }}
         run: bun run canon:check
 
       - name: Check genesis output
+        if: ${{ !cancelled() }}
         run: bun run genesis:check
 
   gate:
