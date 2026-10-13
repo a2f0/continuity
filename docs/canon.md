@@ -20,14 +20,16 @@ The schema lives in `src/canon/types.ts`. Canon stores facts, and
 - ages, as of the story date;
 - license expiration: the holder's birthday, `renewalYears` after issue;
 - passport expiration: the day before the anniversary of issue;
-- the machine readable zone, display names, height and weight formats.
+- display names, height and weight formats.
+
+`src/render/mrz.ts` computes the passport's machine readable zone and check digits.
 
 Storing a derived value would let it drift, so the schema has no field for one.
 
 ## Continuity rules
 
-`validateWorld` in `src/canon/validate.ts` rejects canon that is not
-internally consistent:
+`validateWorld` in `src/canon/validate.ts` checks dates before running the
+character, document, device, and identifier rules in `src/canon/validation/`:
 
 - IDs are unique and kebab-case.
 - Every relationship is reciprocated with its inverse (`parent` and `child`,
