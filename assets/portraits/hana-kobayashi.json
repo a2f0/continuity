@@ -1,0 +1,13 @@
+{
+  "character": "hana-kobayashi",
+  "generatedOn": "2026-10-13",
+  "model": "codex-image-gen",
+  "prompt": "Unretouched passport photograph of a fictional person in their late 40s: Japanese-American woman with light skin, a chin-length black bob with a few strands of gray, dark brown eyes, thin rimless glasses, a calm attentive expression with a slight smile, wearing a teal button-up shirt. Wearing glasses, with no glare on the lenses. Vertical 2:3 frame: head and shoulders, centered, facing the camera straight on, eyes open and looking into the lens, with clear space above the head and the tops of both shoulders in frame. Shot on a full-frame camera with an 85mm lens at f/8 under even, soft studio light with no harsh shadows, against a plain light gray-blue backdrop, in sharp focus. Real skin with visible pores, fine lines, and small blemishes true to the person's age, individual strands of hair with a few flyaways, natural catchlights, slight natural asymmetry, and true-to-life color. It must read as an ordinary photo of a real person: not an illustration, painting, cartoon, 3D render, or CGI, and not airbrushed or beauty-filtered. No text, logos, watermarks, borders, or props.",
+  "promptSha256": "2ba08667b1eef60fe0e29db45be6c0ede93e5c7af249c992e4c8652fee992db4",
+  "imageSha256": "dcd869054a07efb1e12011020219ef2bf54de8e83be2cf5c422ab260d778b374",
+  "framing": {
+    "cx": 0.505,
+    "cy": 0.37,
+    "height": 0.52
+  }
+}

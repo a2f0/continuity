@@ -1,0 +1,13 @@
+{
+  "character": "marcus-bell",
+  "generatedOn": "2026-10-13",
+  "model": "codex-image-gen",
+  "prompt": "Unretouched passport photograph of a fictional person in their early 30s: Black man with dark brown skin, short two-strand twists, clean-shaven, dark brown eyes, a lean athletic build, a bright open smile, wearing a burnt orange quarter-zip pullover. No glasses. Vertical 2:3 frame: head and shoulders, centered, facing the camera straight on, eyes open and looking into the lens, with clear space above the head and the tops of both shoulders in frame. Shot on a full-frame camera with an 85mm lens at f/8 under even, soft studio light with no harsh shadows, against a plain light gray-blue backdrop, in sharp focus. Real skin with visible pores, fine lines, and small blemishes true to the person's age, individual strands of hair with a few flyaways, natural catchlights, slight natural asymmetry, and true-to-life color. It must read as an ordinary photo of a real person: not an illustration, painting, cartoon, 3D render, or CGI, and not airbrushed or beauty-filtered. No text, logos, watermarks, borders, or props.",
+  "promptSha256": "cc1d75c083fc55dfe16efc2a50a5b3b905f727152ebbfea3800c012a808ac33e",
+  "imageSha256": "e3f2ae58be76539240eb355432e4e1bb3b67c2b6ac320fb9a2dcc1cf00fd6aae",
+  "framing": {
+    "cx": 0.5,
+    "cy": 0.385,
+    "height": 0.465
+  }
+}

@@ -33,11 +33,12 @@ export interface PortraitFraming {
   readonly height: number;
 }
 
-// A generated head-and-shoulders portrait, absent better information.
+// A typical generated 2:3 head-and-shoulders portrait, absent a recorded
+// framing; head size varies by about a fifth either way, so frame each one.
 const DEFAULT_PHOTO_FRAMING: PortraitFraming = {
   cx: 0.5,
-  cy: 0.36,
-  height: 0.34,
+  cy: 0.38,
+  height: 0.5,
 };
 const PLACEHOLDER_FACE: FaceBox = { cx: 400, cy: 405, height: 400 };
 const PORTRAIT_EXTENSIONS = ["jpg", "png"] as const;

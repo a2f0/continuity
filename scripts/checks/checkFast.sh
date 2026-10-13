@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Static checks: formatting, lint, file names, Markdown, shell scripts,
-# managed skills, binary placement, dead code, and types. Runs in seconds.
+# managed and project skills, binary placement, dead code, and types. Runs in
+# seconds.
 
 set -e
 
@@ -22,6 +23,9 @@ bun run lint:scripts
 
 echo "Checking managed skills..."
 bun run agents:check
+
+echo "Checking project skills..."
+bun run lint:skills
 
 echo "Checking binary files..."
 bun run lint:binary-files

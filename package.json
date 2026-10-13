@@ -1,6 +1,6 @@
 {
   "name": "@a2f0/continuity",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Canonical fictional characters and the genesis data rendered from them",
   "license": "UNLICENSED",
   "type": "module",
@@ -39,6 +39,7 @@
     "lint:markdown": "git ls-files -z -- '*.md' | xargs -0 bun --bun x markdownlint-cli2",
     "lint:markdown:fix": "git ls-files -z -- '*.md' | xargs -0 bun --bun x markdownlint-cli2 --fix",
     "lint:scripts": "git ls-files -z -- '*.sh' 'scripts/git/hooks/*' | xargs -0 shellcheck",
+    "lint:skills": "bun scripts/checks/checkProjectSkills.ts",
     "portraits": "bun src/portraits/cli.ts",
     "site:build": "bun src/site/build.ts",
     "site:deploy": "bun run check && wrangler deploy",

@@ -1,0 +1,13 @@
+{
+  "character": "daniel-okafor",
+  "generatedOn": "2026-10-13",
+  "model": "codex-image-gen",
+  "prompt": "Unretouched passport photograph of a fictional person in their mid 30s: Nigerian-American man with deep brown skin, close-cropped black hair, a neatly trimmed short black beard, rectangular dark tortoiseshell glasses, a warm easy smile, wearing a charcoal crewneck sweater over a collared shirt. Wearing glasses, with no glare on the lenses. Vertical 2:3 frame: head and shoulders, centered, facing the camera straight on, eyes open and looking into the lens, with clear space above the head and the tops of both shoulders in frame. Shot on a full-frame camera with an 85mm lens at f/8 under even, soft studio light with no harsh shadows, against a plain light gray-blue backdrop, in sharp focus. Real skin with visible pores, fine lines, and small blemishes true to the person's age, individual strands of hair with a few flyaways, natural catchlights, slight natural asymmetry, and true-to-life color. It must read as an ordinary photo of a real person: not an illustration, painting, cartoon, 3D render, or CGI, and not airbrushed or beauty-filtered. No text, logos, watermarks, borders, or props.",
+  "promptSha256": "98a0b91de3160bd6f0fb9bcfa36f0b4fec4c7fb0ee97a306cef55249766c6a80",
+  "imageSha256": "6832d0fe72dec3af667bc0a02b0395c3beba14f0396e7990cff21b5dce6f01b9",
+  "framing": {
+    "cx": 0.5,
+    "cy": 0.395,
+    "height": 0.47
+  }
+}

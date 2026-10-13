@@ -83,12 +83,12 @@ designed so that none of them can pass for a real one:
 
 ## Portraits
 
-Until a character has a photo, documents use an illustrated placeholder drawn
-from canon. `bun run portraits` reports status, and
-`bun run portraits generate` creates photos with OpenAI's image API (set
-`OPENAI_API_KEY`). To make one elsewhere, print the prompt with
-`bun run portraits prompt <id>` and adopt the image with
-`bun run portraits import <id> <file>`. See [docs/portraits.md](docs/portraits.md).
+Each character has a photographic portrait of a person who does not exist;
+until one does, documents use an illustrated placeholder drawn from canon.
+`bun run portraits` reports status. The `portrait-fidelity` skill, for Codex and
+Claude Code alike, generates, reviews, frames, and adopts portraits, through
+OpenAI's image API when `OPENAI_API_KEY` is set and Codex's built-in image
+generation otherwise. See [docs/portraits.md](docs/portraits.md).
 
 ## Keeping it current
 

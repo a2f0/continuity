@@ -1,0 +1,13 @@
+{
+  "character": "rosa-reyes",
+  "generatedOn": "2026-10-13",
+  "model": "codex-image-gen",
+  "prompt": "Unretouched passport photograph of a fictional person in their early 60s: Latina woman with warm tan skin, dark hair streaked with silver pulled into a low bun, warm brown eyes with laugh lines, thin gold-rimmed glasses, a kind closed-mouth smile, wearing a deep red cardigan. Wearing glasses, with no glare on the lenses. Vertical 2:3 frame: head and shoulders, centered, facing the camera straight on, eyes open and looking into the lens, with clear space above the head and the tops of both shoulders in frame. Shot on a full-frame camera with an 85mm lens at f/8 under even, soft studio light with no harsh shadows, against a plain light gray-blue backdrop, in sharp focus. Real skin with visible pores, fine lines, and small blemishes true to the person's age, individual strands of hair with a few flyaways, natural catchlights, slight natural asymmetry, and true-to-life color. It must read as an ordinary photo of a real person: not an illustration, painting, cartoon, 3D render, or CGI, and not airbrushed or beauty-filtered. No text, logos, watermarks, borders, or props.",
+  "promptSha256": "c92e63979d78cb973262a4a20267bc399c4d6eca1ff8bff9902af4d3bd01636b",
+  "imageSha256": "8074d4b6d090d310addd69b12ba5c1d361dd9dd311eedbc6109804b3b20855d1",
+  "framing": {
+    "cx": 0.505,
+    "cy": 0.385,
+    "height": 0.525
+  }
+}
