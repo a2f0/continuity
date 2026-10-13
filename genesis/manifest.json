@@ -32,9 +32,9 @@
       "sha256": "ab7e2beff4d3a69fb4f7bc7ee3b14a4c149394612c4f54ec8e9617f5acaa0dab"
     },
     {
-      "bytes": 47372,
+      "bytes": 47299,
       "path": "avatars/sam-whitfield.png",
-      "sha256": "cada722ea71eec927ee068b898dd9ca26a149fea189251bdbc2b1bedc21e2de2"
+      "sha256": "841cd278091be1dd68d875bc87c371e4bd6a0ed86bb7e5ec3d3557459e01ce52"
     },
     {
       "bytes": 48474,
@@ -42,9 +42,9 @@
       "sha256": "07a5644cfbc818e79e3f4ab1aa7b22219c17d0f281cfcdb419e39e32ba06fbf6"
     },
     {
-      "bytes": 22595,
+      "bytes": 22600,
       "path": "canon.json",
-      "sha256": "53e7a50b6708645b8c16b3cdfa3968bd6435c1e258dced3b0e49544c6affba56"
+      "sha256": "28c4e5b760fd216b5626f9c4cc3c4e1f911e71f743007f42d5307a90f5f0ec36"
     },
     {
       "bytes": 2666,
@@ -52,9 +52,9 @@
       "sha256": "e1c02e2b2c9cc038f6f182d2c92ec05422aa32b028d688f6eef2709149f928df"
     },
     {
-      "bytes": 81256,
+      "bytes": 81315,
       "path": "contacts/contacts.vcf",
-      "sha256": "3a070028ba6c923d0578063a317a098c788c642e8af3cb72c43269803362f4c0"
+      "sha256": "73ebb778e7ad6b8e0ff7f9fb5cbdd1c04082b1089493ee29c2d7dcaf0b381392"
     },
     {
       "bytes": 352286,
@@ -132,9 +132,9 @@
       "sha256": "cb3a21db4b1eedacf2e57e96d8f1778d77af93aa944feb0a39cd5c4fc09eac0a"
     },
     {
-      "bytes": 326238,
+      "bytes": 326255,
       "path": "documents/sam-whitfield/drivers-license-front.jpg",
-      "sha256": "a951fe05835f1ecc8a7e09d0d533d5371303a065359fbc11904bb01ac508f579"
+      "sha256": "d5e6d161f7ba37a33fe693880b21422bb647dcafc9e3b411cd77480fff847897"
     },
     {
       "bytes": 341142,
@@ -172,9 +172,9 @@
       "sha256": "ab7e2beff4d3a69fb4f7bc7ee3b14a4c149394612c4f54ec8e9617f5acaa0dab"
     },
     {
-      "bytes": 47372,
+      "bytes": 47299,
       "path": "tearleads/avatar-sam-whitfield.png",
-      "sha256": "cada722ea71eec927ee068b898dd9ca26a149fea189251bdbc2b1bedc21e2de2"
+      "sha256": "841cd278091be1dd68d875bc87c371e4bd6a0ed86bb7e5ec3d3557459e01ce52"
     },
     {
       "bytes": 48474,

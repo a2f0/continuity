@@ -32,7 +32,7 @@ export const rosaReyes: Character = {
     { label: "home", number: "(360) 555-0120" },
   ],
   emails: [{ label: "personal", address: "rosa.reyes@inbox.example" }],
-  bio: "Rosa emigrated from Aurelia, Utopia, in 1998 with her children Maya and Theo, and worked thirty years as a pediatric nurse at Cedar Hollow Community Hospital before retiring in 2024. She hosts Sunday dinner most weeks, still keeps a landline, and renews her Utopian passport so she can visit her sister in Aurelia.",
+  bio: "Rosa emigrated from Aurelia, Utopia, in 1998 with her children Maya and Theo, and worked twenty-five years as a pediatric nurse at Cedar Hollow Community Hospital before retiring in 2024. She hosts Sunday dinner most weeks, still keeps a landline, and renews her Utopian passport so she can visit her sister in Aurelia.",
   signature: { font: "mrs-saint-delafield", text: "Rosa M. Reyes" },
   relationships: [
     { to: "maya-reyes", kind: "child" },

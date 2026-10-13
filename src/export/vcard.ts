@@ -11,7 +11,7 @@ function escapeText(value: string): string {
     .replaceAll("\\", "\\\\")
     .replaceAll("\n", "\\n")
     .replaceAll(",", "\\,")
-    .replaceAll(";", ";");
+    .replaceAll(";", "\\;");
 }
 
 function fold(line: string): string {

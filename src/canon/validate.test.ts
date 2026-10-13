@@ -116,4 +116,62 @@ describe("validateWorld", () => {
       "address book entry maya-reyes is not another character",
     );
   });
+
+  test("requires a resident's country to match the license issuer", () => {
+    const broken = withCharacter("maya-reyes", (character) => ({
+      ...character,
+      address: { ...character.address, country: "CAN" },
+    }));
+    expect(validateWorld(broken)).toContain(
+      "maya-reyes: a Cascadia license needs a CS, USA address",
+    );
+  });
+
+  test("requires ICAO-sized issuer codes", () => {
+    const broken: World = {
+      ...world,
+      passportIssuers: world.passportIssuers.map((issuer) => ({
+        ...issuer,
+        code: "UTOPIA",
+      })),
+    };
+    expect(validateWorld(broken)).toContain(
+      "passport issuer utopia code UTOPIA must be three capital letters",
+    );
+  });
+
+  test("requires a valid BIP39 identity phrase", () => {
+    const broken: World = {
+      ...world,
+      device: {
+        ...world.device,
+        tearleads: {
+          ...world.device.tearleads,
+          identitySeedPhrase: Array(24).fill("notaword").join(" "),
+        },
+      },
+    };
+    expect(validateWorld(broken)).toContain(
+      "the tearleads identity seed phrase must be a valid 24-word BIP39 phrase",
+    );
+  });
+
+  test("requires what the screenshot run asserts on", () => {
+    const broken: World = {
+      ...world,
+      device: {
+        ...world.device,
+        addressBook: world.device.addressBook.map((entry) => ({
+          ...entry,
+          nickname: entry.nickname ?? "Friend",
+        })),
+        notes: [],
+      },
+    };
+    const problems = validateWorld(broken);
+    expect(problems).toContain("the device needs at least one note");
+    expect(problems).toContain(
+      "the address book needs at least one entry without a nickname",
+    );
+  });
 });

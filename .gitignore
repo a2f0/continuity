@@ -4,6 +4,3 @@
 # Bun / JS / TS
 node_modules/
 *.tsbuildinfo
-
-# Scratch renders from `bun run preview`
-.preview/

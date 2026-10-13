@@ -1,4 +1,4 @@
-import type { Appearance, HairStyle } from "../canon/types";
+import type { Appearance, EyeColor, HairStyle } from "../canon/types";
 import { el } from "./svg";
 
 // A flat illustrated bust drawn from canon appearance. It stands in for a
@@ -8,6 +8,18 @@ import { el } from "./svg";
 const WIDTH = 800;
 const HEIGHT = 1000;
 const HEAD = { cx: 400, cy: 420, rx: 138, ry: 176 } as const;
+
+const IRIS: Readonly<Record<EyeColor, string>> = {
+  BLK: "#1c1512",
+  BLU: "#3f6f9f",
+  BRO: "#3b2a20",
+  DIC: "#4a5a3a",
+  GRN: "#4d7a49",
+  GRY: "#6e7a84",
+  HAZ: "#7a5a32",
+  MAR: "#5a2e1e",
+  PNK: "#a86a6a",
+};
 
 /** Mix a #rrggbb color toward black (negative) or white (positive). */
 function shade(hex: string, amount: number): string {
@@ -83,7 +95,7 @@ function face(appearance: Appearance): string {
     .map((x) =>
       [
         el("ellipse", { cx: x, cy: 438, rx: 22, ry: 11, fill: "#f7f3ee" }),
-        el("circle", { cx: x, cy: 438, r: 10, fill: "#3b2a20" }),
+        el("circle", { cx: x, cy: 438, r: 10, fill: IRIS[appearance.eyes] }),
         el("circle", {
           cx: x + 3,
           cy: 435,

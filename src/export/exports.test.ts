@@ -92,6 +92,26 @@ describe("addressBookVcard", () => {
     expect(vcard).toContain("NICKNAME:Mom\r\n");
   });
 
+  test("escapes structured-value separators", () => {
+    const withSemicolon = {
+      ...world,
+      characters: world.characters.map((character) =>
+        character.id === "rosa-reyes"
+          ? {
+              ...character,
+              address: {
+                ...character.address,
+                street: "88 Juniper Lane; Rear",
+              },
+            }
+          : character,
+      ),
+    };
+    expect(addressBookVcard(withSemicolon, new Map())).toContain(
+      "ADR;TYPE=HOME:;;88 Juniper Lane\\; Rear;Cedar Hollow;CS;98432;USA\r\n",
+    );
+  });
+
   test("folds long lines at 75 octets with CRLF", () => {
     const lines = vcard.split("\r\n");
     expect(lines.every((line) => Buffer.byteLength(line, "utf8") <= 75)).toBe(

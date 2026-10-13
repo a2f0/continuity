@@ -1,4 +1,5 @@
-import { readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import { parseArgs } from "node:util";
 import { world } from "../../canon/world";
 import { findCharacter } from "../canon/derive";
@@ -43,6 +44,10 @@ function save(
   const { mimeType } = imageSize(bytes);
   const extension = mimeType === "image/png" ? "png" : "jpg";
   const other = extension === "png" ? "jpg" : "png";
+  // Git does not track the empty directory, so a fresh clone lacks it.
+  mkdirSync(dirname(portraitPath(character.id, extension)), {
+    recursive: true,
+  });
   rmSync(portraitPath(character.id, other), { force: true });
   writeFileSync(portraitPath(character.id, extension), bytes);
   const previous = readSidecar(character.id);

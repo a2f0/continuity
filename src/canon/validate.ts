@@ -1,3 +1,5 @@
+import { validateMnemonic } from "@scure/bip39";
+import { wordlist } from "@scure/bip39/wordlists/english.js";
 import { addYears, ageOn, compareDates, isIsoDate } from "./dates";
 import { documentExpirations, findCharacter, resolveNoteText } from "./derive";
 import type {
@@ -19,6 +21,10 @@ const PHONE_PATTERN = /^\(\d{3}\) 555-01\d{2}$/;
 const EMAIL_PATTERN =
   /^[a-z0-9._+-]+@(?:(?:[a-z0-9-]+\.)+(?:example|test)|example\.(?:com|net|org))$/;
 const HEX_COLOR_PATTERN = /^#[0-9a-f]{6}$/;
+// ICAO 9303: a three-letter issuing state and at most nine document characters.
+const ISSUER_CODE_PATTERN = /^[A-Z]{3}$/;
+const PASSPORT_NUMBER_PATTERN = /^[A-Z0-9]{1,9}$/;
+const JURISDICTION_CODE_PATTERN = /^[A-Z]{2}$/;
 const MINIMUM_PARENT_AGE = 14;
 
 const INVERSE_RELATIONSHIP: Readonly<
@@ -61,6 +67,23 @@ function checkIds(world: World): string[] {
       .map((id) => `${kind} ID "${id}" is not kebab-case`),
     ...duplicates(ids).map((id) => `${kind} ID "${id}" is used more than once`),
   ]);
+}
+
+function checkIssuers(world: World): string[] {
+  return [
+    ...world.jurisdictions
+      .filter((item) => !JURISDICTION_CODE_PATTERN.test(item.code))
+      .map(
+        (item) =>
+          `jurisdiction ${item.id} code ${item.code} must be two capital letters`,
+      ),
+    ...world.passportIssuers
+      .filter((item) => !ISSUER_CODE_PATTERN.test(item.code))
+      .map(
+        (item) =>
+          `passport issuer ${item.id} code ${item.code} must be three capital letters`,
+      ),
+  ];
 }
 
 function checkIdentity(world: World, character: Character): string[] {
@@ -200,9 +223,12 @@ function checkDriversLicense(
   if (compareDates(license.issued, world.asOf) > 0) {
     problems.push(`${id}: license issued after the story date ${world.asOf}`);
   }
-  if (character.address.region !== jurisdiction.code) {
+  if (
+    character.address.region !== jurisdiction.code ||
+    character.address.country !== jurisdiction.country
+  ) {
     problems.push(
-      `${id}: a ${jurisdiction.name} license needs a ${jurisdiction.code} address`,
+      `${id}: a ${jurisdiction.name} license needs a ${jurisdiction.code}, ${jurisdiction.country} address`,
     );
   }
   return problems;
@@ -226,6 +252,11 @@ function checkPassport(
     ];
   }
   const problems: string[] = [];
+  if (!PASSPORT_NUMBER_PATTERN.test(passport.number)) {
+    problems.push(
+      `${id}: passport number ${passport.number} must be at most nine letters and digits`,
+    );
+  }
   if (!new RegExp(issuer.numberPattern).test(passport.number)) {
     problems.push(
       `${id}: passport number ${passport.number} does not match ${issuer.numberPattern}`,
@@ -304,8 +335,24 @@ function checkDevice(world: World, device: Device): string[] {
       (id) => `address book lists ${id} more than once`,
     ),
   );
-  if (device.tearleads.identitySeedPhrase.trim().split(/\s+/).length !== 24) {
-    problems.push("the tearleads identity seed phrase must have 24 words");
+  const phrase = device.tearleads.identitySeedPhrase;
+  if (
+    phrase.trim().split(/\s+/).length !== 24 ||
+    !validateMnemonic(phrase, wordlist)
+  ) {
+    problems.push(
+      "the tearleads identity seed phrase must be a valid 24-word BIP39 phrase",
+    );
+  }
+  // tearleads' screenshot run asserts on the first note and on a contact it
+  // can find by full name.
+  if (device.notes.length === 0) {
+    problems.push("the device needs at least one note");
+  }
+  if (!device.addressBook.some((entry) => !entry.nickname)) {
+    problems.push(
+      "the address book needs at least one entry without a nickname",
+    );
   }
   if (
     device.wallet.includes("drivers_license") &&
@@ -339,6 +386,7 @@ export function validateWorld(world: World): readonly string[] {
   }
   return [
     ...checkIds(world),
+    ...checkIssuers(world),
     ...world.characters.flatMap((character) => [
       ...checkIdentity(world, character),
       ...checkContactDetails(world, character),
