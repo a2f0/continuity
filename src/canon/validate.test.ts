@@ -20,6 +20,55 @@ describe("validateWorld", () => {
     expect(validateWorld(world)).toEqual([]);
   });
 
+  test.each(["maya-reyes", "rosa-reyes", "theo-reyes"])(
+    "reports an invalid birth date for %s without throwing",
+    (id) => {
+      const broken = withCharacter(id, (character) => ({
+        ...character,
+        birthDate: "2000-02-30",
+      }));
+      expect(validateWorld(broken)).toContain(
+        `${id}: birth date 2000-02-30 is not a calendar date`,
+      );
+    },
+  );
+
+  test("reports every invalid birth date before date-dependent rules run", () => {
+    const broken: World = {
+      ...world,
+      characters: world.characters.map((character) => ({
+        ...character,
+        birthDate: "invalid",
+      })),
+    };
+    expect(validateWorld(broken)).toEqual(
+      world.characters.map(
+        (character) =>
+          `${character.id}: birth date invalid is not a calendar date`,
+      ),
+    );
+  });
+
+  test("reports note failures even when the thrown value is not an Error", () => {
+    const broken: World = {
+      ...world,
+      device: {
+        ...world.device,
+        notes: [
+          {
+            id: "broken-note",
+            text: () => {
+              throw "missing note data";
+            },
+          },
+        ],
+      },
+    };
+    expect(validateWorld(broken)).toContain(
+      "note broken-note: missing note data",
+    );
+  });
+
   test("requires relationships to be reciprocated", () => {
     const broken = withCharacter("rosa-reyes", (character) => ({
       ...character,

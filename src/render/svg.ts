@@ -102,3 +102,7 @@ export function svgDocument(
 ): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${num(width)}mm" height="${num(height)}mm" viewBox="0 0 ${num(width)} ${num(height)}">${body}</svg>`;
 }
+
+export function upper(value: string): string {
+  return value.toLocaleUpperCase("en-US");
+}

@@ -41,7 +41,6 @@ const DEFAULT_PHOTO_FRAMING: PortraitFraming = {
 };
 const PLACEHOLDER_FACE: FaceBox = { cx: 400, cy: 405, height: 400 };
 const PORTRAIT_EXTENSIONS = ["jpg", "png"] as const;
-const cache = new Map<string, Portrait>();
 
 export function portraitPath(characterId: string, extension = "jpg"): string {
   return repoPath("assets", "portraits", `${characterId}.${extension}`);
@@ -85,20 +84,16 @@ function readPhoto(characterId: string): Portrait | undefined {
 }
 
 export function loadPortrait(character: Character): Portrait {
-  const cached = cache.get(character.id);
-  if (cached) {
-    return cached;
-  }
-  const portrait = readPhoto(character.id) ?? {
-    bytes: rasterize(placeholderPortraitSvg(character.appearance), 800).png,
-    face: PLACEHOLDER_FACE,
-    height: 1000,
-    mimeType: "image/png" as const,
-    source: "placeholder" as const,
-    width: 800,
-  };
-  cache.set(character.id, portrait);
-  return portrait;
+  return (
+    readPhoto(character.id) ?? {
+      bytes: rasterize(placeholderPortraitSvg(character.appearance), 800).png,
+      face: PLACEHOLDER_FACE,
+      height: 1000,
+      mimeType: "image/png",
+      source: "placeholder",
+      width: 800,
+    }
+  );
 }
 
 export interface Crop {

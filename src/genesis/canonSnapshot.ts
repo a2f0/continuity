@@ -8,17 +8,10 @@ import {
   passportExpiration,
 } from "../canon/derive";
 import type { Character, World } from "../canon/types";
-import { loadPortrait } from "../render/portrait";
+import type { CharacterAssets } from "./characters";
 
 // canon.json: the canon with every derived fact resolved, for consumers that
 // want character data without running TypeScript from this repository.
-
-export interface CharacterFiles {
-  readonly avatar: string;
-  readonly driversLicenseFront?: string;
-  readonly driversLicenseBack?: string;
-  readonly passport?: string;
-}
 
 function documents(world: World, character: Character) {
   const { driversLicense, passport } = character.documents;
@@ -51,12 +44,16 @@ function documents(world: World, character: Character) {
 
 export function canonSnapshot(
   world: World,
-  files: ReadonlyMap<string, CharacterFiles>,
+  assets: ReadonlyMap<string, CharacterAssets>,
 ): unknown {
   return {
     asOf: world.asOf,
     owner: world.device.owner,
     characters: world.characters.map((character) => {
+      const rendered = assets.get(character.id);
+      if (!rendered) {
+        throw new Error(`Missing rendered assets for ${character.id}`);
+      }
       const {
         appearance,
         signature: _signature,
@@ -76,8 +73,8 @@ export function canonSnapshot(
           weightKg: appearance.weightKg,
         },
         documents: documents(world, character),
-        portrait: loadPortrait(character).source,
-        files: files.get(character.id),
+        portrait: rendered.portrait,
+        files: rendered.files,
       };
     }),
     jurisdictions: world.jurisdictions,

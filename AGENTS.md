@@ -17,6 +17,21 @@ attribution footers. Do not create GitHub issues without an explicit request.
 Wrap noisy commands with `bun run agent:run --label <name> -- <command>` and
 inspect failures with `bun run agent:logs <path>`.
 
+## Code organization
+
+- Keep `src/canon/` independent of rendering, exports, and the concrete
+  `canon/world.ts`. Pass `World` into functions; load the world in CLI
+  entrypoints.
+- `src/genesis/` coordinates renderers and exporters. Renderers take explicit
+  inputs and must not import the genesis builder or cache canon-dependent state
+  across builds.
+- Split modules by behavior: canon rules live in `src/canon/validation/`, and
+  document layouts in `src/render/drivers-license/` and `src/render/passport/`.
+  Import the implementing module directly; avoid barrel files and catch-all
+  helpers.
+- Keep tests beside the behavior they exercise. Use `genesis:check` to prove
+  rendering refactors preserve output without regenerating tracked binaries.
+
 ## Canon and generated output
 
 - `canon/` is the source of truth. Change facts there, then run
@@ -24,8 +39,9 @@ inspect failures with `bun run agent:logs <path>`.
 - Never edit `genesis/` by hand. CI re-renders it on Linux and macOS and fails
   on any difference.
 - Derive, do not store: expiration dates, ages, MRZ lines, and display names
-  are computed in `src/canon/derive.ts`. A note that mentions a canon fact
-  should read it through its context function (see `canon/device/notes.ts`).
+  are computed in `src/canon/derive.ts` and `src/render/mrz.ts`. A note that
+  mentions a canon fact should read it through its context function (see
+  `canon/device/notes.ts`).
 - Character IDs are permanent. Never rename or reuse one; tearleads and other
   consumers key on them.
 - Rendering must stay deterministic: no system fonts, clocks, or unseeded

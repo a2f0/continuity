@@ -5,13 +5,12 @@ import {
   passportExpiration,
 } from "../canon/derive";
 import type { Character, World } from "../canon/types";
-import { CARD, seededRandom } from "../render/card";
-import {
-  driversLicenseBack,
-  driversLicenseFront,
-} from "../render/driversLicense";
-import { DATA_PAGE, passportDataPage } from "../render/passport";
-import { loadPortrait } from "../render/portrait";
+import { CARD, type CardArt, seededRandom } from "../render/card";
+import { driversLicenseBack } from "../render/drivers-license/back";
+import { driversLicenseFront } from "../render/drivers-license/front";
+import { passportDataPage } from "../render/passport/dataPage";
+import { DATA_PAGE } from "../render/passport/types";
+import type { Portrait } from "../render/portrait";
 import { rasterize, toJpeg } from "../render/raster";
 import { framedDocumentSvg } from "../render/scanFrame";
 
@@ -39,7 +38,8 @@ function capture(seed: string) {
 function renderLicense(
   world: World,
   character: Character,
-): Partial<RenderedDocuments> {
+  portrait: Portrait,
+): RenderedDocuments {
   const license = character.documents.driversLicense;
   if (!license) {
     return {};
@@ -50,13 +50,9 @@ function renderLicense(
     expires: driversLicenseExpiration(character, license, jurisdiction),
     jurisdiction,
     license,
-    portrait: loadPortrait(character),
+    portrait,
   };
-  const render = (
-    art: ReturnType<typeof driversLicenseFront>,
-    clipId: string,
-    side: string,
-  ) =>
+  const render = (art: CardArt, clipId: string, side: string) =>
     toJpeg(
       rasterize(
         framedDocumentSvg(art, CARD, {
@@ -77,7 +73,8 @@ function renderLicense(
 function renderPassport(
   world: World,
   character: Character,
-): Partial<RenderedDocuments> {
+  portrait: Portrait,
+): RenderedDocuments {
   const passport = character.documents.passport;
   if (!passport) {
     return {};
@@ -88,7 +85,7 @@ function renderPassport(
     expires: passportExpiration(passport, issuer),
     issuer,
     passport,
-    portrait: loadPortrait(character),
+    portrait,
   });
   const svg = framedDocumentSvg(art, DATA_PAGE, {
     clipId: "p-page",
@@ -101,9 +98,10 @@ function renderPassport(
 export function renderDocuments(
   world: World,
   character: Character,
+  portrait: Portrait,
 ): RenderedDocuments {
   return {
-    ...renderLicense(world, character),
-    ...renderPassport(world, character),
+    ...renderLicense(world, character, portrait),
+    ...renderPassport(world, character, portrait),
   };
 }

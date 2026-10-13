@@ -9,11 +9,8 @@ import {
   TEARLEADS_FILES,
 } from "../export/tearleadsSeed";
 import { addressBookVcard } from "../export/vcard";
-import { renderAvatar } from "../render/avatar";
-import { loadPortrait } from "../render/portrait";
-import { toJpeg } from "../render/raster";
-import { type CharacterFiles, canonSnapshot } from "./canonSnapshot";
-import { renderDocuments } from "./documents";
+import { canonSnapshot } from "./canonSnapshot";
+import { renderCharacters } from "./characters";
 
 // Everything under genesis/, built in memory from canon. The same canon always
 // yields the same bytes, which is what `bun run genesis:check` relies on.
@@ -31,40 +28,6 @@ function json(value: unknown): Uint8Array {
 
 function sha256(bytes: Uint8Array): string {
   return createHash("sha256").update(bytes).digest("hex");
-}
-
-function renderCharacters(world: World, files: Map<string, Uint8Array>) {
-  const characterFiles = new Map<string, CharacterFiles>();
-  const contactPhotos = new Map<string, Uint8Array>();
-  for (const character of world.characters) {
-    const portrait = loadPortrait(character);
-    const avatar = `avatars/${character.id}.png`;
-    files.set(avatar, renderAvatar(portrait).png);
-    contactPhotos.set(character.id, toJpeg(renderAvatar(portrait, 256), 85));
-    const documents = renderDocuments(world, character);
-    const entry: Record<string, string> = { avatar };
-    for (const [key, bytes, name] of [
-      [
-        "driversLicenseFront",
-        documents.driversLicenseFront,
-        "drivers-license-front.jpg",
-      ],
-      [
-        "driversLicenseBack",
-        documents.driversLicenseBack,
-        "drivers-license-back.jpg",
-      ],
-      ["passport", documents.passport, "passport.jpg"],
-    ] as const) {
-      if (bytes) {
-        const path = `documents/${character.id}/${name}`;
-        files.set(path, bytes);
-        entry[key] = path;
-      }
-    }
-    characterFiles.set(character.id, entry as unknown as CharacterFiles);
-  }
-  return { characterFiles, contactPhotos };
 }
 
 function copyTearleadsAttachments(
@@ -104,7 +67,7 @@ export function buildGenesis(world: World): readonly GenesisFile[] {
     );
   }
   const files = new Map<string, Uint8Array>();
-  const { characterFiles, contactPhotos } = renderCharacters(world, files);
+  const { characterAssets, contactPhotos } = renderCharacters(world, files);
   files.set(
     "contacts/contacts.csv",
     new TextEncoder().encode(googleContactsCsv(world)),
@@ -117,7 +80,7 @@ export function buildGenesis(world: World): readonly GenesisFile[] {
   files.set("tearleads/seed.json", json(seed));
   files.set("tearleads/expectations.json", json(buildSeedExpectations(seed)));
   copyTearleadsAttachments(world, files);
-  files.set("canon.json", json(canonSnapshot(world, characterFiles)));
+  files.set("canon.json", json(canonSnapshot(world, characterAssets)));
 
   const sorted = [...files.entries()].sort(([a], [b]) =>
     a < b ? -1 : a > b ? 1 : 0,
