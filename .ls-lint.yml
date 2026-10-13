@@ -1,0 +1,31 @@
+ls:
+  .dir: kebab-case
+  .*: regex:[A-Za-z0-9][A-Za-z0-9._-]* | regex:README | regex:AGENTS
+
+  # Source and canon modules are camelCase, matching tearleads.
+  src:
+    .ts: camelCase
+    .test.ts: camelCase
+
+  canon:
+    .ts: camelCase
+
+  scripts:
+    .ts: camelCase
+    .sh: camelCase
+
+  # Generated outputs and their attachment names are kebab-case: tearleads
+  # shows these file names to people as attachment names.
+  genesis:
+    .*: kebab-case
+
+  # Portrait files are named after character IDs.
+  assets/portraits:
+    .*: kebab-case
+
+ignore:
+  - .git
+  - ".*"
+  - "*/.*"
+  - "*/*/.*"
+  - node_modules

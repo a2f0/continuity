@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name == 'pull_request' && 'pr' || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Bun and ShellCheck
+        uses: jdx/mise-action@2d8d4cafcbd33be2ea37d2b6f5ad595363d1f1ca # v5.1.1
+        with:
+          version: 2026.10.3
+          cache: true
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # Pre-push lints a pushed branch only where hooks are installed, so a
+      # pull request opened from any other clone is checked here. The name is
+      # untrusted input: it reaches the shell only through the environment.
+      - name: Check branch name
+        if: github.event_name == 'pull_request'
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: bun scripts/checks/lintBranchName.ts -- "$BRANCH_NAME"
+
+      - name: Run static checks
+        run: bun run check:fast
+
+  # Rendering runs on Linux and macOS: genesis/ is checked byte for byte, so
+  # this proves the renderer is deterministic across platforms, not just on
+  # the machine that generated the committed files.
+  verify:
+    name: Verify (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.4.2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run tests
+        run: bun run test
+
+      - name: Check canon
+        run: bun run canon:check
+
+      - name: Check genesis output
+        run: bun run genesis:check
+
+  gate:
+    name: CI gate
+    if: always()
+    needs: [lint, verify]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every check to succeed
+        env:
+          CI_NEEDS: ${{ toJSON(needs) }}
+        run: |
+          printf '%s\n' "$CI_NEEDS" | jq -e 'all(.[]; .result == "success")' >/dev/null || {
+            printf '%s\n' "$CI_NEEDS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"' >&2
+            exit 1
+          }

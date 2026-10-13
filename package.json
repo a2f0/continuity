@@ -1,0 +1,72 @@
+{
+  "name": "@a2f0/continuity",
+  "version": "0.1.0",
+  "description": "Canonical fictional characters and the genesis data rendered from them",
+  "license": "UNLICENSED",
+  "type": "module",
+  "packageManager": "bun@1.4.2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a2f0/continuity.git"
+  },
+  "exports": {
+    "./genesis/*": "./genesis/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "genesis"
+  ],
+  "engines": {
+    "bun": ">=1.4.2"
+  },
+  "scripts": {
+    "agent-tool": "agent-tool",
+    "agent:logs": "agent-tool logs",
+    "agent:run": "agent-tool run",
+    "agents:check": "bun run agent-tool skills check",
+    "agents:sync": "bun run agent-tool skills install --apply",
+    "canon:check": "bun src/cli.ts validate",
+    "canon:freshness": "bun src/cli.ts freshness",
+    "check": "sh scripts/checks/check.sh",
+    "check:fast": "sh scripts/checks/checkFast.sh",
+    "genesis": "bun src/cli.ts generate",
+    "genesis:check": "bun src/cli.ts check",
+    "lint:biome": "biome check --error-on-warnings",
+    "lint:binary-files": "bun scripts/checks/checkBinaryFiles.ts",
+    "lint:branch-name": "bun scripts/checks/lintBranchName.ts",
+    "lint:files": "ls-lint",
+    "lint:knip": "knip",
+    "lint:markdown": "git ls-files -z -- '*.md' | xargs -0 bun --bun x markdownlint-cli2",
+    "lint:markdown:fix": "git ls-files -z -- '*.md' | xargs -0 bun --bun x markdownlint-cli2 --fix",
+    "lint:scripts": "git ls-files -z -- '*.sh' 'scripts/git/hooks/*' | xargs -0 shellcheck",
+    "portraits": "bun src/portraits/cli.ts",
+    "preview": "bun src/cli.ts preview",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.{css,html,js,json,jsonc,jsx,mjs,cjs,ts,tsx}": "biome check --fix --error-on-warnings",
+    "*.md": "bun --bun x markdownlint-cli2 --fix"
+  },
+  "devDependencies": {
+    "@a2f0/agent-tool": "0.1.12",
+    "@biomejs/biome": "2.5.15",
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3",
+    "@ls-lint/ls-lint": "2.3.1",
+    "@resvg/resvg-js": "2.6.2",
+    "@tsconfig/strictest": "2.0.8",
+    "@types/bun": "1.4.2",
+    "bwip-js": "4.11.4",
+    "jpeg-js": "0.4.4",
+    "knip": "6.40.0",
+    "lint-staged": "17.6.0",
+    "markdownlint-cli2": "0.23.3",
+    "typescript": "6.0.3"
+  },
+  "overrides": {
+    "markdownlint-cli2@0.23.3": {
+      "smol-toml": "1.9.0"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  // The glob lives in the `lint:markdown` script, not here: config `globs` are
+  // *appended* to any paths given on the command line, so setting them here
+  // would make `lint-staged` re-lint (and --fix) the whole tree on every commit
+  // instead of just the staged files.
+  "gitignore": false,
+  // Managed skill formatting is owned upstream and checked by agents:check.
+  "ignores": [
+    ".agents/skills/cross-agent-review/SKILL.md",
+    ".agents/skills/open-pr/SKILL.md",
+    ".agents/skills/reset/SKILL.md",
+    ".agents/skills/ship-pr/SKILL.md",
+    ".agents/skills/squash-merge/SKILL.md",
+    ".agents/skills/update-dependencies/SKILL.md",
+    ".claude/skills/cross-agent-review/SKILL.md",
+    ".claude/skills/open-pr/SKILL.md",
+    ".claude/skills/reset/SKILL.md",
+    ".claude/skills/ship-pr/SKILL.md",
+    ".claude/skills/squash-merge/SKILL.md",
+    ".claude/skills/update-dependencies/SKILL.md"
+  ],
+  "config": {
+    "default": true,
+    // Prose wraps at 80 columns. Code samples, shell transcripts, and tables
+    // carry their own formatting and cannot be rewrapped without changing what
+    // they mean, so they are measured by their own rules instead.
+    "MD013": {
+      "code_blocks": false,
+      "tables": false
+    }
+  }
+}

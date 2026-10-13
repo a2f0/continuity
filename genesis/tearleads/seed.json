@@ -1,0 +1,134 @@
+{
+  "contacts": [
+    {
+      "avatar": {
+        "file": "avatar-rosa-reyes.png",
+        "mimeType": "image/png"
+      },
+      "fields": {
+        "firstName": "Rosa",
+        "lastName": "Reyes",
+        "nickname": "Mom"
+      }
+    },
+    {
+      "avatar": {
+        "file": "avatar-daniel-okafor.png",
+        "mimeType": "image/png"
+      },
+      "fields": {
+        "firstName": "Daniel",
+        "lastName": "Okafor"
+      }
+    },
+    {
+      "avatar": {
+        "file": "avatar-theo-reyes.png",
+        "mimeType": "image/png"
+      },
+      "fields": {
+        "firstName": "Theo",
+        "lastName": "Reyes"
+      }
+    },
+    {
+      "avatar": {
+        "file": "avatar-priya-natarajan.png",
+        "mimeType": "image/png"
+      },
+      "fields": {
+        "firstName": "Priya",
+        "lastName": "Natarajan"
+      }
+    },
+    {
+      "avatar": {
+        "file": "avatar-sam-whitfield.png",
+        "mimeType": "image/png"
+      },
+      "fields": {
+        "firstName": "Sam",
+        "lastName": "Whitfield"
+      }
+    },
+    {
+      "avatar": {
+        "file": "avatar-hana-kobayashi.png",
+        "mimeType": "image/png"
+      },
+      "fields": {
+        "firstName": "Hana",
+        "lastName": "Kobayashi"
+      }
+    },
+    {
+      "avatar": {
+        "file": "avatar-marcus-bell.png",
+        "mimeType": "image/png"
+      },
+      "fields": {
+        "firstName": "Marcus",
+        "lastName": "Bell"
+      }
+    }
+  ],
+  "files": [
+    {
+      "attachments": [
+        {
+          "file": "drivers-license-front.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "front"
+        },
+        {
+          "file": "drivers-license-back.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "back"
+        }
+      ],
+      "fields": {
+        "expirationDate": "2032-03-14",
+        "licenseId": "R620-4183-9147"
+      },
+      "kind": "drivers_license"
+    },
+    {
+      "attachments": [
+        {
+          "file": "passport.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "passport-image"
+        }
+      ],
+      "fields": {
+        "expirationDate": "2033-06-01",
+        "fullName": "Maya Elena Reyes",
+        "issuingCountry": "Utopia",
+        "passportNumber": "UA4821937"
+      },
+      "kind": "passport"
+    }
+  ],
+  "identitySeedPhrase": "furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just spring",
+  "notes": [
+    {
+      "text": "Design review: onboarding refresh\nPriya wants the empty states reworked before Thursday.\n- Simplify the sync status copy\n- New illustrations for offline mode\n- Redlines to engineering by Friday"
+    },
+    {
+      "text": "Sunday dinner at Mom's\n- Bring the flan; Theo is making arroz con pollo\n- Pick up Mom's prescription at Juniper Pharmacy\n- Ask Sam about the porch railing (again)"
+    },
+    {
+      "text": "Gift ideas\n- Theo (June 2): Japanese whetstone set\n- Mom (July 22): framed print of Aurelia harbor\n- Daniel (November 2): new climbing shoes, size 11"
+    },
+    {
+      "text": "Packing list: Lake Kestrel weekend\n- Passport and driver's license\n- Bike helmet, lights, spare tube\n- Rain shells\n- Pepper's food and leash (Hana can keep him if the cabin says no dogs)"
+    },
+    {
+      "text": "Bike maintenance\n- Chain replaced at 2,140 mi (August)\n- Marcus says go tubeless before gravel season\n- Check brake pads before the Lake Kestrel ride"
+    },
+    {
+      "text": "Home codes\nBuilding door: 4417#\nStorage unit 22-B: 3-9-14\nGuest Wi-Fi: AlderCrest-3B / pepper-loves-the-beach"
+    }
+  ],
+  "password": "screenshot-seed"
+}

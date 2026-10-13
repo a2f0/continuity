@@ -1,0 +1,75 @@
+# Repository guidance
+
+Resolve the GitHub repository with `gh repo view --json nameWithOwner` and use
+its reported identity for GitHub commands. Work on a feature branch, use
+conventional commits, and preserve unrelated edits. Do not force-push or add
+attribution footers. Do not create GitHub issues without an explicit request.
+
+## Validation
+
+- `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed skills,
+  binary placement, Knip, and TypeScript.
+- `bun run check`: `check:fast`, tests, canon consistency, and a full re-render
+  proving `genesis/` matches canon byte for byte. The pre-push hook runs it.
+- `bun run canon:check`: continuity rules alone, plus portrait status.
+- `bun run genesis:check`: the re-render alone (about 20 seconds).
+
+Wrap noisy commands with `bun run agent:run --label <name> -- <command>` and
+inspect failures with `bun run agent:logs <path>`.
+
+## Canon and generated output
+
+- `canon/` is the source of truth. Change facts there, then run
+  `bun run genesis` and commit canon and `genesis/` together.
+- Never edit `genesis/` by hand. CI re-renders it on Linux and macOS and fails
+  on any difference.
+- Derive, do not store: expiration dates, ages, MRZ lines, and display names
+  are computed in `src/canon/derive.ts`. A note that mentions a canon fact
+  should read it through its context function (see `canon/device/notes.ts`).
+- Character IDs are permanent. Never rename or reuse one; tearleads and other
+  consumers key on them.
+- Rendering must stay deterministic: no system fonts, clocks, or unseeded
+  randomness in `src/render/` or `src/genesis/`. Use `seededRandom` for jitter.
+- Keep documents unmistakably fictional: fictional issuers only, a visible
+  `SPECIMEN` mark, non-AAMVA barcode payloads, 555-01XX phone numbers, and
+  reserved email domains. Do not model a real jurisdiction's or country's
+  design.
+
+## Binary files
+
+Binary files are allowed only as `assets/fonts/*.ttf`,
+`assets/portraits/*.{jpg,png}`, and `genesis/**/*.{jpg,png}`, each at most
+3 MiB (`bun run lint:binary-files`). Regenerating images adds to history, so
+avoid churning renders without a reason.
+
+## Agent tooling and shipping
+
+Review, PR, merge, and version helpers come from the exact-pinned
+[`@a2f0/agent-tool`](https://github.com/a2f0/agent-tool) dev dependency; run it
+with `bun run agent-tool`. Title, required-check, and version policy is in
+`agent-tool.json`. The shared `cross-agent-review`, `open-pr`, `squash-merge`,
+`ship-pr`, `reset`, and `update-dependencies` skills are managed copies in
+`.agents/skills` and `.claude/skills`, tracked by `.agent-tool-skills.json`. Do
+not edit them; change the shared skill upstream instead. After changing the
+pin, run `bun run agents:sync` and commit the lockfile, skills, and manifest
+together. `bun run agents:check`, part of `check:fast`, fails on missing,
+outdated, or edited managed skills.
+
+Shipping rules on top of the shared skills:
+
+- **Reviewer**: prefer the other agent's CLI (Codex from Claude Code, Claude
+  from Codex), then the remaining CLIs, and report any fallback.
+- **Base integration**: merge the pinned base OID; never rebase or force-push.
+- **Versions**: the root package ships one patch past its version on the merge
+  base. Before each review, run
+  `bun run agent-tool versions prepare "$BASE_OID"`. Versions are not part of
+  `genesis/`, so a bump never requires regenerating.
+- **Titles**: PR titles and squash subjects follow `commitlint.config.mts`.
+  Check them with
+  `printf '%s\n' "$TITLE" | bun x --no-install commitlint --config commitlint.config.mts`
+  and branch names with `bun run lint:branch-name <name>`.
+- **Merge**: run
+  `node_modules/.bin/agent-tool pr merge '' "$REVIEWED_SHA" "$BASE_REF"`
+  directly, because `bun run` drops empty arguments. Never use `gh pr merge`.
+- **Reset**: after returning to `main`, run `sh scripts/git/installHooks.sh` so
+  merged hook changes take effect.

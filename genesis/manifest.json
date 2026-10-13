@@ -1,0 +1,210 @@
+{
+  "asOf": "2026-10-01",
+  "files": [
+    {
+      "bytes": 51442,
+      "path": "avatars/daniel-okafor.png",
+      "sha256": "9fd72554b9d2c5a7b353e29b8d65530d97331742202a1f0e24ed80cb1d2f7276"
+    },
+    {
+      "bytes": 48626,
+      "path": "avatars/hana-kobayashi.png",
+      "sha256": "7e593cc8881bece20f12b799303bd20f5c3b9a68da74345a4b3e4c1cc41b56c9"
+    },
+    {
+      "bytes": 38540,
+      "path": "avatars/marcus-bell.png",
+      "sha256": "18c3c97ac4844bea8210533d05c8635e9a6bbcd4eb0d27d9f1d4e20fa69055c9"
+    },
+    {
+      "bytes": 45493,
+      "path": "avatars/maya-reyes.png",
+      "sha256": "ed4f64da52ffe31c3c1dfc0ba0865321a9b19c631977d65d8260a5c2982ec604"
+    },
+    {
+      "bytes": 41251,
+      "path": "avatars/priya-natarajan.png",
+      "sha256": "49a5693594ec866319bc4d5bfabd1329c52ce0d0dbefa88efcba06cacf2d16a3"
+    },
+    {
+      "bytes": 43707,
+      "path": "avatars/rosa-reyes.png",
+      "sha256": "ab7e2beff4d3a69fb4f7bc7ee3b14a4c149394612c4f54ec8e9617f5acaa0dab"
+    },
+    {
+      "bytes": 47372,
+      "path": "avatars/sam-whitfield.png",
+      "sha256": "cada722ea71eec927ee068b898dd9ca26a149fea189251bdbc2b1bedc21e2de2"
+    },
+    {
+      "bytes": 48474,
+      "path": "avatars/theo-reyes.png",
+      "sha256": "07a5644cfbc818e79e3f4ab1aa7b22219c17d0f281cfcdb419e39e32ba06fbf6"
+    },
+    {
+      "bytes": 22595,
+      "path": "canon.json",
+      "sha256": "53e7a50b6708645b8c16b3cdfa3968bd6435c1e258dced3b0e49544c6affba56"
+    },
+    {
+      "bytes": 2666,
+      "path": "contacts/contacts.csv",
+      "sha256": "e1c02e2b2c9cc038f6f182d2c92ec05422aa32b028d688f6eef2709149f928df"
+    },
+    {
+      "bytes": 81256,
+      "path": "contacts/contacts.vcf",
+      "sha256": "3a070028ba6c923d0578063a317a098c788c642e8af3cb72c43269803362f4c0"
+    },
+    {
+      "bytes": 352286,
+      "path": "documents/daniel-okafor/drivers-license-back.jpg",
+      "sha256": "9291025c6b801d163e003d429e31b6dc4859e8e12877cabf2977df716a6934e5"
+    },
+    {
+      "bytes": 323882,
+      "path": "documents/daniel-okafor/drivers-license-front.jpg",
+      "sha256": "d069c221f6b1a207894372da4081013004b310b1ab83b42aca84a6b861ad5a3a"
+    },
+    {
+      "bytes": 346063,
+      "path": "documents/hana-kobayashi/drivers-license-back.jpg",
+      "sha256": "64a117f6a787886606dbb163366fb6eb6f1e75eefe2937d22d8fdc29a81a6958"
+    },
+    {
+      "bytes": 328946,
+      "path": "documents/hana-kobayashi/drivers-license-front.jpg",
+      "sha256": "08396f0c083cbeec7c01780f6a17aa1a061daa7ed86ab4d1387cb6afbf711140"
+    },
+    {
+      "bytes": 339135,
+      "path": "documents/marcus-bell/drivers-license-back.jpg",
+      "sha256": "f6632168e5f96a65edfb4756fa2e1c4d8396ed339e745dd81ff57a947419479d"
+    },
+    {
+      "bytes": 325043,
+      "path": "documents/marcus-bell/drivers-license-front.jpg",
+      "sha256": "10f6bbfa71e6e06c69d88328fb964a39b8d1aa4d8f84572df2c8e339e61ee59e"
+    },
+    {
+      "bytes": 346910,
+      "path": "documents/maya-reyes/drivers-license-back.jpg",
+      "sha256": "71ab03f59b76ec2dfaa74b88ada60d590fd25529d40d5c0d79826b3e7556a315"
+    },
+    {
+      "bytes": 327848,
+      "path": "documents/maya-reyes/drivers-license-front.jpg",
+      "sha256": "aefb7a5bd94aba294c85794172acb26f6603ce2244bfa8d1eef3beac14566d62"
+    },
+    {
+      "bytes": 468739,
+      "path": "documents/maya-reyes/passport.jpg",
+      "sha256": "e7a174fc79b119c4db3f6fd40728b012e83c69c95d46d12fcb70202ffbc897c6"
+    },
+    {
+      "bytes": 348853,
+      "path": "documents/priya-natarajan/drivers-license-back.jpg",
+      "sha256": "70347c995eea53d291f8b1c78e232dbd4191e05cad32140737320842a15e7917"
+    },
+    {
+      "bytes": 323488,
+      "path": "documents/priya-natarajan/drivers-license-front.jpg",
+      "sha256": "8772c7231c45cf605ddb3a54dae24f0fb702bf4ea749ccb1023e9c42b08395e2"
+    },
+    {
+      "bytes": 357719,
+      "path": "documents/rosa-reyes/drivers-license-back.jpg",
+      "sha256": "31dbacd681bc1891d68889164bdba2d666ab1392ed3b6d384e53edd22be33b45"
+    },
+    {
+      "bytes": 324165,
+      "path": "documents/rosa-reyes/drivers-license-front.jpg",
+      "sha256": "c78996db836f96d482812f5152c530ea6b3ae8645efa252fe7c01e85ac6d45a2"
+    },
+    {
+      "bytes": 469239,
+      "path": "documents/rosa-reyes/passport.jpg",
+      "sha256": "3e6f72adc0a0f1fd2771f8fee7e6361efdb999afc8938d39408cdf6680446255"
+    },
+    {
+      "bytes": 344854,
+      "path": "documents/sam-whitfield/drivers-license-back.jpg",
+      "sha256": "cb3a21db4b1eedacf2e57e96d8f1778d77af93aa944feb0a39cd5c4fc09eac0a"
+    },
+    {
+      "bytes": 326238,
+      "path": "documents/sam-whitfield/drivers-license-front.jpg",
+      "sha256": "a951fe05835f1ecc8a7e09d0d533d5371303a065359fbc11904bb01ac508f579"
+    },
+    {
+      "bytes": 341142,
+      "path": "documents/theo-reyes/drivers-license-back.jpg",
+      "sha256": "2a0ec90cbea0285b2bdd822c4c0d9f5bf2ca5458d16d6550397b671e36f9179d"
+    },
+    {
+      "bytes": 325720,
+      "path": "documents/theo-reyes/drivers-license-front.jpg",
+      "sha256": "c4c01c99097ae8bfa22f6b0bd4f4360a72782508ababbc57d4753b0ffe0c02ef"
+    },
+    {
+      "bytes": 51442,
+      "path": "tearleads/avatar-daniel-okafor.png",
+      "sha256": "9fd72554b9d2c5a7b353e29b8d65530d97331742202a1f0e24ed80cb1d2f7276"
+    },
+    {
+      "bytes": 48626,
+      "path": "tearleads/avatar-hana-kobayashi.png",
+      "sha256": "7e593cc8881bece20f12b799303bd20f5c3b9a68da74345a4b3e4c1cc41b56c9"
+    },
+    {
+      "bytes": 38540,
+      "path": "tearleads/avatar-marcus-bell.png",
+      "sha256": "18c3c97ac4844bea8210533d05c8635e9a6bbcd4eb0d27d9f1d4e20fa69055c9"
+    },
+    {
+      "bytes": 41251,
+      "path": "tearleads/avatar-priya-natarajan.png",
+      "sha256": "49a5693594ec866319bc4d5bfabd1329c52ce0d0dbefa88efcba06cacf2d16a3"
+    },
+    {
+      "bytes": 43707,
+      "path": "tearleads/avatar-rosa-reyes.png",
+      "sha256": "ab7e2beff4d3a69fb4f7bc7ee3b14a4c149394612c4f54ec8e9617f5acaa0dab"
+    },
+    {
+      "bytes": 47372,
+      "path": "tearleads/avatar-sam-whitfield.png",
+      "sha256": "cada722ea71eec927ee068b898dd9ca26a149fea189251bdbc2b1bedc21e2de2"
+    },
+    {
+      "bytes": 48474,
+      "path": "tearleads/avatar-theo-reyes.png",
+      "sha256": "07a5644cfbc818e79e3f4ab1aa7b22219c17d0f281cfcdb419e39e32ba06fbf6"
+    },
+    {
+      "bytes": 346910,
+      "path": "tearleads/drivers-license-back.jpg",
+      "sha256": "71ab03f59b76ec2dfaa74b88ada60d590fd25529d40d5c0d79826b3e7556a315"
+    },
+    {
+      "bytes": 327848,
+      "path": "tearleads/drivers-license-front.jpg",
+      "sha256": "aefb7a5bd94aba294c85794172acb26f6603ce2244bfa8d1eef3beac14566d62"
+    },
+    {
+      "bytes": 369,
+      "path": "tearleads/expectations.json",
+      "sha256": "02aa9eb710482055aa63d1679a2f06c9ce39bb660e8ad4381f5b877ff8b299f9"
+    },
+    {
+      "bytes": 468739,
+      "path": "tearleads/passport.jpg",
+      "sha256": "e7a174fc79b119c4db3f6fd40728b012e83c69c95d46d12fcb70202ffbc897c6"
+    },
+    {
+      "bytes": 3666,
+      "path": "tearleads/seed.json",
+      "sha256": "7ca3f1aa15a383307f167710b30d56aace5df9b8a2cd37c432192fecc1447f9a"
+    }
+  ]
+}

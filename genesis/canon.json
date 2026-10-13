@@ -1,0 +1,739 @@
+{
+  "asOf": "2026-10-01",
+  "owner": "maya-reyes",
+  "characters": [
+    {
+      "id": "maya-reyes",
+      "name": {
+        "given": "Maya",
+        "middle": "Elena",
+        "family": "Reyes"
+      },
+      "sex": "F",
+      "pronouns": "she/her",
+      "birthDate": "1991-03-14",
+      "birthPlace": "Aurelia, Utopia",
+      "address": {
+        "street": "1427 Alder Crest Ave",
+        "unit": "Apt 3B",
+        "city": "Port Alder",
+        "region": "CS",
+        "postalCode": "98471",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0142"
+        }
+      ],
+      "emails": [
+        {
+          "label": "personal",
+          "address": "maya.reyes@inbox.example"
+        },
+        {
+          "label": "work",
+          "address": "maya@harborlight.example"
+        }
+      ],
+      "occupation": {
+        "title": "Senior Product Designer",
+        "organization": "Harborlight Studio",
+        "department": "Design"
+      },
+      "bio": "Born in Aurelia, Utopia, Maya moved to Port Alder at seven with her mother Rosa and baby brother Theo, and keeps her Utopian passport alongside her Cascadia license. She studied design at Cascadia State University, where she met Sam Whitfield, and has spent six years at Harborlight Studio, now reporting to Priya Natarajan. She married Daniel Okafor in 2019; they share apartment 3B on Alder Crest Avenue with Pepper, a border collie mix whose vet, Hana Kobayashi, lives across the hall. Saturday mornings she rides with Marcus Bell. She wears contact lenses, so her license carries a corrective-lens restriction.",
+      "relationships": [
+        {
+          "to": "daniel-okafor",
+          "kind": "spouse"
+        },
+        {
+          "to": "rosa-reyes",
+          "kind": "parent"
+        },
+        {
+          "to": "theo-reyes",
+          "kind": "sibling"
+        },
+        {
+          "to": "priya-natarajan",
+          "kind": "manager"
+        },
+        {
+          "to": "sam-whitfield",
+          "kind": "friend"
+        },
+        {
+          "to": "hana-kobayashi",
+          "kind": "neighbor"
+        },
+        {
+          "to": "marcus-bell",
+          "kind": "friend"
+        }
+      ],
+      "age": 35,
+      "displayName": "Maya Reyes",
+      "legalName": "Maya Elena Reyes",
+      "appearance": {
+        "description": "Latina woman with warm olive-tan skin, long dark brown wavy hair falling past her shoulders, brown eyes, thick dark eyebrows, small gold stud earrings, natural makeup, a gentle closed-mouth smile, wearing a slate blue blouse",
+        "eyes": "BRO",
+        "hair": "BLK",
+        "heightCm": 165,
+        "weightKg": 61
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "R620-4183-9147",
+          "class": "C",
+          "issued": "2024-02-20",
+          "restrictions": [
+            "B"
+          ],
+          "documentDiscriminator": "2402200817CS3",
+          "donor": true,
+          "expires": "2032-03-14"
+        },
+        "passport": {
+          "issuer": "utopia",
+          "number": "UA4821937",
+          "issued": "2023-06-02",
+          "expires": "2033-06-01"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/maya-reyes.png",
+        "driversLicenseFront": "documents/maya-reyes/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/maya-reyes/drivers-license-back.jpg",
+        "passport": "documents/maya-reyes/passport.jpg"
+      }
+    },
+    {
+      "id": "daniel-okafor",
+      "name": {
+        "given": "Daniel",
+        "middle": "Chidi",
+        "family": "Okafor"
+      },
+      "sex": "M",
+      "pronouns": "he/him",
+      "birthDate": "1989-11-02",
+      "birthPlace": "Port Alder, Cascadia",
+      "address": {
+        "street": "1427 Alder Crest Ave",
+        "unit": "Apt 3B",
+        "city": "Port Alder",
+        "region": "CS",
+        "postalCode": "98471",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0187"
+        },
+        {
+          "label": "work",
+          "number": "(360) 555-0110"
+        }
+      ],
+      "emails": [
+        {
+          "label": "personal",
+          "address": "daniel.okafor@inbox.example"
+        },
+        {
+          "label": "work",
+          "address": "dokafor@portalderschools.example"
+        }
+      ],
+      "occupation": {
+        "title": "Chemistry Teacher",
+        "organization": "Port Alder High School",
+        "department": "Science"
+      },
+      "bio": "Daniel grew up in Port Alder and has taught chemistry at Port Alder High School for nine years. He married Maya Reyes in 2019. He climbs at the gym on Tuesdays with Sam Whitfield, rides occasionally with Marcus Bell, and is the one who walks Pepper before school. He has worn glasses since he was twelve.",
+      "relationships": [
+        {
+          "to": "maya-reyes",
+          "kind": "spouse"
+        },
+        {
+          "to": "hana-kobayashi",
+          "kind": "neighbor"
+        },
+        {
+          "to": "sam-whitfield",
+          "kind": "friend"
+        },
+        {
+          "to": "marcus-bell",
+          "kind": "friend"
+        }
+      ],
+      "age": 36,
+      "displayName": "Daniel Okafor",
+      "legalName": "Daniel Chidi Okafor",
+      "appearance": {
+        "description": "Nigerian-American man with deep brown skin, close-cropped black hair, a neatly trimmed short black beard, rectangular dark tortoiseshell glasses, a warm easy smile, wearing a charcoal crewneck sweater over a collared shirt",
+        "eyes": "BRO",
+        "hair": "BLK",
+        "heightCm": 185,
+        "weightKg": 84
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "O415-7720-3368",
+          "class": "C",
+          "issued": "2021-10-15",
+          "restrictions": [
+            "B"
+          ],
+          "documentDiscriminator": "2110154402CS1",
+          "expires": "2029-11-02"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/daniel-okafor.png",
+        "driversLicenseFront": "documents/daniel-okafor/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/daniel-okafor/drivers-license-back.jpg"
+      }
+    },
+    {
+      "id": "rosa-reyes",
+      "name": {
+        "given": "Rosa",
+        "middle": "María",
+        "family": "Reyes"
+      },
+      "sex": "F",
+      "pronouns": "she/her",
+      "birthDate": "1963-07-22",
+      "birthPlace": "Aurelia, Utopia",
+      "address": {
+        "street": "88 Juniper Lane",
+        "city": "Cedar Hollow",
+        "region": "CS",
+        "postalCode": "98432",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0119"
+        },
+        {
+          "label": "home",
+          "number": "(360) 555-0120"
+        }
+      ],
+      "emails": [
+        {
+          "label": "personal",
+          "address": "rosa.reyes@inbox.example"
+        }
+      ],
+      "bio": "Rosa emigrated from Aurelia, Utopia, in 1998 with her children Maya and Theo, and worked thirty years as a pediatric nurse at Cedar Hollow Community Hospital before retiring in 2024. She hosts Sunday dinner most weeks, still keeps a landline, and renews her Utopian passport so she can visit her sister in Aurelia.",
+      "relationships": [
+        {
+          "to": "maya-reyes",
+          "kind": "child"
+        },
+        {
+          "to": "theo-reyes",
+          "kind": "child"
+        }
+      ],
+      "age": 63,
+      "displayName": "Rosa Reyes",
+      "legalName": "Rosa María Reyes",
+      "appearance": {
+        "description": "Latina woman with warm tan skin, dark hair streaked with silver pulled into a low bun, warm brown eyes with laugh lines, thin gold-rimmed glasses, a kind closed-mouth smile, wearing a deep red cardigan",
+        "eyes": "BRO",
+        "hair": "GRY",
+        "heightCm": 157,
+        "weightKg": 66
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "R205-9931-4472",
+          "class": "C",
+          "issued": "2023-07-10",
+          "restrictions": [
+            "B"
+          ],
+          "documentDiscriminator": "2307106615CS2",
+          "donor": true,
+          "expires": "2031-07-22"
+        },
+        "passport": {
+          "issuer": "utopia",
+          "number": "UC1067354",
+          "issued": "2021-11-30",
+          "expires": "2031-11-29"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/rosa-reyes.png",
+        "driversLicenseFront": "documents/rosa-reyes/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/rosa-reyes/drivers-license-back.jpg",
+        "passport": "documents/rosa-reyes/passport.jpg"
+      }
+    },
+    {
+      "id": "theo-reyes",
+      "name": {
+        "given": "Teodoro",
+        "middle": "Luis",
+        "family": "Reyes",
+        "preferred": "Theo"
+      },
+      "sex": "M",
+      "pronouns": "he/him",
+      "birthDate": "1996-06-02",
+      "birthPlace": "Aurelia, Utopia",
+      "address": {
+        "street": "512 Wharf Street",
+        "unit": "Unit 7",
+        "city": "Port Alder",
+        "region": "CS",
+        "postalCode": "98470",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0163"
+        }
+      ],
+      "emails": [
+        {
+          "label": "personal",
+          "address": "theo.reyes@inbox.example"
+        }
+      ],
+      "occupation": {
+        "title": "Sous Chef",
+        "organization": "Saltgrass Kitchen"
+      },
+      "bio": "Theo was two when the family left Aurelia and remembers none of it, which Rosa finds unbearable. He goes by Theo everywhere except on documents, cooks at Saltgrass Kitchen on the Port Alder waterfront, and makes the arroz con pollo at Sunday dinner. His sister Maya still introduces him as her baby brother.",
+      "relationships": [
+        {
+          "to": "rosa-reyes",
+          "kind": "parent"
+        },
+        {
+          "to": "maya-reyes",
+          "kind": "sibling"
+        }
+      ],
+      "age": 30,
+      "displayName": "Theo Reyes",
+      "legalName": "Teodoro Luis Reyes",
+      "appearance": {
+        "description": "Latino man with light brown skin, short dark hair with a skin fade, light stubble, brown eyes, a small silver hoop earring in his left ear, an easygoing grin, wearing a dark olive work shirt",
+        "eyes": "BRO",
+        "hair": "BLK",
+        "heightCm": 178,
+        "weightKg": 76
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "R861-0247-5593",
+          "class": "C",
+          "issued": "2022-05-23",
+          "documentDiscriminator": "2205239180CS4",
+          "expires": "2030-06-02"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/theo-reyes.png",
+        "driversLicenseFront": "documents/theo-reyes/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/theo-reyes/drivers-license-back.jpg"
+      }
+    },
+    {
+      "id": "priya-natarajan",
+      "name": {
+        "given": "Priya",
+        "family": "Natarajan"
+      },
+      "sex": "F",
+      "pronouns": "she/her",
+      "birthDate": "1984-09-09",
+      "birthPlace": "Chennai, India",
+      "address": {
+        "street": "2210 Bayview Terrace",
+        "city": "Port Alder",
+        "region": "CS",
+        "postalCode": "98473",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0175"
+        },
+        {
+          "label": "work",
+          "number": "(360) 555-0101"
+        }
+      ],
+      "emails": [
+        {
+          "label": "work",
+          "address": "priya@harborlight.example"
+        },
+        {
+          "label": "personal",
+          "address": "priya.natarajan@inbox.example"
+        }
+      ],
+      "occupation": {
+        "title": "Design Director",
+        "organization": "Harborlight Studio",
+        "department": "Design"
+      },
+      "bio": "Priya leads the design team at Harborlight Studio and hired Maya Reyes six years ago. She moved to Port Alder from the Bay Area in 2016, renewed her Cascadia license in 2025, and runs the Thursday design reviews that Maya's notes keep mentioning.",
+      "relationships": [
+        {
+          "to": "maya-reyes",
+          "kind": "report"
+        }
+      ],
+      "age": 42,
+      "displayName": "Priya Natarajan",
+      "legalName": "Priya Natarajan",
+      "appearance": {
+        "description": "South Indian woman with medium brown skin, long straight black hair in a sleek low ponytail, dark brown eyes, a small gold nose stud, a confident warm smile, wearing a plum blazer over a black top",
+        "eyes": "BRO",
+        "hair": "BLK",
+        "heightCm": 160,
+        "weightKg": 55
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "N312-6658-0914",
+          "class": "C",
+          "issued": "2025-08-28",
+          "documentDiscriminator": "2508283057CS1",
+          "expires": "2033-09-09"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/priya-natarajan.png",
+        "driversLicenseFront": "documents/priya-natarajan/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/priya-natarajan/drivers-license-back.jpg"
+      }
+    },
+    {
+      "id": "sam-whitfield",
+      "name": {
+        "given": "Samuel",
+        "middle": "James",
+        "family": "Whitfield",
+        "preferred": "Sam"
+      },
+      "sex": "M",
+      "pronouns": "he/him",
+      "birthDate": "1990-12-19",
+      "birthPlace": "Fernwood, Cascadia",
+      "address": {
+        "street": "47 Mill Road",
+        "city": "Fernwood",
+        "region": "CS",
+        "postalCode": "98455",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0131"
+        },
+        {
+          "label": "work",
+          "number": "(360) 555-0132"
+        }
+      ],
+      "emails": [
+        {
+          "label": "work",
+          "address": "sam@whitfieldwoodworks.example"
+        }
+      ],
+      "occupation": {
+        "title": "Owner",
+        "organization": "Whitfield Woodworks"
+      },
+      "bio": "Sam roomed down the hall from Maya Reyes at Cascadia State University, dropped out of architecture, and now runs Whitfield Woodworks from a converted barn in Fernwood. He climbs with Daniel Okafor on Tuesdays, rides a 1978 motorcycle he rebuilt himself, and is always about to fix Rosa's porch railing.",
+      "relationships": [
+        {
+          "to": "maya-reyes",
+          "kind": "friend"
+        },
+        {
+          "to": "daniel-okafor",
+          "kind": "friend"
+        }
+      ],
+      "age": 35,
+      "displayName": "Sam Whitfield",
+      "legalName": "Samuel James Whitfield",
+      "appearance": {
+        "description": "White man with fair freckled skin, short tousled auburn hair, a full reddish-brown beard, blue eyes, broad shoulders, a friendly lopsided smile, wearing a brown and cream flannel shirt",
+        "eyes": "BLU",
+        "hair": "RED",
+        "heightCm": 190,
+        "weightKg": 95
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "W775-3109-8826",
+          "class": "C",
+          "issued": "2020-12-01",
+          "endorsements": [
+            "M"
+          ],
+          "documentDiscriminator": "2012017741CS2",
+          "donor": true,
+          "expires": "2028-12-19"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/sam-whitfield.png",
+        "driversLicenseFront": "documents/sam-whitfield/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/sam-whitfield/drivers-license-back.jpg"
+      }
+    },
+    {
+      "id": "hana-kobayashi",
+      "name": {
+        "given": "Hana",
+        "family": "Kobayashi"
+      },
+      "sex": "F",
+      "pronouns": "she/her",
+      "birthDate": "1977-04-03",
+      "birthPlace": "Sacramento, California",
+      "address": {
+        "street": "1427 Alder Crest Ave",
+        "unit": "Apt 3A",
+        "city": "Port Alder",
+        "region": "CS",
+        "postalCode": "98471",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0154"
+        },
+        {
+          "label": "work",
+          "number": "(360) 555-0150"
+        }
+      ],
+      "emails": [
+        {
+          "label": "personal",
+          "address": "hana.kobayashi@inbox.example"
+        },
+        {
+          "label": "work",
+          "address": "hkobayashi@aldercreekvet.example"
+        }
+      ],
+      "occupation": {
+        "title": "Veterinarian",
+        "organization": "Alder Creek Animal Hospital"
+      },
+      "bio": "Hana is a veterinarian at Alder Creek Animal Hospital and lives across the hall from Maya and Daniel in apartment 3A. She treats Pepper, takes him for a weekend when Maya and Daniel travel, and has a standing invitation to their Friday pizza nights.",
+      "relationships": [
+        {
+          "to": "maya-reyes",
+          "kind": "neighbor"
+        },
+        {
+          "to": "daniel-okafor",
+          "kind": "neighbor"
+        }
+      ],
+      "age": 49,
+      "displayName": "Hana Kobayashi",
+      "legalName": "Hana Kobayashi",
+      "appearance": {
+        "description": "Japanese-American woman with light skin, a chin-length black bob with a few strands of gray, dark brown eyes, thin rimless glasses, a calm attentive expression with a slight smile, wearing a teal button-up shirt",
+        "eyes": "BRO",
+        "hair": "BLK",
+        "heightCm": 162,
+        "weightKg": 57
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "K148-5562-7031",
+          "class": "C",
+          "issued": "2022-03-15",
+          "restrictions": [
+            "B"
+          ],
+          "documentDiscriminator": "2203152268CS3",
+          "expires": "2030-04-03"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/hana-kobayashi.png",
+        "driversLicenseFront": "documents/hana-kobayashi/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/hana-kobayashi/drivers-license-back.jpg"
+      }
+    },
+    {
+      "id": "marcus-bell",
+      "name": {
+        "given": "Marcus",
+        "middle": "Anthony",
+        "family": "Bell"
+      },
+      "sex": "M",
+      "pronouns": "he/him",
+      "birthDate": "1994-08-27",
+      "birthPlace": "Atlanta, Georgia",
+      "address": {
+        "street": "3305 Cormorant Way",
+        "city": "Port Alder",
+        "region": "CS",
+        "postalCode": "98472",
+        "country": "USA"
+      },
+      "phones": [
+        {
+          "label": "mobile",
+          "number": "(360) 555-0198"
+        }
+      ],
+      "emails": [
+        {
+          "label": "personal",
+          "address": "marcus.bell@inbox.example"
+        },
+        {
+          "label": "work",
+          "address": "mbell@tidewater.example"
+        }
+      ],
+      "occupation": {
+        "title": "Software Engineer",
+        "organization": "Tidewater Systems"
+      },
+      "bio": "Marcus moved from Atlanta to Port Alder in 2023 for an engineering job at Tidewater Systems and swapped his Georgia license for a Cascadia one that August. He met Maya Reyes on a Saturday group ride, now leads it, and keeps telling everyone to go tubeless.",
+      "relationships": [
+        {
+          "to": "maya-reyes",
+          "kind": "friend"
+        },
+        {
+          "to": "daniel-okafor",
+          "kind": "friend"
+        }
+      ],
+      "age": 32,
+      "displayName": "Marcus Bell",
+      "legalName": "Marcus Anthony Bell",
+      "appearance": {
+        "description": "Black man with dark brown skin, short two-strand twists, clean-shaven, dark brown eyes, a lean athletic build, a bright open smile, wearing a burnt orange quarter-zip pullover",
+        "eyes": "BRO",
+        "hair": "BLK",
+        "heightCm": 175,
+        "weightKg": 72
+      },
+      "documents": {
+        "driversLicense": {
+          "jurisdiction": "cascadia",
+          "number": "B590-8814-2265",
+          "class": "C",
+          "issued": "2023-08-14",
+          "documentDiscriminator": "2308149936CS1",
+          "expires": "2031-08-27"
+        }
+      },
+      "portrait": "placeholder",
+      "files": {
+        "avatar": "avatars/marcus-bell.png",
+        "driversLicenseFront": "documents/marcus-bell/drivers-license-front.jpg",
+        "driversLicenseBack": "documents/marcus-bell/drivers-license-back.jpg"
+      }
+    }
+  ],
+  "jurisdictions": [
+    {
+      "id": "cascadia",
+      "name": "Cascadia",
+      "code": "CS",
+      "country": "USA",
+      "agency": "Cascadia Department of Licensing",
+      "motto": "Per Silvas Ad Mare",
+      "minimumAge": 16,
+      "renewalYears": 8,
+      "licenseNumberPattern": "^[A-Z]\\d{3}-\\d{4}-\\d{4}$",
+      "classes": {
+        "A": "Combination vehicles over 26,000 lbs",
+        "B": "Single vehicles over 26,000 lbs",
+        "C": "Passenger vehicles and light trucks"
+      },
+      "endorsements": {
+        "M": "Motorcycle",
+        "N": "Tank vehicle",
+        "P": "Passenger transport",
+        "T": "Double and triple trailers"
+      },
+      "restrictions": {
+        "B": "Corrective lenses",
+        "C": "Mechanical aid",
+        "E": "Automatic transmission only",
+        "F": "Outside mirror",
+        "G": "Daylight driving only"
+      },
+      "palette": {
+        "ink": "#1b2a30",
+        "primary": "#1f4e5a",
+        "secondary": "#3f7a5c",
+        "accent": "#b8862b",
+        "paper": "#eef4f1",
+        "paperShade": "#cfe0e2"
+      }
+    }
+  ],
+  "passportIssuers": [
+    {
+      "id": "utopia",
+      "name": "Utopia",
+      "code": "UTO",
+      "nationality": "UTOPIAN",
+      "authority": "Ministry of Foreign Affairs",
+      "validityYears": 10,
+      "numberPattern": "^U[A-Z]\\d{7}$",
+      "palette": {
+        "ink": "#2a1a1f",
+        "primary": "#6b1f2e",
+        "secondary": "#3b4a7a",
+        "accent": "#a8873a",
+        "paper": "#f4efe4",
+        "paperShade": "#e2d6bf"
+      }
+    }
+  ]
+}

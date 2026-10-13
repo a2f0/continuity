@@ -1,0 +1,18 @@
+{
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["@types/bun"]
+  },
+  "include": [
+    "canon/**/*.ts",
+    "scripts/**/*.ts",
+    "src/**/*.ts",
+    "*.config.ts",
+    "*.config.mts"
+  ]
+}
