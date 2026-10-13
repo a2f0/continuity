@@ -13,7 +13,7 @@ function documentImage(
     <a href="${assetUrl(path)}" aria-label="Open ${e(person.displayName)}: ${e(label)}">
       <img src="${assetUrl(path)}" alt="${e(person.displayName)} — ${e(label)}, fictional specimen" loading="lazy" decoding="async" width="${image.width}" height="${image.height}">
     </a>
-    <figcaption class="document-caption"><span>${e(label)}</span><a href="${assetUrl(path)}" download>Download JPG <span aria-hidden="true">↗</span></a></figcaption>
+    <figcaption class="document-caption"><span>${e(label)}</span><a href="${assetUrl(path)}" download aria-label="Download ${e(person.displayName)}: ${e(label)}">Download JPG</a></figcaption>
   </figure>`;
 }
 

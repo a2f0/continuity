@@ -119,13 +119,13 @@ Wrangler's authenticated session. The gallery is static HTML and CSS, built
 from the committed `genesis/` snapshot; run `bun run check` before publishing.
 `src/site/` builds the page and `site/` contains its stylesheet and headers.
 
-The hostname belongs to `terraform/stacks/prod/website` in the
+The hostname belongs to `terraform/stacks/prod/continuity` in the
 [tearleads repository](https://github.com/a2f0/tearleads). For its first setup,
 publish the Worker here, then plan and apply the hostname there:
 
 ```sh
-terraform/scripts/run-website-stack.sh prod plan -out=/path/to/gallery.tfplan
-terraform/scripts/run-website-stack.sh prod apply /path/to/gallery.tfplan
+terraform/scripts/run-continuity-stack.sh plan -out=/path/to/gallery.tfplan
+terraform/scripts/run-continuity-stack.sh apply /path/to/gallery.tfplan
 ```
 
 Later asset deployments need only Wrangler. `workers.dev` and preview URLs
