@@ -1,0 +1,6 @@
+# MacOS
+.DS_Store
+
+# Bun / JS / TS
+node_modules/
+*.tsbuildinfo
