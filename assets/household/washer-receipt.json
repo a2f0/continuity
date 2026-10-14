@@ -1,0 +1,9 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: photorealistic-natural. Asset type: receipt photograph for a fictional household inventory demo. A real-looking smartphone photograph of one printed paper receipt resting on a light gray kitchen countertop. Receipt is entirely visible with narrow margins, almost top-down with slight natural perspective; portrait 2:3 composition. Soft daylight, genuine off-white thermal-paper fiber, subtly curled edge and one light fold, restrained everyday wear, sharp readable black monospaced thermal print. Looks like an owner photographed a receipt, not a flat digital graphic or a render. No hands, no product, no extra objects. This is a fictional store and fictional product. Print only this exact receipt content, with sensible receipt layout and right-aligned USD prices:\nWILLOW HOME\nCedar Hollow\nPURCHASE RECEIPT\n2025-11-15\nReceipt WH-251115-0286\n\nFront-load washing machine\nHearthmere HM-W8\nSerial: HM25-W8-008614\nQty 1                 $699.00\n\nSubtotal              $699.00\nTax (8%)              $55.92\nTOTAL                 $754.92\n\nPAID - CARD\nThank you for shopping with us.\nKeep this receipt for your records.\nConstraints: keep every model, serial, receipt number, date and amount exact; legible sharp text; no actual card number, no real brands, no barcode, no watermark, no specimen/sample/demo marks, no graphic overlays or collage. Natural photographed paper and shadows are essential.",
+  "generatedOn": "2026-10-14",
+  "imageSha256": "f765c4baf902c2e17a9b9248ab298e1afa30ca0335c821e29e760dae0a949139",
+  "promptSha256": "af20ca84b1780c6b0709ddea2b2c2da17f1d223069855bd67384f9f718bb377e",
+  "references": {},
+  "receiptSha256": "e31f7087cf81fce252c45349d4c67b301e12a7d4a430adc6c2bfcd0f7bbf7ca7"
+}

@@ -27,7 +27,7 @@ attachments.
 | `passport` | `passport-image` |
 | `birth_certificate` | `birth-certificate-image` |
 | `credit_card` | `credit-card-front-image`, `credit-card-back-image` |
-| `tool`, `appliance` | `equipment-photos` (repeatable collection) |
+| `tool`, `appliance` | `equipment-photos` (repeatable), `receipt-image` |
 | `image` | Unslotted attachment |
 
 Attachment `file` values are names beside `seed.json`. Household photos use
@@ -74,7 +74,7 @@ creation, repeatable equipment slots, integrity verification, and household
 screenshot assertions. Older consumers cannot safely adopt this version.
 The coordinated consumer
 ([Tearleads integration](https://github.com/a2f0/tearleads)) must demonstrate
-a fresh encrypted restore with 20 blobs. Before shipping that consumer, run
+a fresh encrypted restore with 24 blobs. Before shipping that consumer, run
 its fresh-restore contract test and browser captures against the merged pin.
 
 Update the commit pin for `@a2f0/continuity` in tearleads' root `package.json`
@@ -92,3 +92,13 @@ Run `bun run build:website` in tearleads to regenerate the backup, capture the
 app, and stage the screenshots into the website. When adding a wallet kind,
 register its projector and editor in tearleads before adopting the new pin,
 and add its detail view to the screenshot capture and website gallery.
+
+Each seeded equipment item also has a photorealistic purchase receipt in its
+`receipt-image` slot. Canon owns the fictional merchant, date, receipt number,
+and integer-cent amounts. Receipt sidecars bind those facts and the item's
+make, model, and serial number with `receiptSha256`; changing them requires
+regenerating and visually checking the receipt text. Hash the UTF-8 JSON from
+`JSON.stringify({ receipt: item.receipt, make: item.make, model: item.model,
+serialNumber: item.serialNumber })` with SHA-256, preserving that key order.
+Receipts use the same
+image integrity checks as household photos and have no specimen watermark.

@@ -45,7 +45,23 @@ for (const [label, patch, message] of [
   ],
   [
     "duplicate serial",
-    { equipment: [tool, { ...tool, id: "second-drill" }] },
+    {
+      equipment: [
+        tool,
+        {
+          ...tool,
+          id: "second-drill",
+          receipt: {
+            image: "second-receipt",
+            merchant: "Other",
+            number: "OTHER-1",
+            purchasedAt: "2026-01-01",
+            subtotalCents: 100,
+            taxCents: 8,
+          },
+        },
+      ],
+    },
     "duplicate serial",
   ],
   [

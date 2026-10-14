@@ -9,15 +9,24 @@ test("household seed supplies photos, two makes, equipment identifiers, and date
   const seed = buildTearleadsSeed(world, assets);
   const expected = buildSeedExpectations(seed);
   expect(seed.schemaVersion).toBe(2);
-  expect(assets.size).toBe(7);
+  expect(assets.size).toBe(11);
   expect(expected.photos).toHaveLength(2);
   expect(expected.tools).toHaveLength(2);
   expect(expected.appliances).toHaveLength(2);
   expect(expected.tools[0]).toMatchObject({
     title: "Drill Alderforge AF-D18",
-    imageCount: 2,
+    imageCount: 3,
     fields: { serialNumber: "AF26-D18-004217" },
   });
+  for (const item of seed.files.filter((file) =>
+    ["tool", "appliance"].includes(file.kind),
+  )) {
+    expect(
+      item.attachments.filter(
+        (attachment) => attachment.slot === "receipt-image",
+      ),
+    ).toHaveLength(1);
+  }
   for (const photo of seed.files.filter((file) => file.kind === "image")) {
     const { width, byteLength } = photo.fields;
     expect(Number(width)).toBe(1536);

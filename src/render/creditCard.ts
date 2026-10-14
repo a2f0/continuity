@@ -30,7 +30,7 @@ export function creditCardFront(fields: Fields): CardArt {
     body: [
       background(),
       text(6, 10, fields.issuer, { ...label, size: 4, weight: 600 }),
-      text(6, 16, "SPECIMEN CREDIT CARD", {
+      text(6, 16, "CREDIT CARD", {
         ...label,
         letterSpacing: 0.4,
       }),
@@ -59,12 +59,6 @@ export function creditCardFront(fields: Fields): CardArt {
       text(6, 48, fields.nameOnCard.toUpperCase(), { ...label, size: 2.5 }),
       text(64, 43, "VALID THRU", { ...label, size: 1.5 }),
       text(64, 48, month, { ...label, family: FONT.mono, size: 2.6 }),
-      text(27, 27, "SPECIMEN", {
-        ...label,
-        size: 6,
-        weight: 600,
-        opacity: 0.7,
-      }),
     ].join(""),
   };
 }
@@ -83,19 +77,6 @@ export function creditCardBack(fields: Fields): CardArt {
         family: FONT.mono,
         size: 2.5,
       }),
-      text(6, 37, "SPECIMEN · NOT VALID FOR PAYMENT", {
-        ...label,
-        size: 2.5,
-        weight: 600,
-      }),
-      text(
-        6,
-        43,
-        "Fictional issuer and account · Demonstration use only",
-        label,
-      ),
-      text(6, 48, "No payment account · No banking services", label),
-      text(70, 5, "SPECIMEN", { ...label, fill: "#ffffff", size: 1.5 }),
     ].join(""),
   };
 }

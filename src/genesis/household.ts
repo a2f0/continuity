@@ -72,7 +72,10 @@ export function loadHouseholdPhotos(world: World, root = repoPath("assets")) {
   const { photos, equipment } = world.device.household;
   const ids = new Set([
     ...photos.map((photo) => photo.id),
-    ...equipment.flatMap((item) => item.photos),
+    ...equipment.flatMap((item) => [
+      ...item.photos,
+      ...(item.receipt ? [item.receipt.image] : []),
+    ]),
   ]);
   return new Map(
     [...ids].map((id) => {
@@ -82,6 +85,21 @@ export function loadHouseholdPhotos(world: World, root = repoPath("assets")) {
       const provenance: unknown = JSON.parse(
         readFileSync(join(root, "household", `${id}.json`), "utf8"),
       );
+      const item = equipment.find((item) => item.receipt?.image === id);
+      const { receiptSha256 } = record(provenance) ? provenance : {};
+      if (
+        item &&
+        receiptSha256 !==
+          digest(
+            JSON.stringify({
+              receipt: item.receipt,
+              make: item.make,
+              model: item.model,
+              serialNumber: item.serialNumber,
+            }),
+          )
+      )
+        throw new Error(`Stale receipt facts: ${id}`);
       validateProvenance(
         provenance,
         id,

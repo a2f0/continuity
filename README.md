@@ -79,7 +79,7 @@ designed so that none of them can pass for a real one:
   AAMVA card standard's field numbering but copy no real jurisdiction's design.
 - Passports come from Utopia (`UTO`), the specimen state ICAO uses in its own
   examples. Their machine readable zones are computed to the ICAO rules.
-- Every document carries a visible `SPECIMEN` mark.
+- Documents render without specimen watermarks.
 - License barcodes encode a plain-text specimen notice, never AAMVA data.
 - Phone numbers use 555-0100 through 555-0199, reserved for fiction, and email
   addresses use domains reserved by RFC 2606. The canon rejects anything else.

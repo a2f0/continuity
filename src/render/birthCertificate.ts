@@ -1,5 +1,5 @@
 import type { birthCertificateFields } from "../canon/documentFields";
-import { type CardArt, SPECIMEN_RED, specimenMark } from "./card";
+import type { CardArt } from "./card";
 import { FONT } from "./fonts";
 import { el, text } from "./svg";
 
@@ -68,18 +68,6 @@ export function birthCertificatePage(
             "stroke-width": 0.2,
           })
         );
-      }),
-      specimenMark(74, 104, 16),
-      text(74, 169, "SPECIMEN · FICTIONAL RECORD", {
-        ...label,
-        fill: SPECIMEN_RED,
-        anchor: "middle",
-        weight: 600,
-      }),
-      text(74, 176, "For demonstration only · Not valid for identification", {
-        ...label,
-        size: 2.4,
-        anchor: "middle",
       }),
     ].join(""),
   };

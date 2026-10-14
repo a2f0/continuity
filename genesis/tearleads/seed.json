@@ -202,6 +202,11 @@
           "file": "household-drill-detail.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
+        },
+        {
+          "file": "household-drill-receipt.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "receipt-image"
         }
       ]
     },
@@ -218,6 +223,11 @@
           "file": "household-circular-saw.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
+        },
+        {
+          "file": "household-saw-receipt.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "receipt-image"
         }
       ]
     },
@@ -234,6 +244,11 @@
           "file": "household-washing-machine.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
+        },
+        {
+          "file": "household-washer-receipt.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "receipt-image"
         }
       ]
     },
@@ -250,6 +265,11 @@
           "file": "household-refrigerator.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
+        },
+        {
+          "file": "household-fridge-receipt.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "receipt-image"
         }
       ]
     },

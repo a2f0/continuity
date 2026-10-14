@@ -13,6 +13,14 @@ export interface Equipment {
   readonly model: string;
   readonly serialNumber: string;
   readonly photos: readonly string[];
+  readonly receipt?: {
+    readonly image: string;
+    readonly merchant: string;
+    readonly purchasedAt: string;
+    readonly number: string;
+    readonly subtotalCents: number;
+    readonly taxCents: number;
+  };
 }
 
 export interface Household {

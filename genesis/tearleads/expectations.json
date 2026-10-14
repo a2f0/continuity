@@ -29,7 +29,7 @@
   "tools": [
     {
       "title": "Drill Alderforge AF-D18",
-      "imageCount": 2,
+      "imageCount": 3,
       "fields": {
         "equipmentType": "drill",
         "make": "Alderforge",
@@ -39,7 +39,7 @@
     },
     {
       "title": "Circular Saw Alderforge AF-CS165",
-      "imageCount": 1,
+      "imageCount": 2,
       "fields": {
         "equipmentType": "circular_saw",
         "make": "Alderforge",
@@ -51,7 +51,7 @@
   "appliances": [
     {
       "title": "Washing Machine Hearthmere HM-W8",
-      "imageCount": 1,
+      "imageCount": 2,
       "fields": {
         "equipmentType": "washing_machine",
         "make": "Hearthmere",
@@ -61,7 +61,7 @@
     },
     {
       "title": "Refrigerator Hearthmere HM-R320",
-      "imageCount": 1,
+      "imageCount": 2,
       "fields": {
         "equipmentType": "refrigerator",
         "make": "Hearthmere",

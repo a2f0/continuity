@@ -1,0 +1,9 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: photorealistic-natural. Asset type: receipt photograph for a fictional household inventory demo. A real-looking smartphone photograph of one printed paper receipt resting on a pale wooden kitchen table. Receipt is entirely visible with narrow margins, almost top-down with slight natural perspective; portrait 2:3 composition. Soft daylight, genuine off-white thermal-paper fiber, subtly curled edge and one light fold, restrained everyday wear, sharp readable black monospaced thermal print. Looks like an owner photographed a receipt, not a flat digital graphic or a render. No hands, no product, no extra objects. This is a fictional store and fictional product. Print only this exact receipt content, with sensible receipt layout and right-aligned USD prices:\nROWAN HARDWARE\nCedar Hollow\nPURCHASE RECEIPT\n2026-02-14\nReceipt RH-260214-0418\n\nCordless drill kit\nAlderforge AF-D18\nSerial: AF26-D18-004217\nQty 1                 $149.00\n\nSubtotal              $149.00\nTax (8%)              $11.92\nTOTAL                 $160.92\n\nPAID - CARD\nThank you for shopping with us.\nKeep this receipt for your records.\nConstraints: keep every model, serial, receipt number, date and amount exact; legible sharp text; no actual card number, no real brands, no barcode, no watermark, no specimen/sample/demo marks, no graphic overlays or collage. Natural photographed paper and shadows are essential.",
+  "generatedOn": "2026-10-14",
+  "imageSha256": "57c946aba449deaceb3e171fb560d94a8e883f44851e94ebe86c8ef58238e805",
+  "promptSha256": "70d0ef620c09bab2c16ab83c6586c2e89ad94ad4537e868276da0af147a10449",
+  "references": {},
+  "receiptSha256": "12f39584030bb97d7a824b6180d65de8cc8b73c19e3857fcccdfb81f1c0d4356"
+}

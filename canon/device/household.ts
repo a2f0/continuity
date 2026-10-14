@@ -25,6 +25,14 @@ export const household: Household = {
       model: "AF-D18",
       serialNumber: "AF26-D18-004217",
       photos: ["drill", "drill-detail"],
+      receipt: {
+        image: "drill-receipt",
+        merchant: "Rowan Hardware",
+        purchasedAt: "2026-02-14",
+        number: "RH-260214-0418",
+        subtotalCents: 14900,
+        taxCents: 1192,
+      },
     },
     {
       id: "circular-saw",
@@ -34,6 +42,14 @@ export const household: Household = {
       model: "AF-CS165",
       serialNumber: "AF26-CS-001832",
       photos: ["circular-saw"],
+      receipt: {
+        image: "saw-receipt",
+        merchant: "Rowan Hardware",
+        purchasedAt: "2026-05-09",
+        number: "RH-260509-0637",
+        subtotalCents: 12900,
+        taxCents: 1032,
+      },
     },
     {
       id: "washing-machine",
@@ -43,6 +59,14 @@ export const household: Household = {
       model: "HM-W8",
       serialNumber: "HM25-W8-008614",
       photos: ["washing-machine"],
+      receipt: {
+        image: "washer-receipt",
+        merchant: "Willow Home",
+        purchasedAt: "2025-11-15",
+        number: "WH-251115-0286",
+        subtotalCents: 69900,
+        taxCents: 5592,
+      },
     },
     {
       id: "refrigerator",
@@ -52,6 +76,14 @@ export const household: Household = {
       model: "HM-R320",
       serialNumber: "HM25-R3-006209",
       photos: ["refrigerator"],
+      receipt: {
+        image: "fridge-receipt",
+        merchant: "Willow Home",
+        purchasedAt: "2025-08-23",
+        number: "WH-250823-0193",
+        subtotalCents: 109900,
+        taxCents: 8792,
+      },
     },
   ],
   weight: [

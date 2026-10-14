@@ -34,14 +34,33 @@ export function householdFiles(
       };
     }),
     ...household.equipment.map(
-      ({ kind, equipmentType, make, model, serialNumber, photos }) => ({
+      ({
+        kind,
+        equipmentType,
+        make,
+        model,
+        serialNumber,
+        photos,
+        receipt,
+      }) => ({
         kind,
         fields: { equipmentType, make, model, serialNumber },
-        attachments: photos.map((id) => ({
-          file: `household-${id}.jpg`,
-          mimeType: "image/jpeg",
-          slot: "equipment-photos",
-        })),
+        attachments: [
+          ...photos.map((id) => ({
+            file: `household-${id}.jpg`,
+            mimeType: "image/jpeg",
+            slot: "equipment-photos",
+          })),
+          ...(receipt
+            ? [
+                {
+                  file: `household-${receipt.image}.jpg`,
+                  mimeType: "image/jpeg",
+                  slot: "receipt-image",
+                },
+              ]
+            : []),
+        ],
       }),
     ),
     {

@@ -166,3 +166,19 @@ test("equipment detail photos reject replaced source images", () => {
     "Stale household reference",
   );
 });
+
+test("receipt photos reject a changed equipment serial", () => {
+  const changed = world;
+  const equipment = changed.device.household.equipment.map((item, index) =>
+    index === 0 ? { ...item, serialNumber: "CHANGED" } : item,
+  );
+  expect(() =>
+    loadHouseholdPhotos({
+      ...changed,
+      device: {
+        ...changed.device,
+        household: { ...changed.device.household, equipment },
+      },
+    }),
+  ).toThrow("Stale receipt facts: drill-receipt");
+});

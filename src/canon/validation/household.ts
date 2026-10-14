@@ -1,6 +1,7 @@
 import { isIsoDate } from "../dates";
 import type { Household } from "../householdTypes";
 import type { World } from "../types";
+import { checkReceipts } from "./receipts";
 
 export function checkHousehold(world: World): string[] {
   const { photos, equipment, weight, bloodPressure } = world.device.household;
@@ -15,7 +16,12 @@ export function checkHousehold(world: World): string[] {
     }
     ids.add(item.id);
   }
-  const equipmentPhotos = new Set(equipment.flatMap((item) => item.photos));
+  const equipmentPhotos = new Set(
+    equipment.flatMap((item) => [
+      ...item.photos,
+      ...(item.receipt ? [item.receipt.image] : []),
+    ]),
+  );
   for (const photo of photos) {
     if (equipmentPhotos.has(photo.id))
       problems.push(`household: conflicting photo id ${photo.id}`);
@@ -29,7 +35,10 @@ export function checkHousehold(world: World): string[] {
     )
       problems.push(`household: invalid family photo ${photo.id}`);
   }
-  problems.push(...checkEquipment(equipment));
+  problems.push(
+    ...checkEquipment(equipment),
+    ...checkReceipts(equipment, world.asOf),
+  );
   for (const rows of [weight, bloodPressure]) {
     const times = new Set<string>();
     for (const row of rows) {
