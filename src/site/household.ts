@@ -7,7 +7,12 @@ export function householdGallery(gallery: Gallery): string {
     .map((file) => {
       const { fileName, make, model, serialNumber, equipmentType } =
         file.fields;
-      const title = fileName ?? `${make} ${model} ${equipmentType}`;
+      const typeLabel = equipmentType
+        ?.split("_")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      const title =
+        fileName?.replace(/\.jpg$/u, "") ?? `${typeLabel} ${make} ${model}`;
       const images = file.attachments
         .map((attachment, index) => {
           const path = `tearleads/${attachment.file}`;

@@ -32,6 +32,8 @@ describe("asset gallery", () => {
       }
     }
     expect(html).toContain("AF26-D18-004217");
+    expect(html).toContain("Circular Saw Alderforge AF-CS165</h3>");
+    expect(html).toContain("Washing Machine Hearthmere HM-W8</h3>");
   });
   test("counts every rendered document image", () => {
     const count = gallery.assets.filter((asset) =>

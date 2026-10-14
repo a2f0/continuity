@@ -135,7 +135,12 @@ a typical one that rarely fits exactly. Frame every new image:
 
 ## 6. Re-render and check
 
-1. Run `bun run genesis`.
+1. Check household photo dependencies before running `bun run genesis`.
+   When a replaced portrait appears in `assets/household/*.json`, regenerate
+   and review those family photos using the updated portrait. Follow the
+   source-photo and sidecar procedure in
+   `docs/portraits.md#household-photo-dependencies`; refreshing reference
+   hashes alone does not refresh a face. Then run `bun run genesis`.
 2. View each target's `genesis/avatars/<id>.png` and the documents under
    `genesis/documents/<id>/`. The photo should fit its box and the grayscale
    ghost should still read as the same person.

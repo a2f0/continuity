@@ -15,7 +15,10 @@ export function checkHousehold(world: World): string[] {
     }
     ids.add(item.id);
   }
+  const equipmentPhotos = new Set(equipment.flatMap((item) => item.photos));
   for (const photo of photos) {
+    if (equipmentPhotos.has(photo.id))
+      problems.push(`household: conflicting photo id ${photo.id}`);
     checkDate(photo.capturedAt, world.asOf, problems);
     if (
       !photo.fileName.trim() ||

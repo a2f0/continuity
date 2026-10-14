@@ -21,6 +21,11 @@ function check(patch: Partial<Household>): readonly string[] {
 test("household canon is valid", () => expect(check({})).toEqual([]));
 
 for (const [label, patch, message] of [
+  [
+    "conflicting photo id",
+    { photos: [{ ...photo, id: "drill-detail" }] },
+    "conflicting photo id",
+  ],
   ["invalid id", { photos: [{ ...photo, id: "../escape" }] }, "invalid id"],
   ["duplicate id", { photos: [photo, photo] }, "duplicate id"],
   [

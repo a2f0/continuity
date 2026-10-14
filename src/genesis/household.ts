@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { isIsoDate } from "../canon/dates";
 import type { World } from "../canon/types";
 import { repoPath } from "../paths";
 import { imageSize } from "../render/imageSize";
@@ -22,19 +23,38 @@ function validateProvenance(
 ): void {
   if (!record(value))
     throw new Error(`Invalid household photo provenance: ${id}`);
-  const { prompt, model, imageSha256, promptSha256, generatedOn, references } =
-    value;
+  const {
+    prompt,
+    model,
+    imageSha256,
+    promptSha256,
+    generatedOn,
+    references,
+    sourceReferences,
+  } = value;
   if (
     typeof prompt !== "string" ||
     !prompt.trim() ||
     typeof model !== "string" ||
     !model.trim() ||
     typeof generatedOn !== "string" ||
+    !isIsoDate(generatedOn) ||
     imageSha256 !== digest(bytes) ||
     promptSha256 !== digest(prompt) ||
     !record(references)
   )
     throw new Error(`Unrecorded or edited household photo: ${id}`);
+  if (sourceReferences !== undefined) {
+    if (!record(sourceReferences))
+      throw new Error(`Invalid source references: ${id}`);
+    for (const [source, hash] of Object.entries(sourceReferences)) {
+      if (
+        !/^[a-z][a-z0-9-]*$/u.test(source) ||
+        hash !== digest(readFileSync(join(root, "household", `${source}.jpg`)))
+      )
+        throw new Error(`Stale household reference: ${id}`);
+    }
+  }
   if (Object.keys(references).length !== characters.length)
     throw new Error(`Missing portrait references: ${id}`);
   for (const character of characters) {

@@ -90,3 +90,32 @@ exactly, so frame every new portrait.
 the source under a grid in tenths with the recorded face and crops drawn on
 it, beside the ID photo and avatar documents cut from it. Regenerating keeps
 existing framing, so check it against the new image.
+
+## Household photo dependencies
+
+Family photos in `assets/household/` record hashes of the portraits used as
+references. After replacing a portrait, `bun run genesis` stops with
+`Stale portrait reference` for affected photos. Equipment detail photos may
+likewise record `sourceReferences` to other household images.
+
+1. Find affected sidecars by searching `assets/household/*.json` for the
+   changed character or equipment photo ID.
+2. Read each sidecar's `prompt`, then regenerate or edit its image using the
+   updated portrait or equipment photo as a reference. Review the result
+   against canon and the updated source; do not merely refresh old hashes.
+3. Convert the accepted result with `portraitJpeg` from
+   `src/portraits/jpeg.ts` and save `assets/household/<id>.jpg`. This scales
+   the long edge to 1536 pixels. Keep both dimensions at least 512 pixels and
+   the file below 3 MiB.
+4. Record the exact final tool prompt, model, ISO `generatedOn` date,
+   `imageSha256` of the saved JPEG, and `promptSha256` of its UTF-8 prompt.
+   In `references`, map each canonical character ID to the SHA-256 of its
+   current `assets/portraits/<id>.jpg`. For equipment references, use
+   `sourceReferences` with household image IDs and JPEG hashes. For edits,
+   retain the prior prompt, model, and image hash in `previousGeneration`.
+5. Run `bun run genesis` and `bun run check`. Commit source photos, sidecars,
+   any canon edits, and the regenerated output together.
+
+There is currently no household import CLI. The sidecar procedure above is
+explicit so generation remains a reviewed source change, never a network
+operation hidden inside `genesis`.

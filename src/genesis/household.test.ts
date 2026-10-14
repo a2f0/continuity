@@ -77,6 +77,7 @@ for (const [label, patch] of [
   ["prompt hash mismatch", { promptSha256: "0".repeat(64) }],
   ["missing prompt", { prompt: undefined }],
   ["missing model", { model: undefined }],
+  ["invalid date", { generatedOn: "yesterday" }],
   ["invalid references", { references: null }],
 ] satisfies Array<[string, Record<string, unknown>]>) {
   test(`household photos reject ${label}`, () => {
@@ -154,5 +155,14 @@ test("family photos reject missing or replaced portrait references", () => {
   );
   expect(() => loadHouseholdPhotos(familyWorld, root)).toThrow(
     "Stale portrait reference",
+  );
+});
+
+test("equipment detail photos reject replaced source images", () => {
+  const root = fixture(sourceBytes, {
+    sourceReferences: { drill: "0".repeat(64) },
+  });
+  expect(() => loadHouseholdPhotos(fixtureWorld, root)).toThrow(
+    "Stale household reference",
   );
 });

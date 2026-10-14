@@ -2,7 +2,8 @@
 
 Canonical fictional characters, and the genesis data rendered from them:
 driver's licenses, passports, birth certificates, credit cards, contact cards,
-avatars, family photos, household inventory, health trackers, and notes that seed
+avatars, family photos, household inventory, health trackers, and notes that
+seed
 [tearleads](https://github.com/a2f0/tearleads) for screenshots, demos, and
 import testing.
 

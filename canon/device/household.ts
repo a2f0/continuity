@@ -13,7 +13,7 @@ export const household: Household = {
       id: "family-walk",
       fileName: "Waterfront walk with Pepper.jpg",
       characters: ["maya-reyes", "daniel-okafor"],
-      capturedAt: "2026-09-26T10:00:00-07:00",
+      capturedAt: "2026-09-26T15:00:00-07:00",
     },
   ],
   equipment: [
@@ -71,7 +71,7 @@ export const household: Household = {
       measuredAt: "2026-09-12T07:30:00-07:00",
       weight: "61.3",
       unit: "kg",
-      notes: "Rest day",
+      notes: "Before the Saturday ride",
     },
     {
       measuredAt: "2026-09-18T07:30:00-07:00",

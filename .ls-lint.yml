@@ -20,6 +20,9 @@ ls:
     .*: kebab-case
 
   # Portrait files are named after character IDs.
+  assets/household:
+    .*: kebab-case
+
   assets/portraits:
     .*: kebab-case
 
