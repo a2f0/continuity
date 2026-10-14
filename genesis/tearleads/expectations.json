@@ -1,4 +1,165 @@
 {
+  "schemaVersion": 2,
+  "photos": [
+    {
+      "title": "Sunday dinner at Mom's.jpg",
+      "imageCount": 1,
+      "fields": {
+        "fileName": "Sunday dinner at Mom's.jpg",
+        "mimeType": "image/jpeg",
+        "sourceLastModified": "1789952400000",
+        "width": "1536",
+        "height": "1024",
+        "byteLength": "515383"
+      }
+    },
+    {
+      "title": "Waterfront walk with Pepper.jpg",
+      "imageCount": 1,
+      "fields": {
+        "fileName": "Waterfront walk with Pepper.jpg",
+        "mimeType": "image/jpeg",
+        "sourceLastModified": "1790442000000",
+        "width": "1536",
+        "height": "1024",
+        "byteLength": "476869"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "title": "Drill Alderforge AF-D18",
+      "imageCount": 2,
+      "fields": {
+        "equipmentType": "drill",
+        "make": "Alderforge",
+        "model": "AF-D18",
+        "serialNumber": "AF26-D18-004217"
+      }
+    },
+    {
+      "title": "Circular Saw Alderforge AF-CS165",
+      "imageCount": 1,
+      "fields": {
+        "equipmentType": "circular_saw",
+        "make": "Alderforge",
+        "model": "AF-CS165",
+        "serialNumber": "AF26-CS-001832"
+      }
+    }
+  ],
+  "appliances": [
+    {
+      "title": "Washing Machine Hearthmere HM-W8",
+      "imageCount": 1,
+      "fields": {
+        "equipmentType": "washing_machine",
+        "make": "Hearthmere",
+        "model": "HM-W8",
+        "serialNumber": "HM25-W8-008614"
+      }
+    },
+    {
+      "title": "Refrigerator Hearthmere HM-R320",
+      "imageCount": 1,
+      "fields": {
+        "equipmentType": "refrigerator",
+        "make": "Hearthmere",
+        "model": "HM-R320",
+        "serialNumber": "HM25-R3-006209"
+      }
+    }
+  ],
+  "weight": {
+    "title": "Maya's Weight",
+    "rowCount": 6,
+    "rows": [
+      {
+        "measuredAt": "2026-09-03T07:30:00-07:00",
+        "weight": "61.4",
+        "unit": "kg",
+        "notes": "Morning weigh-in"
+      },
+      {
+        "measuredAt": "2026-09-07T07:30:00-07:00",
+        "weight": "61.2",
+        "unit": "kg",
+        "notes": "Before breakfast"
+      },
+      {
+        "measuredAt": "2026-09-12T07:30:00-07:00",
+        "weight": "61.3",
+        "unit": "kg",
+        "notes": "Rest day"
+      },
+      {
+        "measuredAt": "2026-09-18T07:30:00-07:00",
+        "weight": "61.1",
+        "unit": "kg",
+        "notes": "Morning weigh-in"
+      },
+      {
+        "measuredAt": "2026-09-23T07:30:00-07:00",
+        "weight": "61.2",
+        "unit": "kg",
+        "notes": "Before breakfast"
+      },
+      {
+        "measuredAt": "2026-09-30T07:30:00-07:00",
+        "weight": "61",
+        "unit": "kg",
+        "notes": "Morning weigh-in"
+      }
+    ]
+  },
+  "bloodPressure": {
+    "title": "Maya's Blood Pressure",
+    "rowCount": 6,
+    "rows": [
+      {
+        "measuredAt": "2026-09-03T08:00:00-07:00",
+        "systolic": "118",
+        "diastolic": "76",
+        "pulse": "68",
+        "notes": "Seated, left arm"
+      },
+      {
+        "measuredAt": "2026-09-07T08:00:00-07:00",
+        "systolic": "121",
+        "diastolic": "78",
+        "pulse": "70",
+        "notes": "Before breakfast"
+      },
+      {
+        "measuredAt": "2026-09-12T08:00:00-07:00",
+        "systolic": "117",
+        "diastolic": "75",
+        "pulse": "66",
+        "notes": "Seated, left arm"
+      },
+      {
+        "measuredAt": "2026-09-18T08:00:00-07:00",
+        "systolic": "119",
+        "diastolic": "77",
+        "pulse": "69",
+        "notes": "After five minutes resting"
+      },
+      {
+        "measuredAt": "2026-09-23T08:00:00-07:00",
+        "systolic": "116",
+        "diastolic": "74",
+        "pulse": "65",
+        "notes": "Before breakfast"
+      },
+      {
+        "measuredAt": "2026-09-30T08:00:00-07:00",
+        "systolic": "118",
+        "diastolic": "76",
+        "pulse": "67",
+        "notes": "Seated, left arm"
+      }
+    ]
+  },
   "birthCertificate": {
     "imageCount": 1,
     "title": "Birth Certificate Maya Elena Reyes"

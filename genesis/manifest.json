@@ -202,6 +202,11 @@
       "sha256": "976a74023dbfe3f31a250a976cfdf8d3772be1fddbb39d597a01998b9417d928"
     },
     {
+      "bytes": 520526,
+      "path": "tearleads/circular-saw.jpg",
+      "sha256": "a87041fc9194e304e048c1ab0ad792531217175ca41cbb9cff1a8dcb2acdee18"
+    },
+    {
       "bytes": 150239,
       "path": "tearleads/credit-card-back.jpg",
       "sha256": "3c12a2ce12c3fa1e42b09f70ac09aed75b2a7b68ed4bef05eb995e77eb04f852"
@@ -210,6 +215,16 @@
       "bytes": 160020,
       "path": "tearleads/credit-card-front.jpg",
       "sha256": "f6ea257a383559fd7dbb26421d975f0ce4946e10ed1d1ca9dbf2560cb34da549"
+    },
+    {
+      "bytes": 381400,
+      "path": "tearleads/drill-detail.jpg",
+      "sha256": "88a710e4020a2677efaa75bb978cce81ceb00cc207b1014145ffb5df2e6c037d"
+    },
+    {
+      "bytes": 390656,
+      "path": "tearleads/drill.jpg",
+      "sha256": "71179b529daaebc682d69e842f04ceecc796289e5b5dbb902f08608c92735477"
     },
     {
       "bytes": 346910,
@@ -222,9 +237,19 @@
       "sha256": "aee5aba1a7e753b9cb3e56d549be0e4e20bef4ae23870c9b83b9f201c9fb51a4"
     },
     {
-      "bytes": 560,
+      "bytes": 4473,
       "path": "tearleads/expectations.json",
-      "sha256": "603e2c2360f091445828766f29c912157678b36b96ced402baf455fc41765ae3"
+      "sha256": "d272d0d00ef4c08c26c43f3b97d5fa8f8f9c70bb14a14beed5f4080dfce6e2a3"
+    },
+    {
+      "bytes": 515383,
+      "path": "tearleads/family-dinner.jpg",
+      "sha256": "834f0c888aaf6de1ae118f163e6d1ed77cbeb4ead03d77ef9302fb9847705334"
+    },
+    {
+      "bytes": 476869,
+      "path": "tearleads/family-walk.jpg",
+      "sha256": "62e13a006318761232a60fc6bf778d019a5bf73d89316a0ebfb72213c72bdebc"
     },
     {
       "bytes": 498930,
@@ -232,9 +257,19 @@
       "sha256": "bf5d19862a5db515307086652d2172acf75cc23223b9b175261671fec06af537"
     },
     {
-      "bytes": 4799,
+      "bytes": 398099,
+      "path": "tearleads/refrigerator.jpg",
+      "sha256": "2c1bf0e984839c59b8a4e6ca521dd6386e4831e0f19a04579fb2c1e0a434760c"
+    },
+    {
+      "bytes": 9709,
       "path": "tearleads/seed.json",
-      "sha256": "26eb20d11abb0801f53308ada13f812062798438e447588eb259aab2cbadc7de"
+      "sha256": "bd7412cbe71a679cfa07c73abe71da2dc6b54c432dafee4c4f662f7c01c20d95"
+    },
+    {
+      "bytes": 354798,
+      "path": "tearleads/washing-machine.jpg",
+      "sha256": "b402b559c11efe5815250e91f3444fdf5397265663197cb490e0d14cfcaa7501"
     }
   ]
 }

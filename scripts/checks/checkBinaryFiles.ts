@@ -14,6 +14,7 @@ const ALLOWED: readonly {
 }[] = [
   { extensions: [".ttf"], prefix: "assets/fonts/" },
   { extensions: [".jpg", ".png"], prefix: "assets/portraits/" },
+  { extensions: [".jpg"], prefix: "assets/household/" },
   { extensions: [".jpg", ".png"], prefix: "genesis/" },
 ];
 const MAX_BYTES = 3 * 1024 * 1024;

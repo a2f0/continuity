@@ -1,0 +1,5 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: photorealistic-natural. Asset type: fictional family photo in a demo personal photo library. Reference images in order: Maya Reyes, Daniel Okafor, Rosa Reyes, Theo Reyes; all four are AI-generated fictional people. Create one candid landscape photograph of these four adults at Sunday dinner at Rosa's cozy home in Cedar Hollow in September 2026. Preserve each reference face faithfully: Maya 35, Daniel 36 with glasses, Rosa 63 with glasses and low bun, Theo 30. They sit together around a wood dining table, relaxed and smiling, with a home-cooked rice dinner. Natural window light, real skin texture, believable hands, ordinary lived-in home, authentic family snapshot with all four faces clearly visible. No other people, text, watermarks, collage, illustration, waxy skin, or real-world brand logos. Landscape 3:2 composition.",
+  "sha256": "834f0c888aaf6de1ae118f163e6d1ed77cbeb4ead03d77ef9302fb9847705334"
+}

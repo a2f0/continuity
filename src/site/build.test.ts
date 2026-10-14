@@ -20,6 +20,19 @@ beforeAll(() => {
 afterAll(() => rmSync(root, { recursive: true, force: true }));
 
 describe("asset gallery", () => {
+  test("previews family photos and every equipment photo", () => {
+    expect(html).toContain('id="household"');
+    for (const file of gallery.seedFiles.filter((file) =>
+      ["image", "tool", "appliance"].includes(file.kind),
+    )) {
+      for (const attachment of file.attachments) {
+        expect(html).toContain(
+          `src="${assetUrl(`tearleads/${attachment.file}`)}"`,
+        );
+      }
+    }
+    expect(html).toContain("AF26-D18-004217");
+  });
   test("counts every rendered document image", () => {
     const count = gallery.assets.filter((asset) =>
       asset.path.startsWith("documents/"),

@@ -1,4 +1,5 @@
 import { characterIndex, characters } from "./characters";
+import { householdGallery } from "./household";
 import { assetUrl, escapeHtml as e, fileSize } from "./html";
 import type { Gallery } from "./types";
 
@@ -41,7 +42,7 @@ export function galleryPage(gallery: Gallery): string {
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header"><a class="wordmark" href="#top">continuity<span>/ tearleads</span></a>
-    <nav aria-label="Page sections"><a href="#cast">Cast</a><a href="#notes">Notes</a><a href="#files">Files <span aria-hidden="true">↓</span></a></nav>
+    <nav aria-label="Page sections"><a href="#cast">Cast</a><a href="#household">Family and home</a><a href="#notes">Notes</a><a href="#files">Files <span aria-hidden="true">↓</span></a></nav>
   </header>
   <main id="main">
     <section class="intro" aria-labelledby="intro-title"><div><p class="eyebrow">The tearleads specimen collection</p>
@@ -55,6 +56,7 @@ export function galleryPage(gallery: Gallery): string {
     <section id="cast" aria-labelledby="cast-title"><div class="section-heading"><h2 id="cast-title">The cast</h2><p>One connected world, down to the last detail.</p></div>
       ${characterIndex(gallery)}${characters(gallery)}
     </section>
+    ${householdGallery(gallery)}
     <section id="notes" class="notes-section" aria-labelledby="notes-title"><div class="section-heading"><h2 id="notes-title">Life between the lines.</h2><p>The notes on ${e(owner?.displayName ?? "the owner")}’s device.</p></div><div class="notes-grid">${notes(gallery)}</div></section>
     <section id="files" class="files-section" aria-labelledby="files-title"><div class="section-heading"><h2 id="files-title">The complete collection.</h2><p>${gallery.assets.length} files, ready to use.</p></div>
       <div class="download-intro"><p>Portraits, specimen documents, contact exports, and the tearleads seed. Open an image above to inspect it, or download any original below.</p><a class="text-link" href="${assetUrl("manifest.json")}" download>Download manifest <span aria-hidden="true">↓</span></a></div>

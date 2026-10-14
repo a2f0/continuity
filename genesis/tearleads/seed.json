@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 2,
   "contacts": [
     {
       "avatar": {
@@ -148,6 +149,206 @@
           "slot": "credit-card-back-image"
         }
       ]
+    },
+    {
+      "kind": "image",
+      "fields": {
+        "fileName": "Sunday dinner at Mom's.jpg",
+        "mimeType": "image/jpeg",
+        "sourceLastModified": "1789952400000",
+        "width": "1536",
+        "height": "1024",
+        "byteLength": "515383"
+      },
+      "attachments": [
+        {
+          "file": "family-dinner.jpg",
+          "mimeType": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "kind": "image",
+      "fields": {
+        "fileName": "Waterfront walk with Pepper.jpg",
+        "mimeType": "image/jpeg",
+        "sourceLastModified": "1790442000000",
+        "width": "1536",
+        "height": "1024",
+        "byteLength": "476869"
+      },
+      "attachments": [
+        {
+          "file": "family-walk.jpg",
+          "mimeType": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "kind": "tool",
+      "fields": {
+        "equipmentType": "drill",
+        "make": "Alderforge",
+        "model": "AF-D18",
+        "serialNumber": "AF26-D18-004217"
+      },
+      "attachments": [
+        {
+          "file": "drill.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "equipment-photos"
+        },
+        {
+          "file": "drill-detail.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "equipment-photos"
+        }
+      ]
+    },
+    {
+      "kind": "tool",
+      "fields": {
+        "equipmentType": "circular_saw",
+        "make": "Alderforge",
+        "model": "AF-CS165",
+        "serialNumber": "AF26-CS-001832"
+      },
+      "attachments": [
+        {
+          "file": "circular-saw.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "equipment-photos"
+        }
+      ]
+    },
+    {
+      "kind": "appliance",
+      "fields": {
+        "equipmentType": "washing_machine",
+        "make": "Hearthmere",
+        "model": "HM-W8",
+        "serialNumber": "HM25-W8-008614"
+      },
+      "attachments": [
+        {
+          "file": "washing-machine.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "equipment-photos"
+        }
+      ]
+    },
+    {
+      "kind": "appliance",
+      "fields": {
+        "equipmentType": "refrigerator",
+        "make": "Hearthmere",
+        "model": "HM-R320",
+        "serialNumber": "HM25-R3-006209"
+      },
+      "attachments": [
+        {
+          "file": "refrigerator.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "equipment-photos"
+        }
+      ]
+    },
+    {
+      "kind": "weight",
+      "fields": {
+        "trackerName": "Maya's Weight",
+        "unit": "kg"
+      },
+      "rows": [
+        {
+          "measuredAt": "2026-09-03T07:30:00-07:00",
+          "weight": "61.4",
+          "unit": "kg",
+          "notes": "Morning weigh-in"
+        },
+        {
+          "measuredAt": "2026-09-07T07:30:00-07:00",
+          "weight": "61.2",
+          "unit": "kg",
+          "notes": "Before breakfast"
+        },
+        {
+          "measuredAt": "2026-09-12T07:30:00-07:00",
+          "weight": "61.3",
+          "unit": "kg",
+          "notes": "Rest day"
+        },
+        {
+          "measuredAt": "2026-09-18T07:30:00-07:00",
+          "weight": "61.1",
+          "unit": "kg",
+          "notes": "Morning weigh-in"
+        },
+        {
+          "measuredAt": "2026-09-23T07:30:00-07:00",
+          "weight": "61.2",
+          "unit": "kg",
+          "notes": "Before breakfast"
+        },
+        {
+          "measuredAt": "2026-09-30T07:30:00-07:00",
+          "weight": "61",
+          "unit": "kg",
+          "notes": "Morning weigh-in"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "kind": "blood_pressure",
+      "fields": {
+        "trackerName": "Maya's Blood Pressure"
+      },
+      "rows": [
+        {
+          "measuredAt": "2026-09-03T08:00:00-07:00",
+          "systolic": "118",
+          "diastolic": "76",
+          "pulse": "68",
+          "notes": "Seated, left arm"
+        },
+        {
+          "measuredAt": "2026-09-07T08:00:00-07:00",
+          "systolic": "121",
+          "diastolic": "78",
+          "pulse": "70",
+          "notes": "Before breakfast"
+        },
+        {
+          "measuredAt": "2026-09-12T08:00:00-07:00",
+          "systolic": "117",
+          "diastolic": "75",
+          "pulse": "66",
+          "notes": "Seated, left arm"
+        },
+        {
+          "measuredAt": "2026-09-18T08:00:00-07:00",
+          "systolic": "119",
+          "diastolic": "77",
+          "pulse": "69",
+          "notes": "After five minutes resting"
+        },
+        {
+          "measuredAt": "2026-09-23T08:00:00-07:00",
+          "systolic": "116",
+          "diastolic": "74",
+          "pulse": "65",
+          "notes": "Before breakfast"
+        },
+        {
+          "measuredAt": "2026-09-30T08:00:00-07:00",
+          "systolic": "118",
+          "diastolic": "76",
+          "pulse": "67",
+          "notes": "Seated, left arm"
+        }
+      ],
+      "attachments": []
     }
   ],
   "identitySeedPhrase": "furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just spring",

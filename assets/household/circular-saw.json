@@ -1,0 +1,5 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: product-mockup. Asset type: photorealistic household inventory photo for a fictional demo app. Photograph a compact circular saw, dark teal and graphite molded housing, silver metal base plate and guarded blade, unplugged on an ordinary wooden workbench. Entire item visible, natural three-quarter angle, soft daylight, realistic material textures and slight everyday wear, clean uncluttered framing. Fictional maker text \"Alderforge\" and small model text \"AF-CS165\" on a tasteful simple badge. If a serial label is visible use \"AF26-CS-001832\". No real-world brands, people, watermark, graphic overlays, collage, or illustration. Looks like a sharp photograph an owner took for their inventory. Landscape 3:2 composition.",
+  "sha256": "a87041fc9194e304e048c1ab0ad792531217175ca41cbb9cff1a8dcb2acdee18"
+}

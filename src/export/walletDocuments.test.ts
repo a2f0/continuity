@@ -53,7 +53,13 @@ test("credit cards export fields and both attachment slots used by Tearleads", (
 
 test("wallet selection controls exported sample documents", () => {
   expect(
-    buildTearleadsSeed({ ...world, device: { ...world.device, wallet: [] } })
-      .files,
+    buildTearleadsSeed({
+      ...world,
+      device: { ...world.device, wallet: [] },
+    }).files.filter((file) =>
+      world.device.wallet.includes(
+        file.kind as (typeof world.device.wallet)[number],
+      ),
+    ),
   ).toEqual([]);
 });

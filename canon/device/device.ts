@@ -1,8 +1,10 @@
 import type { Device } from "../../src/canon/types";
+import { household } from "./household";
 import { notes } from "./notes";
 
 // Maya's phone: what a fresh tearleads install is seeded with.
 export const device: Device = {
+  household,
   owner: "maya-reyes",
   tearleads: {
     // tearleads' screenshot run reads both values from the generated seed.

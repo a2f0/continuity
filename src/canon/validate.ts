@@ -8,6 +8,7 @@ import {
 } from "./validation/characters";
 import { checkDevice, checkNotes } from "./validation/device";
 import { checkDocuments } from "./validation/documents";
+import { checkHousehold } from "./validation/household";
 import {
   checkIds,
   checkIssuers,
@@ -41,5 +42,6 @@ export function validateWorld(world: World): readonly string[] {
     ...checkUniqueDocumentNumbers(world),
     ...checkDevice(world, world.device),
     ...checkNotes(world),
+    ...checkHousehold(world),
   ];
 }

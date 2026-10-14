@@ -1,0 +1,5 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: product-mockup. Asset type: photorealistic household inventory photo for a fictional demo app. Photograph a brushed stainless steel two-door refrigerator with bottom freezer, installed in an ordinary small apartment kitchen with wood cabinets. Entire item visible, natural three-quarter angle, soft daylight, realistic material textures and slight everyday wear, clean uncluttered framing. Fictional maker text \"Hearthmere\" and small model text \"HM-R320\" on a tasteful simple badge. If a serial label is visible use \"HM25-R3-006209\". No real-world brands, people, watermark, graphic overlays, collage, or illustration. Looks like a sharp photograph an owner took for their inventory. Landscape 3:2 composition.",
+  "sha256": "2c1bf0e984839c59b8a4e6ca521dd6386e4831e0f19a04579fb2c1e0a434760c"
+}

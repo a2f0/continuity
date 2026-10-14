@@ -2,7 +2,7 @@
 
 Canonical fictional characters, and the genesis data rendered from them:
 driver's licenses, passports, birth certificates, credit cards, contact cards,
-avatars, and notes that seed
+avatars, family photos, household inventory, health trackers, and notes that seed
 [tearleads](https://github.com/a2f0/tearleads) for screenshots, demos, and
 import testing.
 
@@ -41,6 +41,7 @@ bun run check               # everything CI runs
 | `src/site/`, `site/` | Static asset gallery builder, stylesheet, and headers |
 | `assets/fonts/` | Vendored OFL and Apache fonts, with their licenses |
 | `assets/portraits/` | One canonical portrait per character, with provenance |
+| `assets/household/` | Family and equipment photos, with generation provenance |
 | `genesis/` | Generated output; never edit it by hand |
 
 ## Generated output

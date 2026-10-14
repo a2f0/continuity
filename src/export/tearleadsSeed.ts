@@ -13,6 +13,7 @@ import {
   creditCardFields,
 } from "../canon/documentFields";
 import type { World } from "../canon/types";
+import { householdExpectations, householdFiles } from "./householdSeed";
 
 // The seed tearleads' screenshot run restores. Its shape is tearleads'
 // SeedSpec (packages/app/test/screenshot-seed/seedTypes.ts); attachment paths
@@ -34,13 +35,15 @@ interface SeedContact {
   readonly avatar?: SeedAttachment;
 }
 
-interface SeedFile {
+export interface SeedFile {
   readonly kind: string;
   readonly fields: Readonly<Record<string, string>>;
   readonly attachments: readonly SeedAttachment[];
+  readonly rows?: readonly Readonly<Record<string, string>>[];
 }
 
 export interface SeedSpec {
+  readonly schemaVersion: 2;
   readonly password: string;
   readonly identitySeedPhrase: string;
   readonly contacts: readonly SeedContact[];
@@ -49,7 +52,9 @@ export interface SeedSpec {
 }
 
 /** Strings tearleads' screenshot run asserts on after restoring the seed. */
-export interface SeedExpectations {
+export interface SeedExpectations
+  extends ReturnType<typeof householdExpectations> {
+  readonly schemaVersion: 2;
   readonly contact: { readonly displayName: string };
   readonly note: { readonly title: string; readonly bodyLine: string };
   readonly driversLicense?: {
@@ -158,6 +163,7 @@ function walletFiles(world: World): SeedFile[] {
 export function buildTearleadsSeed(world: World): SeedSpec {
   const { device } = world;
   return {
+    schemaVersion: 2,
     contacts: device.addressBook.map((entry) => {
       const character = findCharacter(world, entry.character);
       return {
@@ -172,7 +178,7 @@ export function buildTearleadsSeed(world: World): SeedSpec {
         },
       };
     }),
-    files: walletFiles(world),
+    files: [...walletFiles(world), ...householdFiles(world)],
     identitySeedPhrase: device.tearleads.identitySeedPhrase,
     notes: device.notes.map((note) => ({ text: resolveNoteText(world, note) })),
     password: device.tearleads.backupPassword,
@@ -217,6 +223,8 @@ export function buildSeedExpectations(seed: SeedSpec): SeedExpectations {
       }
     : undefined;
   return {
+    schemaVersion: 2,
+    ...householdExpectations(seed.files),
     ...(birthCertificate ? { birthCertificate } : {}),
     ...(creditCard ? { creditCard } : {}),
     contact: {

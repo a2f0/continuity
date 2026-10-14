@@ -60,7 +60,8 @@ inspect failures with `bun run agent:logs <path>`.
 ## Binary files
 
 Binary files are allowed only as `assets/fonts/*.ttf`,
-`assets/portraits/*.{jpg,png}`, and `genesis/**/*.{jpg,png}`, each at most
+`assets/portraits/*.{jpg,png}`, `assets/household/*.jpg`, and
+`genesis/**/*.{jpg,png}`, each at most
 3 MiB (`bun run lint:binary-files`). Regenerating images adds to history, so
 avoid churning renders without a reason.
 
