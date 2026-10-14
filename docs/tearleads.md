@@ -30,7 +30,8 @@ attachments.
 | `tool`, `appliance` | `equipment-photos` (repeatable collection) |
 | `image` | Unslotted attachment |
 
-Attachment `file` values are names beside `seed.json`. Birth certificates
+Attachment `file` values are names beside `seed.json`. Household photos use
+`household-<id>.jpg` names to avoid collisions with wallet images. Birth certificates
 resolve the holder's name, birth date, birthplace, and parent names from canon.
 Credit cards resolve the cardholder name and expiration month from canon;
 their non-payment numbers start with `0000` and the specimen CVV is `000`.
@@ -45,9 +46,11 @@ omitted when the device does not select them.
 `canon/device/household.ts` owns the family photo metadata, fictional equipment
 brands and identifiers, and tracker readings. `assets/household/` holds reviewed
 photorealistic JPEGs and JSON provenance with the exact prompt, generation model,
-and SHA-256. These images were generated with Codex's built-in image tool; family
+generation date, image and prompt SHA-256 hashes, and reference portrait hashes.
+These images were generated with Codex's built-in image tool; family
 photos use the existing fictional portraits as face references. Regeneration
-copies these bytes and derives image sizes; it never calls an image service.
+verifies these hashes and reference portraits, then derives image sizes before
+constructing the seed; it never calls an image service.
 
 The drill has two photos in the same logical `equipment-photos` slot. Tearleads
 must append a distinct physical slot for each photo, preserving independent
@@ -61,6 +64,13 @@ Expectations include every household image and inventory item plus the tracker
 rows, so screenshots can assert visible fields and plotted points.
 
 ## Adopting it in tearleads
+
+Schema version 2 requires the coordinated Tearleads consumer update: row
+creation, repeatable equipment slots, integrity verification, and household
+screenshot assertions. Older consumers cannot safely adopt this version.
+The consumer changes are on `feat/seed-screenshot-coverage`; its real SDK probe
+produced an encrypted backup with 20 blobs. Before shipping that consumer, run
+its fresh-restore contract test and browser captures against the merged pin.
 
 Update the commit pin for `@a2f0/continuity` in tearleads' root `package.json`
 catalog and run `bun install`. Bun records the commit in `bun.lock`; rendered

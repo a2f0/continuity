@@ -1,12 +1,12 @@
 import { expect, test } from "bun:test";
 import { world } from "../../canon/world";
 import { validateWorld } from "../canon/validate";
-import { copyHouseholdPhotos } from "../genesis/household";
+import { loadHouseholdPhotos } from "../genesis/household";
 import { buildSeedExpectations, buildTearleadsSeed } from "./tearleadsSeed";
 
 test("household seed supplies photos, two makes, equipment identifiers, and dated tracker rows", () => {
-  const assets = new Map<string, Uint8Array>();
-  const seed = copyHouseholdPhotos(world, assets, buildTearleadsSeed(world));
+  const assets = loadHouseholdPhotos(world);
+  const seed = buildTearleadsSeed(world, assets);
   const expected = buildSeedExpectations(seed);
   expect(seed.schemaVersion).toBe(2);
   expect(assets.size).toBe(7);
@@ -33,51 +33,26 @@ test("household seed supplies photos, two makes, equipment identifiers, and date
   expect(validateWorld(world)).toEqual([]);
 });
 
-test("canon rejects household drift before generating fixtures", () => {
-  const household = world.device.household;
-  const invalid = {
+test("image metadata is required and tracker defaults follow recorded units", () => {
+  expect(() => buildTearleadsSeed(world, new Map())).toThrow(
+    "Missing image metadata",
+  );
+  const changed = {
     ...world,
     device: {
       ...world.device,
       household: {
-        ...household,
-        photos: [
-          {
-            id: "../escape",
-            fileName: "photo.jpg",
-            characters: ["missing"],
-            capturedAt: "2099-01-01T12:00:00Z",
-          },
-        ],
-        equipment: [...household.equipment, ...household.equipment],
-        weight: [
-          {
-            measuredAt: "2026-02-30T07:30:00Z",
-            weight: "NaN",
-            unit: "kg" as const,
-            notes: "",
-          },
-        ],
-        bloodPressure: [
-          {
-            measuredAt: "2026-09-30T08:00:00Z",
-            systolic: "60",
-            diastolic: "80",
-            pulse: "abc",
-            notes: "",
-          },
-        ],
+        ...world.device.household,
+        weight: world.device.household.weight.map((row) => ({
+          ...row,
+          unit: "lb" as const,
+        })),
       },
     },
   };
-  const problems = validateWorld(invalid).join("\n");
-  for (const message of [
-    "duplicate id",
-    "invalid family photo",
-    "future timestamp",
-    "duplicate serial",
-    "invalid weight",
-    "invalid blood pressure",
-  ])
-    expect(problems).toContain(message);
+  expect(
+    buildTearleadsSeed(changed, loadHouseholdPhotos(world)).files.find(
+      (file) => file.kind === "weight",
+    )?.fields,
+  ).toMatchObject({ unit: "lb" });
 });

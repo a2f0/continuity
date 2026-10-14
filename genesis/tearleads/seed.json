@@ -162,7 +162,7 @@
       },
       "attachments": [
         {
-          "file": "family-dinner.jpg",
+          "file": "household-family-dinner.jpg",
           "mimeType": "image/jpeg"
         }
       ]
@@ -179,7 +179,7 @@
       },
       "attachments": [
         {
-          "file": "family-walk.jpg",
+          "file": "household-family-walk.jpg",
           "mimeType": "image/jpeg"
         }
       ]
@@ -194,12 +194,12 @@
       },
       "attachments": [
         {
-          "file": "drill.jpg",
+          "file": "household-drill.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
         },
         {
-          "file": "drill-detail.jpg",
+          "file": "household-drill-detail.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
         }
@@ -215,7 +215,7 @@
       },
       "attachments": [
         {
-          "file": "circular-saw.jpg",
+          "file": "household-circular-saw.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
         }
@@ -231,7 +231,7 @@
       },
       "attachments": [
         {
-          "file": "washing-machine.jpg",
+          "file": "household-washing-machine.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
         }
@@ -247,7 +247,7 @@
       },
       "attachments": [
         {
-          "file": "refrigerator.jpg",
+          "file": "household-refrigerator.jpg",
           "mimeType": "image/jpeg",
           "slot": "equipment-photos"
         }

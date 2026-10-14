@@ -13,7 +13,12 @@ import {
   creditCardFields,
 } from "../canon/documentFields";
 import type { World } from "../canon/types";
-import { householdExpectations, householdFiles } from "./householdSeed";
+import {
+  type HouseholdExpectations,
+  type HouseholdPhotoMetadata,
+  householdExpectations,
+  householdFiles,
+} from "./householdSeed";
 
 // The seed tearleads' screenshot run restores. Its shape is tearleads'
 // SeedSpec (packages/app/test/screenshot-seed/seedTypes.ts); attachment paths
@@ -52,8 +57,7 @@ export interface SeedSpec {
 }
 
 /** Strings tearleads' screenshot run asserts on after restoring the seed. */
-export interface SeedExpectations
-  extends ReturnType<typeof householdExpectations> {
+export interface SeedExpectations extends HouseholdExpectations {
   readonly schemaVersion: 2;
   readonly contact: { readonly displayName: string };
   readonly note: { readonly title: string; readonly bodyLine: string };
@@ -160,7 +164,10 @@ function walletFiles(world: World): SeedFile[] {
   return files;
 }
 
-export function buildTearleadsSeed(world: World): SeedSpec {
+export function buildTearleadsSeed(
+  world: World,
+  photos: ReadonlyMap<string, HouseholdPhotoMetadata>,
+): SeedSpec {
   const { device } = world;
   return {
     schemaVersion: 2,
@@ -178,7 +185,7 @@ export function buildTearleadsSeed(world: World): SeedSpec {
         },
       };
     }),
-    files: [...walletFiles(world), ...householdFiles(world)],
+    files: [...walletFiles(world), ...householdFiles(world, photos)],
     identitySeedPhrase: device.tearleads.identitySeedPhrase,
     notes: device.notes.map((note) => ({ text: resolveNoteText(world, note) })),
     password: device.tearleads.backupPassword,

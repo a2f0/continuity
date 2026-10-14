@@ -11,7 +11,7 @@ import {
 import { addressBookVcard } from "../export/vcard";
 import { canonSnapshot } from "./canonSnapshot";
 import { renderCharacters } from "./characters";
-import { copyHouseholdPhotos } from "./household";
+import { loadHouseholdPhotos } from "./household";
 
 // Everything under genesis/, built in memory from canon. The same canon always
 // yields the same bytes, which is what `bun run genesis:check` relies on.
@@ -84,7 +84,10 @@ export function buildGenesis(world: World): readonly GenesisFile[] {
     "contacts/contacts.vcf",
     new TextEncoder().encode(addressBookVcard(world, contactPhotos)),
   );
-  const seed = copyHouseholdPhotos(world, files, buildTearleadsSeed(world));
+  const photos = loadHouseholdPhotos(world);
+  for (const [id, photo] of photos)
+    files.set(`tearleads/household-${id}.jpg`, photo.bytes);
+  const seed = buildTearleadsSeed(world, photos);
   files.set("tearleads/seed.json", json(seed));
   files.set("tearleads/expectations.json", json(buildSeedExpectations(seed)));
   copyTearleadsAttachments(world, files);

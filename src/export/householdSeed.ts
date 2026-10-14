@@ -2,25 +2,43 @@ import { findCharacter, firstName } from "../canon/derive";
 import type { World } from "../canon/types";
 import type { SeedFile } from "./tearleadsSeed";
 
-export function householdFiles(world: World): SeedFile[] {
+export interface HouseholdPhotoMetadata {
+  readonly width: number;
+  readonly height: number;
+  readonly byteLength: number;
+}
+
+export function householdFiles(
+  world: World,
+  photos: ReadonlyMap<string, HouseholdPhotoMetadata>,
+): SeedFile[] {
   const { household } = world.device;
   const name = firstName(findCharacter(world, world.device.owner));
   return [
-    ...household.photos.map((photo) => ({
-      kind: "image",
-      fields: {
-        fileName: photo.fileName,
-        mimeType: "image/jpeg",
-        sourceLastModified: String(Date.parse(photo.capturedAt)),
-      },
-      attachments: [{ file: `${photo.id}.jpg`, mimeType: "image/jpeg" }],
-    })),
+    ...household.photos.map((photo) => {
+      const metadata = photos.get(photo.id);
+      if (!metadata) throw new Error(`Missing image metadata: ${photo.id}`);
+      return {
+        kind: "image",
+        fields: {
+          fileName: photo.fileName,
+          mimeType: "image/jpeg",
+          sourceLastModified: String(Date.parse(photo.capturedAt)),
+          width: String(metadata.width),
+          height: String(metadata.height),
+          byteLength: String(metadata.byteLength),
+        },
+        attachments: [
+          { file: `household-${photo.id}.jpg`, mimeType: "image/jpeg" },
+        ],
+      };
+    }),
     ...household.equipment.map(
       ({ kind, equipmentType, make, model, serialNumber, photos }) => ({
         kind,
         fields: { equipmentType, make, model, serialNumber },
         attachments: photos.map((id) => ({
-          file: `${id}.jpg`,
+          file: `household-${id}.jpg`,
           mimeType: "image/jpeg",
           slot: "equipment-photos",
         })),
@@ -28,7 +46,10 @@ export function householdFiles(world: World): SeedFile[] {
     ),
     {
       kind: "weight",
-      fields: { trackerName: `${name}'s Weight`, unit: "kg" },
+      fields: {
+        trackerName: `${name}'s Weight`,
+        unit: household.weight.at(-1)?.unit ?? "kg",
+      },
       rows: household.weight,
       attachments: [],
     },
@@ -41,7 +62,27 @@ export function householdFiles(world: World): SeedFile[] {
   ];
 }
 
-export function householdExpectations(files: readonly SeedFile[]) {
+interface ImageExpectation {
+  readonly title: string;
+  readonly imageCount: number;
+  readonly fields: Readonly<Record<string, string>>;
+}
+interface TrackerExpectation {
+  readonly title: string;
+  readonly rowCount: number;
+  readonly rows: readonly Readonly<Record<string, string>>[];
+}
+export interface HouseholdExpectations {
+  readonly photos: readonly ImageExpectation[];
+  readonly tools: readonly ImageExpectation[];
+  readonly appliances: readonly ImageExpectation[];
+  readonly weight: TrackerExpectation;
+  readonly bloodPressure: TrackerExpectation;
+}
+
+export function householdExpectations(
+  files: readonly SeedFile[],
+): HouseholdExpectations {
   const details = (kind: string) =>
     files
       .filter((file) => file.kind === kind)
@@ -52,8 +93,9 @@ export function householdExpectations(files: readonly SeedFile[]) {
           .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
           .join(" ");
         return {
-          title:
+          title: requiredTitle(
             kind === "image" ? fileName : [typeLabel, make, model].join(" "),
+          ),
           imageCount: file.attachments.length,
           fields: file.fields,
         };
@@ -63,7 +105,11 @@ export function householdExpectations(files: readonly SeedFile[]) {
     if (!file?.rows?.length)
       throw new Error(`Missing seeded readings for ${kind}`);
     const { trackerName } = file.fields;
-    return { title: trackerName, rowCount: file.rows.length, rows: file.rows };
+    return {
+      title: requiredTitle(trackerName),
+      rowCount: file.rows.length,
+      rows: file.rows,
+    };
   };
   return {
     photos: details("image"),
@@ -72,4 +118,9 @@ export function householdExpectations(files: readonly SeedFile[]) {
     weight: tracker("weight"),
     bloodPressure: tracker("blood_pressure"),
   };
+}
+
+function requiredTitle(title: string | undefined): string {
+  if (!title?.trim()) throw new Error("Missing household document title");
+  return title;
 }

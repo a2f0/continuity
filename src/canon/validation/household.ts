@@ -7,8 +7,12 @@ export function checkHousehold(world: World): string[] {
   const problems: string[] = [];
   const ids = new Set<string>();
   for (const item of [...photos, ...equipment]) {
-    if (!/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u.test(item.id) || ids.has(item.id))
-      problems.push(`household: invalid or duplicate id ${item.id}`);
+    if (!/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u.test(item.id)) {
+      problems.push(`household: invalid id ${item.id}`);
+    }
+    if (ids.has(item.id)) {
+      problems.push(`household: duplicate id ${item.id}`);
+    }
     ids.add(item.id);
   }
   for (const photo of photos) {
@@ -64,10 +68,12 @@ function checkDate(value: string, asOf: string, problems: string[]): void {
   if (
     !isIsoDate(value.slice(0, 10)) ||
     !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$/u.test(value) ||
-    !Number.isFinite(Date.parse(value)) ||
-    value.slice(0, 10) > asOf
+    !Number.isFinite(Date.parse(value))
   )
-    problems.push(`household: invalid or future timestamp ${value}`);
+    problems.push(`household: invalid timestamp ${value}`);
+  if (value.slice(0, 10) > asOf) {
+    problems.push(`household: future timestamp ${value}`);
+  }
 }
 
 function checkEquipment(equipment: Household["equipment"]): string[] {

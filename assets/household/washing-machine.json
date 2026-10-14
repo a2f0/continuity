@@ -1,5 +1,8 @@
 {
   "model": "codex-image-gen",
-  "prompt": "Use case: product-mockup. Asset type: photorealistic household inventory photo for a fictional demo app. Photograph a white front-loading washing machine with circular glass door and simple dial, installed in a tidy small apartment laundry nook. Entire item visible, natural three-quarter angle, soft daylight, realistic material textures and slight everyday wear, clean uncluttered framing. Fictional maker text \"Hearthmere\" and small model text \"HM-W8\" on a tasteful simple badge. If a serial label is visible use \"HM25-W8-008614\". No real-world brands, people, watermark, graphic overlays, collage, or illustration. Looks like a sharp photograph an owner took for their inventory. Landscape 3:2 composition.",
-  "sha256": "b402b559c11efe5815250e91f3444fdf5397265663197cb490e0d14cfcaa7501"
+  "prompt": "Use case: precise-object-edit. Correct this fictional Hearthmere HM-W8 washing machine inventory photograph. Preserve the white front-loading washer, circular glass door, room, daylight and photorealistic textures. Remove the serial label from the wall entirely. Put a small realistic manufacturer plate on the front lower-right of the MACHINE with exact serial \"HM25-W8-008614\". Keep brand \"Hearthmere\" and model \"HM-W8\" exact on upper left. Replace all garbled tiny control panel writing with clean simple pictogram icons and one numeric dial; no program words needed. A believable understated real appliance, no text overlays, no collage. Landscape 3:2.",
+  "generatedOn": "2026-10-14",
+  "imageSha256": "d283ce90547c2764f320c08fe80619393f135cf19ff78c2b0049555fdd61042d",
+  "promptSha256": "9af56860dbd288ef42eaab4fd054ddf15afb936e9c6d27d5d76d3496d0379e8b",
+  "references": {}
 }

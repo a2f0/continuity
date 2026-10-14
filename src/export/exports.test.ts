@@ -1,11 +1,12 @@
 import { describe, expect, test } from "bun:test";
 import { world } from "../../canon/world";
+import { loadHouseholdPhotos } from "../genesis/household";
 import { googleContactsCsv } from "./googleContactsCsv";
 import { buildSeedExpectations, buildTearleadsSeed } from "./tearleadsSeed";
 import { addressBookVcard } from "./vcard";
 
 describe("buildTearleadsSeed", () => {
-  const seed = buildTearleadsSeed(world);
+  const seed = buildTearleadsSeed(world, loadHouseholdPhotos(world));
 
   test("seeds the owner's address book, notes, and wallet", () => {
     expect(seed.contacts).toHaveLength(world.device.addressBook.length);
@@ -15,11 +16,19 @@ describe("buildTearleadsSeed", () => {
       nickname: "Mom",
     });
     expect(seed.notes).toHaveLength(world.device.notes.length);
-    expect(seed.files.slice(0, 4).map((file) => file.kind)).toEqual([
+    expect(seed.files.map((file) => file.kind)).toEqual([
       "drivers_license",
       "passport",
       "birth_certificate",
       "credit_card",
+      "image",
+      "image",
+      "tool",
+      "tool",
+      "appliance",
+      "appliance",
+      "weight",
+      "blood_pressure",
     ]);
   });
 
@@ -49,7 +58,22 @@ describe("buildTearleadsSeed", () => {
   });
 
   test("derives the strings the screenshot run asserts on", () => {
-    expect(buildSeedExpectations(seed)).toMatchObject({
+    const {
+      schemaVersion,
+      photos,
+      tools,
+      appliances,
+      weight,
+      bloodPressure,
+      ...walletExpectations
+    } = buildSeedExpectations(seed);
+    expect(schemaVersion).toBe(2);
+    expect(photos).toHaveLength(2);
+    expect(tools).toHaveLength(2);
+    expect(appliances).toHaveLength(2);
+    expect(weight.rowCount).toBe(6);
+    expect(bloodPressure.rowCount).toBe(6);
+    expect(walletExpectations).toEqual({
       contact: { displayName: "Daniel Okafor" },
       driversLicense: {
         imageCount: 2,
