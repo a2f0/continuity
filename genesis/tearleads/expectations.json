@@ -1,4 +1,12 @@
 {
+  "birthCertificate": {
+    "imageCount": 1,
+    "title": "Birth Certificate Maya Elena Reyes"
+  },
+  "creditCard": {
+    "title": "Alder Grove Bank ending in 4242",
+    "imageCount": 2
+  },
   "contact": {
     "displayName": "Daniel Okafor"
   },

@@ -40,6 +40,9 @@ function character(person: Person, index: number, gallery: Gallery): string {
     [person.files.driversLicenseFront, "Driver’s license · front"],
     [person.files.driversLicenseBack, "Driver’s license · back"],
     [person.files.passport, "Passport · data page"],
+    [person.files.birthCertificate, "Birth certificate"],
+    [person.files.creditCardFront, "Credit card · front"],
+    [person.files.creditCardBack, "Credit card · back"],
   ] as const;
   const relationships = person.relationships
     .map((relationship) => {

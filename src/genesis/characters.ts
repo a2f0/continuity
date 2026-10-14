@@ -33,6 +33,9 @@ export function renderCharacters(world: World, files: Map<string, Uint8Array>) {
         "drivers-license-back.jpg",
       ],
       ["passport", documents.passport, "passport.jpg"],
+      ["birthCertificate", documents.birthCertificate, "birth-certificate.jpg"],
+      ["creditCardFront", documents.creditCardFront, "credit-card-front.jpg"],
+      ["creditCardBack", documents.creditCardBack, "credit-card-back.jpg"],
     ] as const) {
       if (bytes) {
         const path = `documents/${character.id}/${name}`;

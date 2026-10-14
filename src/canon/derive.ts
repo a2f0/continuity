@@ -1,6 +1,7 @@
 import { addDays, addYears, ageOn, birthdayIn, yearOf } from "./dates";
 import type {
   Character,
+  CreditCard,
   DriversLicense,
   IsoDate,
   Jurisdiction,
@@ -92,6 +93,11 @@ export function passportExpiration(
   return addDays(addYears(passport.issued, issuer.validityYears), -1);
 }
 
+/** The last month a card remains valid, as printed on the card. */
+export function creditCardExpiration(card: CreditCard): string {
+  return addYears(card.issued, card.validityYears).slice(0, 7);
+}
+
 /** 5'-05", as printed in AAMVA field 16. */
 export function formatHeight(heightCm: number): string {
   const totalInches = Math.round(heightCm / 2.54);
@@ -110,7 +116,7 @@ export function documentExpirations(
   character: Character,
 ): readonly { readonly label: string; readonly expires: IsoDate }[] {
   const expirations: { label: string; expires: IsoDate }[] = [];
-  const { driversLicense, passport } = character.documents;
+  const { driversLicense, passport, creditCard } = character.documents;
   if (driversLicense) {
     expirations.push({
       expires: driversLicenseExpiration(
@@ -128,6 +134,18 @@ export function documentExpirations(
         findPassportIssuer(world, passport.issuer),
       ),
       label: `${character.id} passport ${passport.number}`,
+    });
+  }
+  if (creditCard) {
+    const month = creditCardExpiration(creditCard);
+    const year = Number(month.slice(0, 4));
+    const nextMonth = Number(month.slice(5)) + 1;
+    expirations.push({
+      expires:
+        nextMonth === 13
+          ? `${year + 1}-01-01`
+          : `${year}-${String(nextMonth).padStart(2, "0")}-01`,
+      label: `${character.id} credit card ending in ${creditCard.number.slice(-4)}`,
     });
   }
   return expirations;

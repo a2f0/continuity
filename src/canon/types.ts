@@ -148,6 +148,21 @@ export interface Passport {
   readonly issued: IsoDate;
 }
 
+export interface BirthCertificate {
+  readonly number: string;
+  readonly authority: string;
+  readonly issued: IsoDate;
+}
+
+export interface CreditCard {
+  readonly issuer: string;
+  /** Fictional non-payment number, always beginning with 0000. */
+  readonly number: string;
+  readonly cvv: string;
+  readonly issued: IsoDate;
+  readonly validityYears: number;
+}
+
 export interface Signature {
   readonly font: SignatureFont;
   /** Defaults to the given and family names. */
@@ -173,6 +188,8 @@ export interface Character {
   readonly documents: {
     readonly driversLicense?: DriversLicense;
     readonly passport?: Passport;
+    readonly birthCertificate?: BirthCertificate;
+    readonly creditCard?: CreditCard;
   };
 }
 
@@ -236,7 +253,11 @@ export interface AddressBookEntry {
   readonly labels?: readonly string[];
 }
 
-export type WalletDocument = "drivers_license" | "passport";
+export type WalletDocument =
+  | "drivers_license"
+  | "passport"
+  | "birth_certificate"
+  | "credit_card";
 
 /** The owner's device: what a fresh tearleads install is seeded with. */
 export interface Device {

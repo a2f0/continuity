@@ -1,7 +1,8 @@
 # continuity
 
 Canonical fictional characters, and the genesis data rendered from them:
-driver's licenses, passports, contact cards, avatars, and notes that seed
+driver's licenses, passports, birth certificates, credit cards, contact cards,
+avatars, and notes that seed
 [tearleads](https://github.com/a2f0/tearleads) for screenshots, demos, and
 import testing.
 
@@ -49,7 +50,7 @@ bun run check               # everything CI runs
 | `genesis/tearleads/seed.json` | tearleads `SeedSpec`: contacts, notes, wallet documents |
 | `genesis/tearleads/expectations.json` | Strings tearleads' screenshot run asserts on |
 | `genesis/tearleads/*.jpg`, `*.png` | Attachments referenced by `seed.json` |
-| `genesis/documents/<id>/` | Every character's license (front and back) and passport |
+| `genesis/documents/<id>/` | Character documents: licenses, passports, birth certificates, and credit cards |
 | `genesis/avatars/<id>.png` | 512 px contact photos |
 | `genesis/contacts/contacts.csv` | The owner's address book as a Google Contacts export |
 | `genesis/contacts/contacts.vcf` | The same address book as vCard 3.0, with photos |

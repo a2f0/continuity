@@ -13,6 +13,7 @@ import { DATA_PAGE } from "../render/passport/types";
 import type { Portrait } from "../render/portrait";
 import { rasterize, toJpeg } from "../render/raster";
 import { framedDocumentSvg } from "../render/scanFrame";
+import { renderWalletDocuments } from "./walletDocuments";
 
 // Renders a character's identity documents as photographed JPEGs.
 
@@ -24,6 +25,9 @@ export interface RenderedDocuments {
   readonly driversLicenseFront?: Uint8Array;
   readonly driversLicenseBack?: Uint8Array;
   readonly passport?: Uint8Array;
+  readonly birthCertificate?: Uint8Array;
+  readonly creditCardFront?: Uint8Array;
+  readonly creditCardBack?: Uint8Array;
 }
 
 /** Each capture gets its own small tilt and glare, fixed per character. */
@@ -103,5 +107,6 @@ export function renderDocuments(
   return {
     ...renderLicense(world, character, portrait),
     ...renderPassport(world, character, portrait),
+    ...renderWalletDocuments(world, character),
   };
 }

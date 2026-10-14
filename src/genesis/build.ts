@@ -51,6 +51,13 @@ function copyTearleadsAttachments(
     TEARLEADS_FILES.driversLicenseBack,
   );
   copy(`documents/${owner.id}/passport.jpg`, TEARLEADS_FILES.passport);
+  for (const name of [
+    TEARLEADS_FILES.birthCertificate,
+    TEARLEADS_FILES.creditCardFront,
+    TEARLEADS_FILES.creditCardBack,
+  ]) {
+    copy(`documents/${owner.id}/${name}`, name);
+  }
   for (const entry of world.device.addressBook) {
     copy(
       `avatars/${entry.character}.png`,

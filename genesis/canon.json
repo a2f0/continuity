@@ -84,6 +84,22 @@
         "weightKg": 61
       },
       "documents": {
+        "birthCertificate": {
+          "certificateNumber": "UT-B-1991-0314-042",
+          "fullName": "Maya Elena Reyes",
+          "dateOfBirth": "1991-03-14",
+          "placeOfBirth": "Aurelia, Utopia",
+          "parentNames": "Rosa María Reyes",
+          "issuingAuthority": "Aurelia Civil Registry, Utopia",
+          "dateIssued": "1991-03-20"
+        },
+        "creditCard": {
+          "issuer": "Alder Grove Bank",
+          "cardNumber": "0000 0000 0000 4242",
+          "cvvCode": "000",
+          "nameOnCard": "Maya Elena Reyes",
+          "expirationDate": "2028-06"
+        },
         "driversLicense": {
           "jurisdiction": "cascadia",
           "number": "R620-4183-9147",
@@ -108,7 +124,10 @@
         "avatar": "avatars/maya-reyes.png",
         "driversLicenseFront": "documents/maya-reyes/drivers-license-front.jpg",
         "driversLicenseBack": "documents/maya-reyes/drivers-license-back.jpg",
-        "passport": "documents/maya-reyes/passport.jpg"
+        "passport": "documents/maya-reyes/passport.jpg",
+        "birthCertificate": "documents/maya-reyes/birth-certificate.jpg",
+        "creditCardFront": "documents/maya-reyes/credit-card-front.jpg",
+        "creditCardBack": "documents/maya-reyes/credit-card-back.jpg"
       }
     },
     {
