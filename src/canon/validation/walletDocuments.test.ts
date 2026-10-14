@@ -1,7 +1,8 @@
 import { expect, test } from "bun:test";
 import { world } from "../../../canon/world";
-import { findCharacter } from "../derive";
+import { documentExpirations, findCharacter } from "../derive";
 import { checkDevice } from "./device";
+import { checkDocuments } from "./documents";
 import { checkWalletDocuments } from "./walletDocuments";
 
 const maya = findCharacter(world, "maya-reyes");
@@ -21,12 +22,10 @@ test("rejects invalid issue dates and certificates issued before birth", () => {
 });
 
 test("rejects expired cards but accepts the entire expiration month", () => {
-  expect(checkWalletDocuments({ ...world, asOf: "2028-06-30" }, maya)).toEqual(
-    [],
+  expect(checkDocuments({ ...world, asOf: "2028-06-30" }, maya)).toEqual([]);
+  expect(checkDocuments({ ...world, asOf: "2028-07-01" }, maya)).toContain(
+    "maya-reyes credit card ending in 4242 expired on 2028-07-01; renew it in canon",
   );
-  expect(
-    checkWalletDocuments({ ...world, asOf: "2028-07-01" }, maya),
-  ).toContain("maya-reyes: credit card expired; renew it in canon");
 });
 
 test("rejects card numbers outside the fictional range and invalid validity", () => {
@@ -59,5 +58,21 @@ test("wallet documents must be held by the owner", () => {
   );
   expect(problems).toContain(
     "the wallet lists a credit_card maya-reyes does not hold",
+  );
+});
+
+test("freshness includes credit cards and rolls December into January", () => {
+  const december = {
+    ...maya,
+    documents: { creditCard: { ...card, issued: "2025-12-15" } },
+  };
+  expect(documentExpirations(world, december)).toEqual([
+    { label: "maya-reyes credit card ending in 4242", expires: "2029-01-01" },
+  ]);
+  expect(checkDocuments({ ...world, asOf: "2028-12-31" }, december)).toEqual(
+    [],
+  );
+  expect(checkDocuments({ ...world, asOf: "2029-01-01" }, december)).toContain(
+    "maya-reyes credit card ending in 4242 expired on 2029-01-01; renew it in canon",
   );
 });

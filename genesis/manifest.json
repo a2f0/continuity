@@ -87,19 +87,19 @@
       "sha256": "9b20fedc6cc636d8bf40220fbe13386e8dc1419831078ff4385ab00d9eb71b99"
     },
     {
-      "bytes": 410040,
+      "bytes": 403589,
       "path": "documents/maya-reyes/birth-certificate.jpg",
-      "sha256": "d4bc3a2a6cf912e6346e34716ec768cafcefe092b81b69b9e8fc77d66c21eada"
+      "sha256": "976a74023dbfe3f31a250a976cfdf8d3772be1fddbb39d597a01998b9417d928"
     },
     {
-      "bytes": 149383,
+      "bytes": 150239,
       "path": "documents/maya-reyes/credit-card-back.jpg",
-      "sha256": "8508798223ae54c6f407b143c3ed846a3199171f745daf7014ddb297ba5ce9c3"
+      "sha256": "3c12a2ce12c3fa1e42b09f70ac09aed75b2a7b68ed4bef05eb995e77eb04f852"
     },
     {
-      "bytes": 156488,
+      "bytes": 160020,
       "path": "documents/maya-reyes/credit-card-front.jpg",
-      "sha256": "59707da489af1ce9ad81a0f4cf113effcaca8a581cc28a03852ab472777ac66f"
+      "sha256": "f6ea257a383559fd7dbb26421d975f0ce4946e10ed1d1ca9dbf2560cb34da549"
     },
     {
       "bytes": 346910,
@@ -197,19 +197,19 @@
       "sha256": "62102a7de028d1fc2d567a4868383f2fb6132735b984883807155a75d33ebb58"
     },
     {
-      "bytes": 410040,
+      "bytes": 403589,
       "path": "tearleads/birth-certificate.jpg",
-      "sha256": "d4bc3a2a6cf912e6346e34716ec768cafcefe092b81b69b9e8fc77d66c21eada"
+      "sha256": "976a74023dbfe3f31a250a976cfdf8d3772be1fddbb39d597a01998b9417d928"
     },
     {
-      "bytes": 149383,
+      "bytes": 150239,
       "path": "tearleads/credit-card-back.jpg",
-      "sha256": "8508798223ae54c6f407b143c3ed846a3199171f745daf7014ddb297ba5ce9c3"
+      "sha256": "3c12a2ce12c3fa1e42b09f70ac09aed75b2a7b68ed4bef05eb995e77eb04f852"
     },
     {
-      "bytes": 156488,
+      "bytes": 160020,
       "path": "tearleads/credit-card-front.jpg",
-      "sha256": "59707da489af1ce9ad81a0f4cf113effcaca8a581cc28a03852ab472777ac66f"
+      "sha256": "f6ea257a383559fd7dbb26421d975f0ce4946e10ed1d1ca9dbf2560cb34da549"
     },
     {
       "bytes": 346910,

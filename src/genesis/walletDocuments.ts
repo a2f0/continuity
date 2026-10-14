@@ -10,14 +10,20 @@ import {
 import { CARD, type CardArt } from "../render/card";
 import { creditCardBack, creditCardFront } from "../render/creditCard";
 import { rasterize, toJpeg } from "../render/raster";
-import { framedDocumentSvg } from "../render/scanFrame";
+import { type FrameSize, framedDocumentSvg } from "../render/scanFrame";
 import { el } from "../render/svg";
+import {
+  CARD_WIDTH_PX,
+  capture,
+  JPEG_QUALITY,
+  PAGE_WIDTH_PX,
+} from "./documentCapture";
 
 export function renderWalletDocuments(world: World, character: Character) {
   const { birthCertificate, creditCard } = character.documents;
   const render = (
     art: CardArt,
-    size: typeof CARD | typeof CERTIFICATE_PAGE,
+    size: FrameSize,
     clipId: string,
     width: number,
   ) =>
@@ -42,13 +48,12 @@ export function renderWalletDocuments(world: World, character: Character) {
           {
             clipId,
             margin: 5,
-            rotation: -0.6,
-            glareAngle: 20,
+            ...capture(`${character.id}:${clipId}`),
           },
         ),
         width,
       ),
-      88,
+      JPEG_QUALITY,
     );
   return {
     ...(birthCertificate
@@ -59,7 +64,7 @@ export function renderWalletDocuments(world: World, character: Character) {
             ),
             CERTIFICATE_PAGE,
             "birth-certificate",
-            2000,
+            PAGE_WIDTH_PX,
           ),
         }
       : {}),
@@ -69,13 +74,13 @@ export function renderWalletDocuments(world: World, character: Character) {
             creditCardFront(creditCardFields(character, creditCard)),
             CARD,
             "credit-front",
-            1600,
+            CARD_WIDTH_PX,
           ),
           creditCardBack: render(
             creditCardBack(creditCardFields(character, creditCard)),
             CARD,
             "credit-back",
-            1600,
+            CARD_WIDTH_PX,
           ),
         }
       : {}),

@@ -1,5 +1,5 @@
 import type { creditCardFields } from "../canon/documentFields";
-import { CARD, type CardArt, SPECIMEN_RED, specimenMark } from "./card";
+import { CARD, type CardArt } from "./card";
 import { FONT } from "./fonts";
 import { el, text } from "./svg";
 
@@ -30,7 +30,7 @@ export function creditCardFront(fields: Fields): CardArt {
     body: [
       background(),
       text(6, 10, fields.issuer, { ...label, size: 4, weight: 600 }),
-      text(6, 16, "EVERYDAY · SPECIMEN CREDIT", {
+      text(6, 16, "SPECIMEN CREDIT CARD", {
         ...label,
         letterSpacing: 0.4,
       }),
@@ -59,7 +59,12 @@ export function creditCardFront(fields: Fields): CardArt {
       text(6, 48, fields.nameOnCard.toUpperCase(), { ...label, size: 2.5 }),
       text(64, 43, "VALID THRU", { ...label, size: 1.5 }),
       text(64, 48, month, { ...label, family: FONT.mono, size: 2.6 }),
-      specimenMark(51, 27, 8),
+      text(27, 27, "SPECIMEN", {
+        ...label,
+        size: 6,
+        weight: 600,
+        opacity: 0.7,
+      }),
     ].join(""),
   };
 }
@@ -89,8 +94,8 @@ export function creditCardBack(fields: Fields): CardArt {
         "Fictional issuer and account · Demonstration use only",
         label,
       ),
-      text(6, 48, "aldergrove.example · (360) 555-0108", label),
-      text(70, 5, "SPECIMEN", { ...label, fill: SPECIMEN_RED, size: 1.5 }),
+      text(6, 48, "No payment account · No banking services", label),
+      text(70, 5, "SPECIMEN", { ...label, fill: "#ffffff", size: 1.5 }),
     ].join(""),
   };
 }

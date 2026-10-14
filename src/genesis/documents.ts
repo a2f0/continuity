@@ -5,7 +5,7 @@ import {
   passportExpiration,
 } from "../canon/derive";
 import type { Character, World } from "../canon/types";
-import { CARD, type CardArt, seededRandom } from "../render/card";
+import { CARD, type CardArt } from "../render/card";
 import { driversLicenseBack } from "../render/drivers-license/back";
 import { driversLicenseFront } from "../render/drivers-license/front";
 import { passportDataPage } from "../render/passport/dataPage";
@@ -13,13 +13,15 @@ import { DATA_PAGE } from "../render/passport/types";
 import type { Portrait } from "../render/portrait";
 import { rasterize, toJpeg } from "../render/raster";
 import { framedDocumentSvg } from "../render/scanFrame";
+import {
+  CARD_WIDTH_PX,
+  capture,
+  JPEG_QUALITY,
+  PAGE_WIDTH_PX,
+} from "./documentCapture";
 import { renderWalletDocuments } from "./walletDocuments";
 
 // Renders a character's identity documents as photographed JPEGs.
-
-const JPEG_QUALITY = 88;
-const CARD_WIDTH_PX = 1600;
-const PAGE_WIDTH_PX = 2000;
 
 export interface RenderedDocuments {
   readonly driversLicenseFront?: Uint8Array;
@@ -28,15 +30,6 @@ export interface RenderedDocuments {
   readonly birthCertificate?: Uint8Array;
   readonly creditCardFront?: Uint8Array;
   readonly creditCardBack?: Uint8Array;
-}
-
-/** Each capture gets its own small tilt and glare, fixed per character. */
-function capture(seed: string) {
-  const random = seededRandom(seed);
-  return {
-    glareAngle: Math.round(random() * 60) - 10,
-    rotation: Math.round((random() * 2.6 - 1.3) * 10) / 10,
-  };
 }
 
 function renderLicense(

@@ -34,6 +34,14 @@ asserts on: a contact's display name, the first note's title and body line,
 and each wallet document's title and image count. Optional wallet kinds are
 omitted when the device does not select them.
 
+## Integration verification
+
+The expanded seed was tested with tearleads' `continuitySeed.test.ts` against
+its birth certificate implementation: the real SDK built and decoded the
+backup with all four document kinds, their projected titles, and all 13 image
+blobs (seven contact avatars and six document images). The test uses the same
+attachment slots consumed by the document editors.
+
 ## Adopting it in tearleads
 
 Update the commit pin for `@a2f0/continuity` in tearleads' root `package.json`

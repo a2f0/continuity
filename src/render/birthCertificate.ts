@@ -22,7 +22,7 @@ export function birthCertificatePage(
     ["Parent(s) recorded", fields.parentNames],
     ["Certificate number", fields.certificateNumber],
     ["Date issued", fields.dateIssued],
-  ];
+  ] as const;
   return {
     defs: "",
     body: [
@@ -45,7 +45,7 @@ export function birthCertificatePage(
         stroke: ink,
         "stroke-width": 0.15,
       }),
-      text(74, 22, "UTOPIA · CIVIL RECORDS", {
+      text(74, 22, "CIVIL RECORDS", {
         ...label,
         anchor: "middle",
         letterSpacing: 0.8,
@@ -57,7 +57,7 @@ export function birthCertificatePage(
         anchor: "middle",
       }),
       text(74, 43, fields.issuingAuthority, { ...label, anchor: "middle" }),
-      ...rows.map(([name = "", content = ""], index) => {
+      ...rows.map(([name, content], index) => {
         const y = 59 + index * 17;
         return (
           text(17, y, name.toUpperCase(), label) +

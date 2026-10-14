@@ -1,5 +1,4 @@
 import { compareDates, isIsoDate } from "../dates";
-import { creditCardFields } from "../documentFields";
 import type { Character, CreditCard, World } from "../types";
 
 export function checkWalletDocuments(
@@ -34,13 +33,11 @@ export function checkWalletDocuments(
       `${character.id}: birth certificate needs a number and issuing authority`,
     );
   }
-  if (creditCard)
-    problems.push(...checkCreditCard(world, character, creditCard));
+  if (creditCard) problems.push(...checkCreditCard(character, creditCard));
   return problems;
 }
 
 function checkCreditCard(
-  world: World,
   character: Character,
   creditCard: CreditCard,
 ): string[] {
@@ -59,12 +56,6 @@ function checkCreditCard(
     problems.push(
       `${character.id}: credit card needs an issuer and validity of 1–10 years`,
     );
-  } else if (
-    isIsoDate(creditCard.issued) &&
-    creditCardFields(character, creditCard).expirationDate <
-      world.asOf.slice(0, 7)
-  ) {
-    problems.push(`${character.id}: credit card expired; renew it in canon`);
   }
   return problems;
 }

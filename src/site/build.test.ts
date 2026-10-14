@@ -20,6 +20,13 @@ beforeAll(() => {
 afterAll(() => rmSync(root, { recursive: true, force: true }));
 
 describe("asset gallery", () => {
+  test("counts every rendered document image", () => {
+    const count = gallery.assets.filter((asset) =>
+      asset.path.startsWith("documents/"),
+    ).length;
+    expect(html).toContain(`<dt>Document images</dt><dd>${count}</dd>`);
+  });
+
   test("publishes every manifest asset unchanged with a download on the page", () => {
     for (const asset of gallery.assets) {
       expect(readFileSync(join(output, "genesis", asset.path))).toEqual(
