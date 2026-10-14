@@ -72,14 +72,13 @@ and maintained.
 
 ## Fiction, not forgery
 
-The documents are realistic enough for screenshots and import testing, and
-designed so that none of them can pass for a real one:
+The documents use realistic layouts for screenshots and import testing, with
+fictional people, issuers, and data. They render without specimen watermarks.
 
 - Licenses come from Cascadia, a state that does not exist. They follow the
   AAMVA card standard's field numbering but copy no real jurisdiction's design.
 - Passports come from Utopia (`UTO`), the specimen state ICAO uses in its own
   examples. Their machine readable zones are computed to the ICAO rules.
-- Documents render without specimen watermarks.
 - License barcodes encode a plain-text specimen notice, never AAMVA data.
 - Phone numbers use 555-0100 through 555-0199, reserved for fiction, and email
   addresses use domains reserved by RFC 2606. The canon rejects anything else.

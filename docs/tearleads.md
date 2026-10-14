@@ -105,3 +105,8 @@ and the sidecar's `equipmentSha256`. Both functions hash explicit ordered field
 lists, so reordering object keys does not invalidate a current image.
 Receipts use the same
 image integrity checks as household photos and have no specimen watermark.
+
+Generated document artwork omits visible specimen marks and demo disclaimers.
+Fictional issuers, non-payment card numbers, and reserved contact data remain
+part of canon. `documentMarkings.test.ts` guards all six document faces against
+visible specimen text returning.
