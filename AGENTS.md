@@ -97,3 +97,9 @@ Shipping rules on top of the shared skills:
   directly, because `bun run` drops empty arguments. Never use `gh pr merge`.
 - **Reset**: after returning to `main`, run `sh scripts/git/installHooks.sh` so
   merged hook changes take effect.
+- **Deploy**: CI does not publish the gallery at continuity.tearleads.com.
+  After merging a change to `genesis/`, `src/site/`, `site/`, or
+  `wrangler.jsonc`, run `bun run site:deploy` from the reset `main`, then
+  prove the live index matches the build with
+  `curl -fsS https://continuity.tearleads.com/ | cmp - dist/index.html`.
+  Report a failed deploy separately from the merge.
