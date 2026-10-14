@@ -4,5 +4,6 @@
   "generatedOn": "2026-10-14",
   "imageSha256": "71179b529daaebc682d69e842f04ceecc796289e5b5dbb902f08608c92735477",
   "promptSha256": "019a88f55ae96437da2ff976258274a760de1cc7ca3b59189aa32516384a74a5",
-  "references": {}
+  "references": {},
+  "equipmentSha256": "beb5c9cd11cd8bf51bf17c2172ea3e20a9e4074fee296fc24d0fc4e74270f49e"
 }

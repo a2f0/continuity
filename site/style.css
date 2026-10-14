@@ -561,3 +561,10 @@ footer {
   height: auto;
   margin-block: 1rem;
 }
+
+.household-item figure {
+  margin: 1rem 0;
+}
+.household-item figcaption {
+  font-size: 0.85rem;
+}

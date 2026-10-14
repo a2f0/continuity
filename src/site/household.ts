@@ -19,7 +19,11 @@ export function householdGallery(gallery: Gallery): string {
           const asset = gallery.assets.find((asset) => asset.path === path);
           if (!asset?.image)
             throw new Error(`Missing household gallery image ${path}`);
-          return `<a href="${assetUrl(path)}"><img src="${assetUrl(path)}" alt="${e(title)} — photo ${index + 1}" width="${asset.image.width}" height="${asset.image.height}" loading="lazy"></a>`;
+          const label =
+            attachment.slot === "receipt-image"
+              ? "Purchase receipt"
+              : `Photo ${index + 1}`;
+          return `<figure><figcaption>${e(label)}</figcaption><a href="${assetUrl(path)}"><img src="${assetUrl(path)}" alt="${e(title)} — ${e(label)}" width="${asset.image.width}" height="${asset.image.height}" loading="lazy"></a></figure>`;
         })
         .join("");
       return `<article class="household-item"><h3>${e(title)}</h3>${serialNumber ? `<p>Serial: ${e(serialNumber)}</p>` : ""}${images}</article>`;

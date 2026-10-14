@@ -5,6 +5,7 @@ import { isIsoDate } from "../canon/dates";
 import type { World } from "../canon/types";
 import { repoPath } from "../paths";
 import { imageSize } from "../render/imageSize";
+import { equipmentFactsHash, receiptFactsHash } from "./householdFacts";
 
 function digest(bytes: string | Uint8Array): string {
   return createHash("sha256").update(bytes).digest("hex");
@@ -85,20 +86,14 @@ export function loadHouseholdPhotos(world: World, root = repoPath("assets")) {
       const provenance: unknown = JSON.parse(
         readFileSync(join(root, "household", `${id}.json`), "utf8"),
       );
-      const item = equipment.find((item) => item.receipt?.image === id);
-      const { receiptSha256 } = record(provenance) ? provenance : {};
-      if (
-        item &&
-        receiptSha256 !==
-          digest(
-            JSON.stringify({
-              receipt: item.receipt,
-              make: item.make,
-              model: item.model,
-              serialNumber: item.serialNumber,
-            }),
-          )
-      )
+      const item = equipment.find((item) => item.photos.includes(id));
+      const receiptItem = equipment.find((item) => item.receipt?.image === id);
+      const { equipmentSha256, receiptSha256 } = record(provenance)
+        ? provenance
+        : {};
+      if (item && equipmentSha256 !== equipmentFactsHash(item))
+        throw new Error(`Stale equipment facts: ${id}`);
+      if (receiptItem && receiptSha256 !== receiptFactsHash(receiptItem))
         throw new Error(`Stale receipt facts: ${id}`);
       validateProvenance(
         provenance,

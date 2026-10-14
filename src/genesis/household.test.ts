@@ -167,10 +167,12 @@ test("equipment detail photos reject replaced source images", () => {
   );
 });
 
-test("receipt photos reject a changed equipment serial", () => {
+test("receipt photos reject a changed receipt number", () => {
   const changed = world;
   const equipment = changed.device.household.equipment.map((item, index) =>
-    index === 0 ? { ...item, serialNumber: "CHANGED" } : item,
+    index === 0 && item.receipt
+      ? { ...item, receipt: { ...item.receipt, number: "CHANGED" } }
+      : item,
   );
   expect(() =>
     loadHouseholdPhotos({
@@ -181,4 +183,46 @@ test("receipt photos reject a changed equipment serial", () => {
       },
     }),
   ).toThrow("Stale receipt facts: drill-receipt");
+});
+
+test("equipment photos reject a changed model", () => {
+  const equipment = fixtureWorld.device.household.equipment.map(
+    (item, index) => (index === 0 ? { ...item, model: "CHANGED" } : item),
+  );
+  expect(() =>
+    loadHouseholdPhotos({
+      ...fixtureWorld,
+      device: {
+        ...fixtureWorld.device,
+        household: { ...fixtureWorld.device.household, equipment },
+      },
+    }),
+  ).toThrow("Stale equipment facts: drill");
+});
+
+test("reordering receipt keys does not change its facts fingerprint", () => {
+  const equipment = world.device.household.equipment.map((item) => ({
+    ...item,
+    ...(item.receipt
+      ? {
+          receipt: {
+            taxCents: item.receipt.taxCents,
+            subtotalCents: item.receipt.subtotalCents,
+            number: item.receipt.number,
+            purchasedAt: item.receipt.purchasedAt,
+            merchant: item.receipt.merchant,
+            image: item.receipt.image,
+          },
+        }
+      : {}),
+  }));
+  expect(() =>
+    loadHouseholdPhotos({
+      ...world,
+      device: {
+        ...world.device,
+        household: { ...world.device.household, equipment },
+      },
+    }),
+  ).not.toThrow();
 });

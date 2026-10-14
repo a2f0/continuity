@@ -104,7 +104,7 @@ likewise record `sourceReferences` to other household images.
    updated portrait or equipment photo as a reference. Review the result
    against canon and the updated source; do not merely refresh old hashes.
 3. Convert the accepted result with `portraitJpeg` from
-   `src/portraits/jpeg.ts` and save `assets/household/<id>.jpg`. This scales
+   `src/portraits/jpeg.ts` and save `assets/household/<id>.jpg`. This limits
    the long edge to 1536 pixels. Keep both dimensions at least 512 pixels and
    the file below 3 MiB.
 4. Record the exact final tool prompt, model, ISO `generatedOn` date,

@@ -26,6 +26,11 @@ for (const [label, patch, message] of [
     { photos: [{ ...photo, id: "drill-detail" }] },
     "conflicting photo id",
   ],
+  [
+    "duplicate person",
+    { photos: [{ ...photo, characters: ["maya-reyes", "maya-reyes"] }] },
+    "invalid family photo",
+  ],
   ["invalid id", { photos: [{ ...photo, id: "../escape" }] }, "invalid id"],
   ["duplicate id", { photos: [photo, photo] }, "duplicate id"],
   [
@@ -51,6 +56,7 @@ for (const [label, patch, message] of [
         {
           ...tool,
           id: "second-drill",
+          photos: ["second-drill-photo"],
           receipt: {
             image: "second-receipt",
             merchant: "Other",
@@ -101,3 +107,12 @@ for (const [label, patch, message] of [
     expect(check(patch)[0]).toContain(message);
   });
 }
+
+test("equipment images cannot be shared by different inventory items", () => {
+  const equipment = household.equipment.map((item, index) =>
+    index === 1 ? { ...item, photos: ["drill"] } : item,
+  );
+  expect(check({ equipment })).toEqual([
+    "household: invalid equipment photos circular-saw",
+  ]);
+});

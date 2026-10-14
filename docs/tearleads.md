@@ -97,8 +97,11 @@ Each seeded equipment item also has a photorealistic purchase receipt in its
 `receipt-image` slot. Canon owns the fictional merchant, date, receipt number,
 and integer-cent amounts. Receipt sidecars bind those facts and the item's
 make, model, and serial number with `receiptSha256`; changing them requires
-regenerating and visually checking the receipt text. Hash the UTF-8 JSON from
-`JSON.stringify({ receipt: item.receipt, make: item.make, model: item.model,
-serialNumber: item.serialNumber })` with SHA-256, preserving that key order.
+regenerating and visually checking the receipt text.
+Use `receiptFactsHash(item)` from
+`src/genesis/householdFacts.ts` to compute the fingerprint. Product photos also
+bind equipment type, make, model, and serial through `equipmentFactsHash(item)`
+and the sidecar's `equipmentSha256`. Both functions hash explicit ordered field
+lists, so reordering object keys does not invalidate a current image.
 Receipts use the same
 image integrity checks as household photos and have no specimen watermark.

@@ -29,6 +29,7 @@ export function checkHousehold(world: World): string[] {
     if (
       !photo.fileName.trim() ||
       !photo.characters.length ||
+      new Set(photo.characters).size !== photo.characters.length ||
       photo.characters.some(
         (id) => !world.characters.some((person) => person.id === id),
       )
@@ -91,6 +92,7 @@ function checkDate(value: string, asOf: string, problems: string[]): void {
 function checkEquipment(equipment: Household["equipment"]): string[] {
   const problems: string[] = [];
   const serials = new Set<string>();
+  const photoIds = new Set<string>();
   for (const item of equipment) {
     if (
       ![item.make, item.model, item.serialNumber, item.equipmentType].every(
@@ -105,9 +107,11 @@ function checkEquipment(equipment: Household["equipment"]): string[] {
     if (
       !item.photos.length ||
       new Set(item.photos).size !== item.photos.length ||
+      item.photos.some((id) => photoIds.has(id)) ||
       item.photos.some((id) => !/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u.test(id))
     )
       problems.push(`household: invalid equipment photos ${item.id}`);
+    for (const id of item.photos) photoIds.add(id);
   }
   return problems;
 }
