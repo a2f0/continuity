@@ -107,6 +107,47 @@
         "passportNumber": "UA4821937"
       },
       "kind": "passport"
+    },
+    {
+      "kind": "birth_certificate",
+      "fields": {
+        "certificateNumber": "UT-B-1991-0314-042",
+        "fullName": "Maya Elena Reyes",
+        "dateOfBirth": "1991-03-14",
+        "placeOfBirth": "Aurelia, Utopia",
+        "parentNames": "Rosa María Reyes",
+        "issuingAuthority": "Aurelia Civil Registry, Utopia",
+        "dateIssued": "1991-03-20"
+      },
+      "attachments": [
+        {
+          "file": "birth-certificate.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "birth-certificate-image"
+        }
+      ]
+    },
+    {
+      "kind": "credit_card",
+      "fields": {
+        "issuer": "Alder Grove Bank",
+        "cardNumber": "0000 0000 0000 4242",
+        "cvvCode": "000",
+        "nameOnCard": "Maya Elena Reyes",
+        "expirationDate": "2028-06"
+      },
+      "attachments": [
+        {
+          "file": "credit-card-front.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "credit-card-front-image"
+        },
+        {
+          "file": "credit-card-back.jpg",
+          "mimeType": "image/jpeg",
+          "slot": "credit-card-back-image"
+        }
+      ]
     }
   ],
   "identitySeedPhrase": "furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just spring",

@@ -42,9 +42,9 @@
       "sha256": "62102a7de028d1fc2d567a4868383f2fb6132735b984883807155a75d33ebb58"
     },
     {
-      "bytes": 22552,
+      "bytes": 23369,
       "path": "canon.json",
-      "sha256": "78d7b4e99eb6286b08c1722d7537ec714bc38612a71d3ac6a6e26e8073cf2a50"
+      "sha256": "2d09fc1a193fc903dc1b452523c26aad55146e6a3eeebd3de5f26a28b0dfe971"
     },
     {
       "bytes": 2666,
@@ -85,6 +85,21 @@
       "bytes": 345712,
       "path": "documents/marcus-bell/drivers-license-front.jpg",
       "sha256": "9b20fedc6cc636d8bf40220fbe13386e8dc1419831078ff4385ab00d9eb71b99"
+    },
+    {
+      "bytes": 403589,
+      "path": "documents/maya-reyes/birth-certificate.jpg",
+      "sha256": "976a74023dbfe3f31a250a976cfdf8d3772be1fddbb39d597a01998b9417d928"
+    },
+    {
+      "bytes": 150239,
+      "path": "documents/maya-reyes/credit-card-back.jpg",
+      "sha256": "3c12a2ce12c3fa1e42b09f70ac09aed75b2a7b68ed4bef05eb995e77eb04f852"
+    },
+    {
+      "bytes": 160020,
+      "path": "documents/maya-reyes/credit-card-front.jpg",
+      "sha256": "f6ea257a383559fd7dbb26421d975f0ce4946e10ed1d1ca9dbf2560cb34da549"
     },
     {
       "bytes": 346910,
@@ -182,6 +197,21 @@
       "sha256": "62102a7de028d1fc2d567a4868383f2fb6132735b984883807155a75d33ebb58"
     },
     {
+      "bytes": 403589,
+      "path": "tearleads/birth-certificate.jpg",
+      "sha256": "976a74023dbfe3f31a250a976cfdf8d3772be1fddbb39d597a01998b9417d928"
+    },
+    {
+      "bytes": 150239,
+      "path": "tearleads/credit-card-back.jpg",
+      "sha256": "3c12a2ce12c3fa1e42b09f70ac09aed75b2a7b68ed4bef05eb995e77eb04f852"
+    },
+    {
+      "bytes": 160020,
+      "path": "tearleads/credit-card-front.jpg",
+      "sha256": "f6ea257a383559fd7dbb26421d975f0ce4946e10ed1d1ca9dbf2560cb34da549"
+    },
+    {
       "bytes": 346910,
       "path": "tearleads/drivers-license-back.jpg",
       "sha256": "71ab03f59b76ec2dfaa74b88ada60d590fd25529d40d5c0d79826b3e7556a315"
@@ -192,9 +222,9 @@
       "sha256": "aee5aba1a7e753b9cb3e56d549be0e4e20bef4ae23870c9b83b9f201c9fb51a4"
     },
     {
-      "bytes": 369,
+      "bytes": 560,
       "path": "tearleads/expectations.json",
-      "sha256": "02aa9eb710482055aa63d1679a2f06c9ce39bb660e8ad4381f5b877ff8b299f9"
+      "sha256": "603e2c2360f091445828766f29c912157678b36b96ced402baf455fc41765ae3"
     },
     {
       "bytes": 498930,
@@ -202,9 +232,9 @@
       "sha256": "bf5d19862a5db515307086652d2172acf75cc23223b9b175261671fec06af537"
     },
     {
-      "bytes": 3666,
+      "bytes": 4799,
       "path": "tearleads/seed.json",
-      "sha256": "7ca3f1aa15a383307f167710b30d56aace5df9b8a2cd37c432192fecc1447f9a"
+      "sha256": "26eb20d11abb0801f53308ada13f812062798438e447588eb259aab2cbadc7de"
     }
   ]
 }

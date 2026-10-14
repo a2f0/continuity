@@ -1,6 +1,7 @@
 import { addYears, compareDates, isIsoDate } from "../dates";
 import { documentExpirations } from "../derive";
 import type { Character, DriversLicense, Passport, World } from "../types";
+import { checkWalletDocuments } from "./walletDocuments";
 
 const PASSPORT_NUMBER_PATTERN = /^[A-Z0-9]{1,9}$/;
 
@@ -100,6 +101,7 @@ function checkPassport(
 export function checkDocuments(world: World, character: Character): string[] {
   const { driversLicense, passport } = character.documents;
   const problems = [
+    ...checkWalletDocuments(world, character),
     ...(driversLicense
       ? checkDriversLicense(world, character, driversLicense)
       : []),

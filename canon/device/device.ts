@@ -20,5 +20,5 @@ export const device: Device = {
     { character: "marcus-bell", labels: ["Friends"] },
   ],
   notes,
-  wallet: ["drivers_license", "passport"],
+  wallet: ["drivers_license", "passport", "birth_certificate", "credit_card"],
 };

@@ -37,6 +37,9 @@ describe("document rendering", () => {
         documents.driversLicenseFront,
         documents.driversLicenseBack,
         documents.passport,
+        documents.birthCertificate,
+        documents.creditCardFront,
+        documents.creditCardBack,
       ]) {
         const size = imageSize(bytes ?? new Uint8Array());
         expect(size.mimeType).toBe("image/jpeg");

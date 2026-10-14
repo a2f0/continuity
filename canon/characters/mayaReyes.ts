@@ -49,6 +49,18 @@ export const mayaReyes: Character = {
     { to: "marcus-bell", kind: "friend" },
   ],
   documents: {
+    birthCertificate: {
+      number: "UT-B-1991-0314-042",
+      authority: "Aurelia Civil Registry, Utopia",
+      issued: "1991-03-20",
+    },
+    creditCard: {
+      issuer: "Alder Grove Bank",
+      number: "0000000000004242",
+      cvv: "000",
+      issued: "2025-06-01",
+      validityYears: 3,
+    },
     driversLicense: {
       jurisdiction: "cascadia",
       number: "R620-4183-9147",

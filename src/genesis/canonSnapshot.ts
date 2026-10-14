@@ -7,6 +7,10 @@ import {
   legalName,
   passportExpiration,
 } from "../canon/derive";
+import {
+  birthCertificateFields,
+  creditCardFields,
+} from "../canon/documentFields";
 import type { Character, World } from "../canon/types";
 import type { CharacterAssets } from "./characters";
 
@@ -14,8 +18,21 @@ import type { CharacterAssets } from "./characters";
 // want character data without running TypeScript from this repository.
 
 function documents(world: World, character: Character) {
-  const { driversLicense, passport } = character.documents;
+  const { driversLicense, passport, birthCertificate, creditCard } =
+    character.documents;
   return {
+    ...(birthCertificate
+      ? {
+          birthCertificate: birthCertificateFields(
+            world,
+            character,
+            birthCertificate,
+          ),
+        }
+      : {}),
+    ...(creditCard
+      ? { creditCard: creditCardFields(character, creditCard) }
+      : {}),
     ...(driversLicense
       ? {
           driversLicense: {

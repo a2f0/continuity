@@ -53,6 +53,14 @@ export function checkDevice(world: World, device: Device): string[] {
   if (device.wallet.includes("passport") && !owner.documents.passport) {
     problems.push(`the wallet lists a passport ${owner.id} does not hold`);
   }
+  for (const [kind, document] of [
+    ["birth_certificate", owner.documents.birthCertificate],
+    ["credit_card", owner.documents.creditCard],
+  ] as const) {
+    if (device.wallet.includes(kind) && !document) {
+      problems.push(`the wallet lists a ${kind} ${owner.id} does not hold`);
+    }
+  }
   return problems;
 }
 

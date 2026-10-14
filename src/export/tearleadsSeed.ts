@@ -8,12 +8,16 @@ import {
   passportExpiration,
   resolveNoteText,
 } from "../canon/derive";
+import {
+  birthCertificateFields,
+  creditCardFields,
+} from "../canon/documentFields";
 import type { World } from "../canon/types";
 
 // The seed tearleads' screenshot run restores. Its shape is tearleads'
 // SeedSpec (packages/app/test/screenshot-seed/seedTypes.ts); attachment paths
-// are file names beside seed.json. `avatar` on a contact is an extension the
-// current tearleads seeder ignores until it learns the "contact-avatar" slot.
+// are file names beside seed.json. Contact avatars use the "contact-avatar"
+// slot when the tearleads seeder restores the address book.
 
 interface SeedAttachment {
   readonly file: string;
@@ -53,6 +57,11 @@ export interface SeedExpectations {
     readonly imageCount: number;
   };
   readonly passport?: { readonly title: string; readonly imageCount: number };
+  readonly birthCertificate?: {
+    readonly title: string;
+    readonly imageCount: number;
+  };
+  readonly creditCard?: { readonly title: string; readonly imageCount: number };
 }
 
 export const TEARLEADS_FILES = {
@@ -60,6 +69,9 @@ export const TEARLEADS_FILES = {
   driversLicenseBack: "drivers-license-back.jpg",
   driversLicenseFront: "drivers-license-front.jpg",
   passport: "passport.jpg",
+  birthCertificate: "birth-certificate.jpg",
+  creditCardFront: "credit-card-front.jpg",
+  creditCardBack: "credit-card-back.jpg",
 } as const;
 
 function walletFiles(world: World): SeedFile[] {
@@ -106,6 +118,38 @@ function walletFiles(world: World): SeedFile[] {
         passportNumber: passport.number,
       },
       kind: "passport",
+    });
+  }
+  const { birthCertificate, creditCard } = owner.documents;
+  if (world.device.wallet.includes("birth_certificate") && birthCertificate) {
+    files.push({
+      kind: "birth_certificate",
+      fields: birthCertificateFields(world, owner, birthCertificate),
+      attachments: [
+        {
+          file: TEARLEADS_FILES.birthCertificate,
+          mimeType: "image/jpeg",
+          slot: "birth-certificate-image",
+        },
+      ],
+    });
+  }
+  if (world.device.wallet.includes("credit_card") && creditCard) {
+    files.push({
+      kind: "credit_card",
+      fields: creditCardFields(owner, creditCard),
+      attachments: [
+        {
+          file: TEARLEADS_FILES.creditCardFront,
+          mimeType: "image/jpeg",
+          slot: "credit-card-front-image",
+        },
+        {
+          file: TEARLEADS_FILES.creditCardBack,
+          mimeType: "image/jpeg",
+          slot: "credit-card-back-image",
+        },
+      ],
     });
   }
   return files;
@@ -159,7 +203,22 @@ export function buildSeedExpectations(seed: SeedSpec): SeedExpectations {
     "licenseId",
   );
   const passport = imageTitle("passport", "Passport", "passportNumber");
+  const birthCertificate = imageTitle(
+    "birth_certificate",
+    "Birth Certificate",
+    "fullName",
+  );
+  const card = seed.files.find((file) => file.kind === "credit_card");
+  const { issuer, cardNumber } = card?.fields ?? {};
+  const creditCard = card
+    ? {
+        title: `${issuer} ending in ${cardNumber?.replaceAll(/\D/g, "").slice(-4)}`,
+        imageCount: card.attachments.length,
+      }
+    : undefined;
   return {
+    ...(birthCertificate ? { birthCertificate } : {}),
+    ...(creditCard ? { creditCard } : {}),
     contact: {
       displayName: `${contact.fields.firstName} ${contact.fields.lastName}`,
     },

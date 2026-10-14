@@ -23,13 +23,9 @@ function downloads(gallery: Gallery): string {
 export function galleryPage(gallery: Gallery): string {
   const { canon } = gallery;
   const owner = canon.characters.find((person) => person.id === canon.owner);
-  const documentCount = canon.characters.reduce(
-    (count, person) =>
-      count +
-      (person.files.driversLicenseFront ? 2 : 0) +
-      (person.files.passport ? 1 : 0),
-    0,
-  );
+  const documentCount = gallery.assets.filter((asset) =>
+    asset.path.startsWith("documents/"),
+  ).length;
   return `<!doctype html>
 <html lang="en">
 <head>

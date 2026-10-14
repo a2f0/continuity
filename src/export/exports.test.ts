@@ -18,6 +18,8 @@ describe("buildTearleadsSeed", () => {
     expect(seed.files.map((file) => file.kind)).toEqual([
       "drivers_license",
       "passport",
+      "birth_certificate",
+      "credit_card",
     ]);
   });
 
@@ -58,6 +60,11 @@ describe("buildTearleadsSeed", () => {
         title: "Design review: onboarding refresh",
       },
       passport: { imageCount: 1, title: "Passport UA4821937" },
+      birthCertificate: {
+        imageCount: 1,
+        title: "Birth Certificate Maya Elena Reyes",
+      },
+      creditCard: { imageCount: 2, title: "Alder Grove Bank ending in 4242" },
     });
   });
 });
