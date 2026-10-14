@@ -52,15 +52,16 @@ inspect failures with `bun run agent:logs <path>`.
   consumers key on them.
 - Rendering must stay deterministic: no system fonts, clocks, or unseeded
   randomness in `src/render/` or `src/genesis/`. Use `seededRandom` for jitter.
-- Keep documents unmistakably fictional: fictional issuers only, a visible
-  `SPECIMEN` mark, non-AAMVA barcode payloads, 555-01XX phone numbers, and
-  reserved email domains. Do not model a real jurisdiction's or country's
-  design.
+- Use fictional people and issuers, non-AAMVA barcode payloads, 555-01XX
+  phone numbers, and reserved email domains. Do not model a real
+  jurisdiction's or country's design. Do not add specimen watermarks or
+  demo/disclaimer labels to rendered documents.
 
 ## Binary files
 
 Binary files are allowed only as `assets/fonts/*.ttf`,
-`assets/portraits/*.{jpg,png}`, and `genesis/**/*.{jpg,png}`, each at most
+`assets/portraits/*.{jpg,png}`, `assets/household/*.jpg`, and
+`genesis/**/*.{jpg,png}`, each at most
 3 MiB (`bun run lint:binary-files`). Regenerating images adds to history, so
 avoid churning renders without a reason.
 

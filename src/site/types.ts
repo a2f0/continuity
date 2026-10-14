@@ -1,3 +1,4 @@
+import type { SeedSpec } from "../export/tearleadsSeed";
 import type { canonSnapshot } from "../genesis/canonSnapshot";
 
 export type Snapshot = ReturnType<typeof canonSnapshot>;
@@ -10,6 +11,7 @@ export interface Asset {
 }
 
 export interface Gallery {
+  readonly seedFiles: SeedSpec["files"];
   readonly canon: Snapshot;
   readonly notes: readonly { readonly text: string }[];
   readonly assets: readonly Asset[];

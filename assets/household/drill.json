@@ -1,0 +1,9 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: product-mockup. Asset type: photorealistic household inventory photo for a fictional demo app. Photograph a cordless drill, dark teal and graphite molded housing with black rubber grip, silver chuck, compact battery at base, on an ordinary wooden workbench. Entire item visible, natural three-quarter angle, soft daylight, realistic material textures and slight everyday wear, clean uncluttered framing. Fictional maker text \"Alderforge\" and small model text \"AF-D18\" on a tasteful simple badge. If a serial label is visible use \"AF26-D18-004217\". No real-world brands, people, watermark, graphic overlays, collage, or illustration. Looks like a sharp photograph an owner took for their inventory. Landscape 3:2 composition.",
+  "generatedOn": "2026-10-14",
+  "imageSha256": "71179b529daaebc682d69e842f04ceecc796289e5b5dbb902f08608c92735477",
+  "promptSha256": "019a88f55ae96437da2ff976258274a760de1cc7ca3b59189aa32516384a74a5",
+  "references": {},
+  "equipmentSha256": "beb5c9cd11cd8bf51bf17c2172ea3e20a9e4074fee296fc24d0fc4e74270f49e"
+}

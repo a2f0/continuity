@@ -1,0 +1,14 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: text-localization. Edit this existing photorealistic receipt photograph. Correct only the small print defect in \"Cedar Hollow\": print those exact words with two clean lowercase l letters, normal monospaced thermal lettering. Preserve all other text, dates, receipt number WH-250823-0193, model HM-R320, serial HM25-R3-006209, amounts, layout, paper texture, folds, lighting and wooden table exactly. No watermark or specimen marks. Keep it a natural photograph.",
+  "generatedOn": "2026-10-14",
+  "imageSha256": "41139c8ab33c7886c1ca801d6d776164be8bf39c146a71ba7ab49d033e4f56fe",
+  "promptSha256": "3b3d6df35afbc24bd623e87cc5ff307a141272689e7c2ae9e140ee43c99b7438",
+  "references": {},
+  "receiptSha256": "e7e2ca6adbf8a49282b173170e06788e7b10f33b9d42c69f208157e454fbee8a",
+  "previousGeneration": {
+    "model": "codex-image-gen",
+    "prompt": "Use case: photorealistic-natural. Asset type: receipt photograph for a fictional household inventory demo. A real-looking smartphone photograph of one printed paper receipt resting on a light oak dining table. Receipt is entirely visible with narrow margins, almost top-down with slight natural perspective; portrait 2:3 composition. Soft daylight, genuine off-white thermal-paper fiber, subtly curled edge and one light fold, restrained everyday wear, sharp readable black monospaced thermal print. Looks like an owner photographed a receipt, not a flat digital graphic or a render. No hands, no product, no extra objects. This is a fictional store and fictional product. Print only this exact receipt content, with sensible receipt layout and right-aligned USD prices:\nWILLOW HOME\nCedar Hollow\nPURCHASE RECEIPT\n2025-08-23\nReceipt WH-250823-0193\n\nBottom-freezer refrigerator\nHearthmere HM-R320\nSerial: HM25-R3-006209\nQty 1                 $1099.00\n\nSubtotal              $1099.00\nTax (8%)              $87.92\nTOTAL                 $1186.92\n\nPAID - CARD\nThank you for shopping with us.\nKeep this receipt for your records.\nConstraints: keep every model, serial, receipt number, date and amount exact; legible sharp text; no actual card number, no real brands, no barcode, no watermark, no specimen/sample/demo marks, no graphic overlays or collage. Natural photographed paper and shadows are essential.",
+    "imageSha256": "c9c445f3c0ee64cbbb5c8582ce5606865ecd4dd7037d12f5c04175f9c96bbdea"
+  }
+}

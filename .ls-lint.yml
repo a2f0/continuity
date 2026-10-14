@@ -19,6 +19,10 @@ ls:
   genesis:
     .*: kebab-case
 
+  # Household assets use canonical image IDs.
+  assets/household:
+    .*: kebab-case
+
   # Portrait files are named after character IDs.
   assets/portraits:
     .*: kebab-case

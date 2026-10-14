@@ -4,7 +4,6 @@ import {
   grayscaleFilter,
   laminateGradient,
   paperGradient,
-  specimenMark,
 } from "../card";
 import { el } from "../svg";
 import { background, header, portraitBlocks } from "./artwork";
@@ -52,7 +51,6 @@ export function passportDataPage(input: PassportInput): CardArt {
       dataFields(input),
       signatureBlock(input),
       machineReadableZone(input),
-      specimenMark(64, 42, 13),
       el("rect", {
         width: DATA_PAGE.width,
         height: DATA_PAGE.height,

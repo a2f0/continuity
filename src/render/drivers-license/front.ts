@@ -1,6 +1,7 @@
 import { formatUsDate } from "../../canon/dates";
 import type { IsoDate } from "../../canon/types";
 import {
+  ACCENT_RED,
   CARD,
   type CardArt,
   cardClip,
@@ -8,9 +9,7 @@ import {
   grayscaleFilter,
   laminateGradient,
   paperGradient,
-  SPECIMEN_RED,
   signature,
-  specimenMark,
 } from "../card";
 import { FONT } from "../fonts";
 import { microtext, waveField } from "../guilloche";
@@ -163,11 +162,11 @@ function badges(input: LicenseInput): string {
     badgesText.push(
       el("path", {
         d: `M70.6 ${num(y - 0.6)}c-0.5-0.9-1.9-0.7-1.9 0.4c0 0.9 1.2 1.6 1.9 2.2c0.7-0.6 1.9-1.3 1.9-2.2c0-1.1-1.4-1.3-1.9-0.4z`,
-        fill: SPECIMEN_RED,
+        fill: ACCENT_RED,
       }),
       text(73, y + 0.9, "DONOR", {
         family: FONT.sans,
-        fill: SPECIMEN_RED,
+        fill: ACCENT_RED,
         size: 1.6,
         weight: 700,
       }),
@@ -242,7 +241,6 @@ export function driversLicenseFront(input: LicenseInput): CardArt {
       physicalFields(input),
       ghostImage(input),
       badges(input),
-      specimenMark(46, 37, 8.6),
       el("rect", {
         width: CARD.width,
         height: CARD.height,

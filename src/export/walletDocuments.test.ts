@@ -1,9 +1,10 @@
 import { expect, test } from "bun:test";
 import { world } from "../../canon/world";
+import { loadHouseholdPhotos } from "../genesis/household";
 import { buildTearleadsSeed } from "./tearleadsSeed";
 
 test("birth certificates derive identity and parent names from canon", () => {
-  const seed = buildTearleadsSeed(world);
+  const seed = buildTearleadsSeed(world, loadHouseholdPhotos(world));
   const certificate = seed.files.find(
     (file) => file.kind === "birth_certificate",
   );
@@ -28,14 +29,14 @@ test("birth certificates derive identity and parent names from canon", () => {
     ),
   };
   const { parentNames } =
-    buildTearleadsSeed(renamed).files.find(
+    buildTearleadsSeed(renamed, loadHouseholdPhotos(world)).files.find(
       (file) => file.kind === "birth_certificate",
     )?.fields ?? {};
   expect(parentNames).toBe("Rosalind Reyes");
 });
 
 test("credit cards export fields and both attachment slots used by Tearleads", () => {
-  const card = buildTearleadsSeed(world).files.find(
+  const card = buildTearleadsSeed(world, loadHouseholdPhotos(world)).files.find(
     (file) => file.kind === "credit_card",
   );
   expect(card?.fields).toEqual({
@@ -52,8 +53,21 @@ test("credit cards export fields and both attachment slots used by Tearleads", (
 });
 
 test("wallet selection controls exported sample documents", () => {
-  expect(
-    buildTearleadsSeed({ ...world, device: { ...world.device, wallet: [] } })
-      .files,
-  ).toEqual([]);
+  const photos = loadHouseholdPhotos(world);
+  const full = buildTearleadsSeed(world, photos);
+  const empty = buildTearleadsSeed(
+    { ...world, device: { ...world.device, wallet: [] } },
+    photos,
+  );
+  expect(empty.files).toEqual(
+    full.files.filter(
+      (file) =>
+        ![
+          "drivers_license",
+          "passport",
+          "birth_certificate",
+          "credit_card",
+        ].includes(file.kind),
+    ),
+  );
 });

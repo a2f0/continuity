@@ -38,6 +38,7 @@ export function readGallery(root: string): Gallery {
   ) as SeedSpec;
   return {
     canon,
+    seedFiles: seed.files,
     notes: seed.notes,
     assets: [...assets, { path: "manifest.json", bytes: manifestBytes.length }],
   };

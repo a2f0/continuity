@@ -1,0 +1,12 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: product-mockup. Asset type: second inventory photo of the same fictional drill. Reference image shows the exact Alderforge AF-D18 cordless drill to preserve. Create a photorealistic close-up photograph from a lower angle of the drill's handle and attached battery on the same wooden workbench, with the model badge and the white serial-number label in focus. Exact brand \"Alderforge\", exact model \"AF-D18\", exact serial \"AF26-D18-004217\". Preserve the teal/graphite housing, grip shape, battery, realistic wear and natural daylight. One photograph, no collage, no graphic overlay, no people or watermark. Landscape 3:2.",
+  "generatedOn": "2026-10-14",
+  "imageSha256": "88a710e4020a2677efaa75bb978cce81ceb00cc207b1014145ffb5df2e6c037d",
+  "promptSha256": "db78fc4ed35275d25c339e8dde279336203b20061910ab138443eedb5a1c18c0",
+  "references": {},
+  "sourceReferences": {
+    "drill": "71179b529daaebc682d69e842f04ceecc796289e5b5dbb902f08608c92735477"
+  },
+  "equipmentSha256": "beb5c9cd11cd8bf51bf17c2172ea3e20a9e4074fee296fc24d0fc4e74270f49e"
+}

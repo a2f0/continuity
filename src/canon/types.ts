@@ -3,6 +3,8 @@
 // can be computed from those facts (ages, expiration dates, MRZ lines, display
 // names) is derived in derive.ts instead of stored, so it cannot drift.
 
+import type { Household } from "./householdTypes";
+
 /** A calendar date written as YYYY-MM-DD. */
 export type IsoDate = string;
 
@@ -261,6 +263,7 @@ export type WalletDocument =
 
 /** The owner's device: what a fresh tearleads install is seeded with. */
 export interface Device {
+  readonly household: Household;
   readonly owner: string;
   readonly tearleads: {
     readonly backupPassword: string;

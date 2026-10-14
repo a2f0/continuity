@@ -548,3 +548,23 @@ footer {
     scroll-behavior: auto;
   }
 }
+
+.household-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 2rem;
+}
+
+.household-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block: 1rem;
+}
+
+.household-item figure {
+  margin: 1rem 0;
+}
+.household-item figcaption {
+  font-size: 0.85rem;
+}

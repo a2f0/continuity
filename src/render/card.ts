@@ -6,13 +6,13 @@ import {
   SIGNATURE_FONT_FAMILY,
   SIGNATURE_FONT_SCALE,
 } from "./fonts";
-import { el, fitSize, num, type TextStyle, text } from "./svg";
+import { el, fitSize, type TextStyle, text } from "./svg";
 
 // Shared pieces for ID-1 cards (85.60 x 53.98 mm, ISO/IEC 7810).
 
 export const CARD = { width: 85.6, height: 53.98, radius: 3.18 } as const;
 
-export const SPECIMEN_RED = "#a3232b";
+export const ACCENT_RED = "#a3232b";
 
 const SIGNATURE_INK = "#1d2340";
 
@@ -142,22 +142,6 @@ export function inlineField(
   return (
     text(x, y, label, styles.label) +
     text(x + labelWidth, y, value, { ...styles.value, ...valueStyle })
-  );
-}
-
-export function specimenMark(cx: number, cy: number, size: number): string {
-  return el(
-    "g",
-    { transform: `rotate(-17 ${num(cx)} ${num(cy)})` },
-    text(cx, cy, "SPECIMEN", {
-      anchor: "middle",
-      family: FONT.sans,
-      fill: SPECIMEN_RED,
-      letterSpacing: size * 0.12,
-      opacity: 0.17,
-      size,
-      weight: 700,
-    }),
   );
 }
 

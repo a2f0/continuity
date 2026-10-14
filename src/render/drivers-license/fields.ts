@@ -5,7 +5,7 @@ import {
   givenNames,
 } from "../../canon/derive";
 import type { Character } from "../../canon/types";
-import { fieldStyles, inlineField, SPECIMEN_RED } from "../card";
+import { ACCENT_RED, fieldStyles, inlineField } from "../card";
 import { FONT } from "../fonts";
 import { fitSize, text, upper } from "../svg";
 import type { LicenseInput } from "./types";
@@ -28,7 +28,7 @@ export function identityFields(input: LicenseInput): string {
   return [
     inlineField(x, 15.2, "4d DLN", license.number, styles, {
       family: FONT.mono,
-      fill: SPECIMEN_RED,
+      fill: ACCENT_RED,
       size: 2.6,
     }),
     inlineField(68.5, 15.2, "9 CLASS", license.class, styles, { size: 2.4 }),
@@ -61,7 +61,7 @@ export function physicalFields(input: LicenseInput): string {
   const restrictions = license.restrictions?.join("") || "NONE";
   return [
     inlineField(x, 32.6, "3 DOB", formatUsDate(character.birthDate), styles, {
-      fill: SPECIMEN_RED,
+      fill: ACCENT_RED,
       size: 2.9,
       weight: 700,
     }),

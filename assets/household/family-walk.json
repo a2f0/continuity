@@ -1,0 +1,11 @@
+{
+  "model": "codex-image-gen",
+  "prompt": "Use case: photorealistic-natural. Asset type: fictional family photo for a personal photo library. Reference images are fictional AI-generated Maya Reyes and her husband Daniel Okafor. Create a candid landscape photograph of the same couple on a September 2026 weekend walk on the wooded Port Alder waterfront with their black-and-white border collie mix Pepper. Maya is 35 with long dark wavy hair and warm olive-tan skin; Daniel is 36 with deep brown skin, close-cropped hair, short beard and tortoiseshell glasses. Preserve their reference faces. They wear casual light jackets, stand close together smiling, dog on a leash beside them. Natural overcast coastal daylight, real skin and fabric texture, believable anatomy, authentic family snapshot, medium wide composition. No additional people, text, watermark, collage, illustration or synthetic sheen. Landscape 3:2.",
+  "generatedOn": "2026-10-14",
+  "imageSha256": "62e13a006318761232a60fc6bf778d019a5bf73d89316a0ebfb72213c72bdebc",
+  "promptSha256": "2c6aa0a830211c357c3b6f96d5d578455d83a77332f5d8c0827fd0453853680e",
+  "references": {
+    "maya-reyes": "9b4d2e3f8fea7e36661c9efa1f255368b6ce4e3f1f02fde31a3f71b1f156cbc5",
+    "daniel-okafor": "6832d0fe72dec3af667bc0a02b0395c3beba14f0396e7990cff21b5dce6f01b9"
+  }
+}

@@ -2,7 +2,8 @@
 
 Canonical fictional characters, and the genesis data rendered from them:
 driver's licenses, passports, birth certificates, credit cards, contact cards,
-avatars, and notes that seed
+avatars, family photos, household inventory, health trackers, and notes that
+seed
 [tearleads](https://github.com/a2f0/tearleads) for screenshots, demos, and
 import testing.
 
@@ -41,6 +42,7 @@ bun run check               # everything CI runs
 | `src/site/`, `site/` | Static asset gallery builder, stylesheet, and headers |
 | `assets/fonts/` | Vendored OFL and Apache fonts, with their licenses |
 | `assets/portraits/` | One canonical portrait per character, with provenance |
+| `assets/household/` | Family and equipment photos, with generation provenance |
 | `genesis/` | Generated output; never edit it by hand |
 
 ## Generated output
@@ -70,14 +72,13 @@ and maintained.
 
 ## Fiction, not forgery
 
-The documents are realistic enough for screenshots and import testing, and
-designed so that none of them can pass for a real one:
+The documents use realistic layouts for screenshots and import testing, with
+fictional people, issuers, and data. They render without specimen watermarks.
 
 - Licenses come from Cascadia, a state that does not exist. They follow the
   AAMVA card standard's field numbering but copy no real jurisdiction's design.
 - Passports come from Utopia (`UTO`), the specimen state ICAO uses in its own
   examples. Their machine readable zones are computed to the ICAO rules.
-- Every document carries a visible `SPECIMEN` mark.
 - License barcodes encode a plain-text specimen notice, never AAMVA data.
 - Phone numbers use 555-0100 through 555-0199, reserved for fiction, and email
   addresses use domains reserved by RFC 2606. The canon rejects anything else.

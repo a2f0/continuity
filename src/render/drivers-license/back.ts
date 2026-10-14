@@ -2,14 +2,13 @@ import { formatUsDate } from "../../canon/dates";
 import { givenNames } from "../../canon/derive";
 import { code128, pdf417, quietZone } from "../barcode";
 import {
+  ACCENT_RED,
   CARD,
   type CardArt,
   cardClip,
   grainFilter,
   laminateGradient,
   paperGradient,
-  SPECIMEN_RED,
-  specimenMark,
 } from "../card";
 import { FONT } from "../fonts";
 import { microtext } from "../guilloche";
@@ -83,7 +82,7 @@ function finePrint(input: LicenseInput): string {
   const donorLine = license.donor
     ? text(4.2, 38.4, "ORGAN AND TISSUE DONOR — REGISTERED", {
         family: FONT.sans,
-        fill: SPECIMEN_RED,
+        fill: ACCENT_RED,
         size: 1.4,
         weight: 700,
       })
@@ -145,7 +144,6 @@ export function driversLicenseBack(input: LicenseInput): CardArt {
           weight: 500,
         },
       ),
-      specimenMark(43, 30, 8.6),
       el("rect", {
         width: CARD.width,
         height: CARD.height,
