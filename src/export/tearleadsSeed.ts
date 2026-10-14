@@ -16,8 +16,8 @@ import type { World } from "../canon/types";
 
 // The seed tearleads' screenshot run restores. Its shape is tearleads'
 // SeedSpec (packages/app/test/screenshot-seed/seedTypes.ts); attachment paths
-// are file names beside seed.json. `avatar` on a contact is an extension the
-// current tearleads seeder ignores until it learns the "contact-avatar" slot.
+// are file names beside seed.json. Contact avatars use the "contact-avatar"
+// slot when the tearleads seeder restores the address book.
 
 interface SeedAttachment {
   readonly file: string;

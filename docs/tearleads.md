@@ -11,64 +11,43 @@ attachments.
 `packages/app/test/screenshot-seed/seedTypes.ts`:
 
 - `password` and `identitySeedPhrase`: the backup password and the BIP39 phrase
-  the seeded identity is derived from. Both come from
-  `canon/device/device.ts`.
+  the seeded identity is derived from. Both come from `canon/device/device.ts`.
 - `contacts`: the owner's address book as `firstName`, `lastName`, and
-  `nickname` fields.
+  `nickname` fields, with an `avatar` attachment for the `contact-avatar` slot.
 - `notes`: the owner's notes.
-- `files`: the owner's `drivers_license` (slots `front` and `back`) and
-  `passport` (slot `passport-image`), with the fields tearleads defines.
+- `files`: the owner's wallet documents, with the fields tearleads defines.
 
-Attachment `file` values are names beside `seed.json`. Each contact also
-carries an `avatar` attachment that today's seeder ignores, until it learns the
-`contact-avatar` slot.
+| Kind | Attachment slots |
+| --- | --- |
+| `drivers_license` | `front`, `back` (resolved by the seeder) |
+| `passport` | `passport-image` |
+| `birth_certificate` | `birth-certificate-image` |
+| `credit_card` | `credit-card-front-image`, `credit-card-back-image` |
+
+Attachment `file` values are names beside `seed.json`. Birth certificates
+resolve the holder's name, birth date, birthplace, and parent names from canon.
+Credit cards resolve the cardholder name and expiration month from canon;
+their non-payment numbers start with `0000` and the specimen CVV is `000`.
 
 `genesis/tearleads/expectations.json` lists the strings the screenshot run
 asserts on: a contact's display name, the first note's title and body line,
-and the license and passport titles with their image counts.
-
-## Verified
-
-tearleads' own `buildSeedArtifact` builds a backup from this output unchanged
-(140 rows and 3 blobs at tearleads `a9f4ba2d2`): the license front and back,
-and the passport image.
+and each wallet document's title and image count. Optional wallet kinds are
+omitted when the device does not select them.
 
 ## Adopting it in tearleads
 
-1. Pin this repository by commit, as tearleads pins agent-tool:
+Update the commit pin for `@a2f0/continuity` in tearleads' root `package.json`
+catalog and run `bun install`. Bun records the commit in `bun.lock`; rendered
+specimens remain in this package instead of being copied into tearleads' Git
+history.
 
-   ```json
-   {
-     "devDependencies": {
-       "@a2f0/continuity": "github:a2f0/continuity#<full-commit-sha>"
-     }
-   }
-   ```
+The seeder reads `genesis/tearleads/seed.json` through package resolution and
+loads attachments relative to that file. Its `continuitySeed.test.ts` contract
+test checks document titles and image counts through the real SDK and encrypted
+backup path. The capture runner reads `expectations.json` and waits for the
+restored images to decode.
 
-   Bun records the commit and integrity in `bun.lock`, and no binary file
-   enters tearleads' repository.
-
-2. Point `buildScreenshotSeed.ts` at the package instead of its local fixtures:
-
-   ```ts
-   const SPEC_PATH = Bun.resolveSync(
-     "@a2f0/continuity/genesis/tearleads/seed.json",
-     import.meta.dir,
-   );
-   const FIXTURES_DIR = dirname(SPEC_PATH);
-   ```
-
-   Then delete `fixtures/seed.json` and the two SVG license fixtures.
-
-3. In `packages/app-web/screenshots/capture.spec.ts`, read the asserted
-   strings from `@a2f0/continuity/genesis/tearleads/expectations.json`
-   instead of hard-coding "Alan Turing", "Meeting notes", and
-   "Driver's License S123-4567-8901".
-
-4. Optionally teach `buildSeedArtifact` to attach `contact.avatar` to the
-   `contact-avatar` slot, and add the passport to the screenshot captures.
-
-5. Replace the private `.test_files/` documents with
-   `genesis/documents/maya-reyes/*.jpg` and `genesis/contacts/contacts.csv`.
-
-To update, move the pin to a newer commit and run `bun install`.
+Run `bun run build:website` in tearleads to regenerate the backup, capture the
+app, and stage the screenshots into the website. When adding a wallet kind,
+register its projector and editor in tearleads before adopting the new pin,
+and add its detail view to the screenshot capture and website gallery.
