@@ -139,3 +139,5 @@ are disabled.
 Repository conventions, validation commands, and shipping rules are in
 [AGENTS.md](AGENTS.md). PRs ship with the
 [`@a2f0/agent-tool`](https://github.com/a2f0/agent-tool) skills.
+See [dependency maintenance](docs/dependency-upgrades.md) for upgrade checks
+and active compatibility constraints.
