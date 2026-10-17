@@ -34,12 +34,9 @@ repository-controlled; that narrows exposure without resolving the advisories.
 
 ## Wrangler
 
-Wrangler remains at 4.123.0 until a candidate has a complete non-destructive
-deployment preview. Its exact Miniflare dependency retains Sharp 0.35.2 and
-Undici 7.29.0 with unresolved advisories; upgrading only those nested pins
-requires compatibility tests for the actual Miniflare integrations.
-See [Sharp's advisory](https://github.com/advisories/GHSA-wq5f-xc86-pv6w)
-and [Undici's security advisories](https://github.com/nodejs/undici/security/advisories).
+Update Wrangler with its exact Miniflare dependency as one compatibility group.
+Do not override nested native or network dependencies independently without
+exercising their actual Miniflare integrations.
 
 The gallery Worker is `tearleads-continuity`; its hostname is managed in
 tearleads' Terraform stack. Before changing Wrangler, verify the account,
