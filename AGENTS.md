@@ -7,6 +7,9 @@ attribution footers. Do not create GitHub issues without an explicit request.
 
 ## Validation
 
+For dependency changes, use the managed `update-dependencies` skill and
+[dependency maintenance guide](docs/dependency-upgrades.md).
+
 - `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed and
   project skills, binary placement, Knip, and TypeScript.
 - `bun run check`: `check:fast`, tests, canon consistency, and a full re-render
