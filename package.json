@@ -1,6 +1,6 @@
 {
   "name": "@a2f0/continuity",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Canonical fictional characters and the genesis data rendered from them",
   "license": "UNLICENSED",
   "type": "module",
