@@ -10,6 +10,14 @@ The published package contains genesis data only. Pack it and verify a Bun
 consumer can resolve its exported manifest and assets before shipping. Keep
 run-specific inventories, audits, and validation results in the upgrade PR.
 
+## Bun lockfile format
+
+Bun 1.4 writes format 3 for
+[nested or version-scoped overrides](https://bun.sh/docs/pm/overrides).
+Removing the last such override lets the same pinned Bun write format 2.
+Let Bun choose the format and verify a frozen install leaves the lock unchanged;
+do not edit the format number by hand.
+
 ## Markdown tooling
 
 Markdownlint owns Markdown formatting. Biome's Markdown formatter stays
