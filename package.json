@@ -1,6 +1,6 @@
 {
   "name": "@a2f0/continuity",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Canonical fictional characters and the genesis data rendered from them",
   "license": "UNLICENSED",
   "type": "module",
@@ -52,10 +52,10 @@
     "*.md": "bun --bun x markdownlint-cli2 --fix"
   },
   "devDependencies": {
-    "@a2f0/agent-tool": "0.1.15",
-    "@biomejs/biome": "2.5.15",
-    "@commitlint/cli": "21.2.3",
-    "@commitlint/config-conventional": "21.2.3",
+    "@a2f0/agent-tool": "0.1.17",
+    "@biomejs/biome": "2.6.2",
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
     "@ls-lint/ls-lint": "2.3.2",
     "@resvg/resvg-js": "2.6.2",
     "@scure/bip39": "2.4.0",
@@ -63,15 +63,10 @@
     "@types/bun": "1.4.3",
     "bwip-js": "4.11.4",
     "jpeg-js": "0.4.4",
-    "knip": "6.41.0",
+    "knip": "6.42.1",
     "lint-staged": "17.6.0",
-    "markdownlint-cli2": "0.23.3",
+    "markdownlint-cli2": "0.24.0",
     "typescript": "7.0.2",
-    "wrangler": "4.151.1"
-  },
-  "overrides": {
-    "markdownlint-cli2@0.23.3": {
-      "smol-toml": "1.9.1"
-    }
+    "wrangler": "4.151.3"
   }
 }

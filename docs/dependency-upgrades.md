@@ -10,16 +10,22 @@ The published package contains genesis data only. Pack it and verify a Bun
 consumer can resolve its exported manifest and assets before shipping. Keep
 run-specific inventories, audits, and validation results in the upgrade PR.
 
+## Bun lockfile format
+
+Bun 1.4 writes format 3 for
+[nested or version-scoped overrides](https://bun.sh/docs/pm/overrides).
+Removing the last such override lets the same pinned Bun write format 2.
+Let Bun choose the format and verify a frozen install leaves the lock unchanged;
+do not edit the format number by hand.
+
 ## Markdown tooling
 
-`markdownlint-cli2@0.23.3` pins `smol-toml@1.8.0`, affected by
-[quadratic TOML parsing](https://github.com/advisories/GHSA-r4xh-jqrq-34v2).
-Its scoped override selects the fixed 1.9.1 patch. Recheck actual Markdownlint
-TOML configuration loading and large flat-key parsing after changing it.
-Remove the override when the owner selects a fixed release and those checks
-and the dependency audit pass.
+Markdownlint owns Markdown formatting. Biome's Markdown formatter stays
+disabled because its list spacing conflicts with Markdownlint and it would
+rewrite managed skills. Revisit only when both tools agree and managed skills
+remain byte for byte unchanged after the full validation gate.
 
-Markdownlint also brings two unresolved advisory groups:
+Markdownlint brings two unresolved advisory groups:
 
 - `micromatch` uses `braces@3.0.3`, for which
   [the stack-exhaustion advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm)
