@@ -35,6 +35,7 @@ export function galleryPage(gallery: Gallery, tracking = false): string {
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="description" content="Continuity: the fictional cast, specimen documents, and seed data behind tearleads.">
   <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f5f5f3">
   <title>Continuity — tearleads</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">

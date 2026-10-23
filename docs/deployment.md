@@ -40,10 +40,16 @@ are disabled.
 ## Verification
 
 After an authorized deployment from reset `main`, prove the live index matches
-the built artifact:
+the built artifact, and that the page and its assets still carry the
+`noindex` header. Tests check `_headers` in the build; only the live response
+shows that Cloudflare applied it.
 
 ```sh
 curl -fsS https://continuity.tearleads.com/ | cmp - dist/index.html
+for page in / /genesis/manifest.json; do
+  curl -fsSI "https://continuity.tearleads.com$page" |
+    grep -i '^x-robots-tag: noindex' || echo "missing noindex: $page"
+done
 ```
 
 CI does not publish the gallery. The automatic shipping obligation applies only
