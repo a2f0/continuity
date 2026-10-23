@@ -36,7 +36,9 @@ export function galleryPage(gallery: Gallery, tracking = false): string {
   <meta name="description" content="Continuity: the fictional cast, specimen documents, and seed data behind tearleads.">
   <meta name="color-scheme" content="light">
   <title>Continuity — tearleads</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/style.css">
   ${tracking ? '<script type="module" src="/click-tracking.js"></script>' : ""}
 </head>

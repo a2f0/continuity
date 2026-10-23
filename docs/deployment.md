@@ -7,6 +7,10 @@ Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` for deployment, or use
 Wrangler's authenticated session. The gallery is static HTML and CSS, built
 from the committed `genesis/` snapshot; run `bun run check` before publishing.
 `src/site/` builds the page and `site/` contains its stylesheet and headers.
+The build renders `favicon.svg`, `favicon.ico`, and `apple-touch-icon.png` from
+`assets/brand/logo.svg` with the `favicons` target in `agent-tool.json`
+(`agent-tool images build favicons --out dist`); rendered icons are never
+committed.
 
 The production gallery initializes `@a2f0/ct-client` explicitly for clicks,
 with site `continuity`, app `gallery`, and environment `production`. Its small
@@ -43,4 +47,5 @@ curl -fsS https://continuity.tearleads.com/ | cmp - dist/index.html
 ```
 
 CI does not publish the gallery. The automatic shipping obligation applies only
-to changes in `genesis/`, `src/site/`, `site/`, or `wrangler.jsonc`.
+to changes in `genesis/`, `src/site/`, `site/`, `assets/brand/`, the `images`
+section of `agent-tool.json`, or `wrangler.jsonc`.

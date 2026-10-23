@@ -42,6 +42,7 @@ bun run check               # everything CI runs
 | `src/genesis/` | Builds `genesis/` and compares it with what is on disk |
 | `src/portraits/` | Portrait prompts, provenance, and image generation |
 | `src/site/`, `site/` | Static asset gallery builder, stylesheet, and headers |
+| `assets/brand/` | The logo SVG that the gallery's favicons are rendered from |
 | `assets/fonts/` | Vendored OFL and Apache fonts, with their licenses |
 | `assets/portraits/` | One canonical portrait per character, with provenance |
 | `assets/household/` | Family and equipment photos, with generation provenance |
