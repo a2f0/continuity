@@ -52,18 +52,12 @@ async function openGallery(
       get: () => setting === "automation",
     });
     Object.defineProperty(Navigator.prototype, "globalPrivacyControl", {
-      get: () => setting === "gpc",
+      get: () => setting !== "none",
     });
     Object.defineProperty(Navigator.prototype, "doNotTrack", {
       get: () => (setting === "dnt" ? "1" : null),
     });
     if (setting === "saved") localStorage.setItem("ct:opt-out", "1");
-    if (setting === "extension") {
-      document.addEventListener("DOMContentLoaded", () => {
-        document.documentElement.setAttribute("data-ct-disabled", "");
-        document.dispatchEvent(new Event("ct:opt-out-change"));
-      });
-    }
   }, privacy);
   await context.route("**/*", async (route) => {
     const request = route.request();
@@ -88,12 +82,19 @@ async function openGallery(
       return;
     }
     await route.fulfill({
-      body: Buffer.from(await file.arrayBuffer()),
+      body:
+        url.pathname === "/" && privacy === "extension"
+          ? (await file.text()).replace(
+              '<html lang="en">',
+              '<html lang="en" data-ct-disabled>',
+            )
+          : Buffer.from(await file.arrayBuffer()),
       contentType: file.type,
       headers,
     });
   });
   const page = await context.newPage();
+  await page.clock.install();
   await page.goto(`${site}/?private=secret#sensitive`, { waitUntil: "load" });
   return { context, page, batches };
 }
@@ -126,13 +127,60 @@ test("trusted clicks flush with gallery attribution and GPC override", async () 
   }
 }, 15_000);
 
+test("download, navigation, and external links omit text and destinations", async () => {
+  const { context, page, batches } = await openGallery("gpc");
+  try {
+    // Keep trusted link clicks on the page so all three can flush together.
+    await page.evaluate(() =>
+      document.addEventListener("click", (event) => event.preventDefault()),
+    );
+    await page.locator("#files a[download]").first().click();
+    await page.locator('nav a[href="#cast"]').click();
+    await page
+      .locator('footer a[href="https://github.com/a2f0/continuity"]')
+      .click();
+    const sent = page.waitForResponse(endpoint);
+    await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
+    await sent;
+    expect(batches).toHaveLength(1);
+    expect(batches[0]?.events).toHaveLength(3);
+    for (const event of batches[0]?.events ?? []) {
+      expect(event).toMatchObject({
+        app: "gallery",
+        page: "/",
+        target: "a",
+        label: null,
+      });
+      expect(Object.keys(event).sort()).toEqual([
+        "app",
+        "id",
+        "label",
+        "page",
+        "target",
+        "timestamp",
+      ]);
+    }
+    for (const value of [
+      "genesis/",
+      "#cast",
+      "github.com",
+      "Source on GitHub",
+      "Download manifest",
+    ]) {
+      expect(JSON.stringify(batches)).not.toContain(value);
+    }
+  } finally {
+    await context.close();
+  }
+}, 15_000);
+
 for (const privacy of ["dnt", "extension", "saved", "automation"] as const) {
   test(`${privacy} prevents collection despite the GPC override`, async () => {
     const { context, page, batches } = await openGallery(privacy);
     try {
       await page.locator("h1").click();
       await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
-      await page.waitForTimeout(200);
+      await page.clock.runFor(6_000);
       expect(batches).toEqual([]);
     } finally {
       await context.close();
@@ -149,7 +197,7 @@ test("the extension clears clicks queued before opting out", async () => {
       document.dispatchEvent(new Event("ct:opt-out-change"));
       window.dispatchEvent(new Event("pagehide"));
     });
-    await page.waitForTimeout(200);
+    await page.clock.runFor(6_000);
     expect(batches).toEqual([]);
   } finally {
     await context.close();
@@ -162,7 +210,7 @@ for (const site of ["http://localhost:8787", "https://preview.example.com"]) {
     try {
       await page.locator("h1").click();
       await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
-      await page.waitForTimeout(200);
+      await page.clock.runFor(6_000);
       expect(batches).toEqual([]);
     } finally {
       await context.close();
@@ -174,9 +222,10 @@ test("default preview builds are inert even on the production host", async () =>
   const { context, page, batches } = await openGallery("none", origin, preview);
   try {
     expect(await page.locator("script").count()).toBe(0);
+    expect(await page.locator("#privacy").count()).toBe(0);
     await page.locator("h1").click();
     await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
-    await page.waitForTimeout(200);
+    await page.clock.runFor(6_000);
     expect(batches).toEqual([]);
   } finally {
     await context.close();

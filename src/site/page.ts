@@ -63,13 +63,17 @@ export function galleryPage(gallery: Gallery, tracking = false): string {
       <div class="download-intro"><p>Portraits, specimen documents, contact exports, and the tearleads seed. Open an image above to inspect it, or download any original below.</p><a class="text-link" href="${assetUrl("manifest.json")}" download>Download manifest <span aria-hidden="true">↓</span></a></div>
       <ul class="file-list">${downloads(gallery)}</ul>
     </section>
-    <section id="privacy" aria-labelledby="privacy-title"><h2 id="privacy-title">Click analytics</h2>
+    ${
+      tracking
+        ? `<section id="privacy" aria-labelledby="privacy-title"><h2 id="privacy-title">Click analytics</h2>
       <p>This gallery uses CT, operated by Tearleads, LLC, to understand clicks. CT records the time, element type, gallery name, and production environment. It does not record page text, form values, link destinations, query strings, or fragments. The page is always recorded as <code>/</code>.</p>
       <p>The collector receives your IP address and approximate country, region, and city from Cloudflare. Click records are kept for 90 days and are available only through an authenticated dashboard.</p>
       <p>This gallery overrides Global Privacy Control. Do Not Track, the saved CT opt-out, and the <a href="https://github.com/a2f0/ct/tree/main/packages/extension">CT browser extension</a> still stop collection. Automated browsers are excluded. See <a href="https://github.com/a2f0/ct/blob/main/docs/privacy.md">CT privacy and opt-out instructions</a>.</p>
-    </section>
+    </section>`
+        : ""
+    }
   </main>
-  <footer><a class="wordmark" href="#top">continuity<span>/ tearleads</span></a><p class="footer-caption">Fictional by design. Consistent by construction.</p><a href="https://github.com/a2f0/continuity">Source on GitHub <span aria-hidden="true">↗</span></a></footer>
+  <footer><a class="wordmark" href="#top">continuity<span>/ tearleads</span></a><p class="footer-caption">Fictional by design. Consistent by construction.</p>${tracking ? '<a href="#privacy">Click analytics</a>' : ""}<a href="https://github.com/a2f0/continuity">Source on GitHub <span aria-hidden="true">↗</span></a></footer>
 </body>
 </html>
 `;
