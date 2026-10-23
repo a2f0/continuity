@@ -71,6 +71,9 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Install gallery test browser
+        run: bun x --no-install playwright install --with-deps chromium
+
       - name: Run tests
         run: bun run test
 

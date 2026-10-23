@@ -21,7 +21,7 @@ function downloads(gallery: Gallery): string {
     .join("");
 }
 
-export function galleryPage(gallery: Gallery): string {
+export function galleryPage(gallery: Gallery, tracking = false): string {
   const { canon } = gallery;
   const owner = canon.characters.find((person) => person.id === canon.owner);
   const documentCount = gallery.assets.filter((asset) =>
@@ -38,6 +38,7 @@ export function galleryPage(gallery: Gallery): string {
   <title>Continuity — tearleads</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
+  ${tracking ? '<script type="module" src="/click-tracking.js"></script>' : ""}
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -62,8 +63,17 @@ export function galleryPage(gallery: Gallery): string {
       <div class="download-intro"><p>Portraits, specimen documents, contact exports, and the tearleads seed. Open an image above to inspect it, or download any original below.</p><a class="text-link" href="${assetUrl("manifest.json")}" download>Download manifest <span aria-hidden="true">↓</span></a></div>
       <ul class="file-list">${downloads(gallery)}</ul>
     </section>
+    ${
+      tracking
+        ? `<section id="privacy" aria-labelledby="privacy-title"><h2 id="privacy-title">Click analytics</h2>
+      <p>This gallery uses CT, operated by Tearleads, LLC, to understand clicks. CT records a random identifier for each click, the time, element type, site and gallery name, and production environment. It does not assign a persistent visitor identifier; this gallery leaves event labels empty. It does not record page text, form values, link destinations, query strings, or fragments. The page is always recorded as <code>/</code>.</p>
+      <p>The collector receives your IP address and approximate country, region, and city from Cloudflare. Click records are kept for 90 days and are available only through an authenticated dashboard.</p>
+      <p>This gallery overrides Global Privacy Control. Do Not Track, the saved CT opt-out, and the <a href="https://github.com/a2f0/ct/tree/main/packages/extension">CT browser extension</a> still stop collection. Automated browsers are excluded. See <a href="https://github.com/a2f0/ct/blob/main/docs/privacy.md">CT privacy and opt-out instructions</a>.</p>
+    </section>`
+        : ""
+    }
   </main>
-  <footer><a class="wordmark" href="#top">continuity<span>/ tearleads</span></a><p class="footer-caption">Fictional by design. Consistent by construction.</p><a href="https://github.com/a2f0/continuity">Source on GitHub <span aria-hidden="true">↗</span></a></footer>
+  <footer><a class="wordmark" href="#top">continuity<span>/ tearleads</span></a><p class="footer-caption">Fictional by design. Consistent by construction.</p>${tracking ? '<a href="#privacy">Click analytics</a>' : ""}<a href="https://github.com/a2f0/continuity">Source on GitHub <span aria-hidden="true">↗</span></a></footer>
 </body>
 </html>
 `;
