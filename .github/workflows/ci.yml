@@ -40,7 +40,7 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           BRANCH_NAME: ${{ github.head_ref }}
-        run: bun scripts/checks/lintBranchName.ts -- "$BRANCH_NAME"
+        run: bun run lint:branch-name "$BRANCH_NAME"
 
       - name: Run static checks
         run: bun run check:fast
@@ -93,15 +93,23 @@ jobs:
 
   gate:
     name: CI gate
+    timeout-minutes: 10
     if: always()
     needs: [lint, verify]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Bun
+        uses: jdx/mise-action@8418fedb1110381a0d3ba51a7a415d7c1b884550 # v5.2.2
+        with:
+          version: 2026.10.17
+          install_args: bun
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
       - name: Require every check to succeed
         env:
           CI_NEEDS: ${{ toJSON(needs) }}
-        run: |
-          printf '%s\n' "$CI_NEEDS" | jq -e 'all(.[]; .result == "success")' >/dev/null || {
-            printf '%s\n' "$CI_NEEDS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"' >&2
-            exit 1
-          }
+        run: printf '%s\n' "$CI_NEEDS" | bun run agent-tool ci gate - --policy scripts/checks/ci-gate.json

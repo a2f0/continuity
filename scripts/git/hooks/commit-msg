@@ -7,5 +7,7 @@ MESSAGE_FILE="$1"
 
 cd "$REPO_ROOT"
 
+bun run agent-tool commits check --message-file "$MESSAGE_FILE"
+
 echo "Linting commit message..."
 bun x --no-install commitlint --config "$REPO_ROOT/commitlint.config.mts" --edit "$MESSAGE_FILE"

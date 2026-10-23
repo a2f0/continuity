@@ -1,0 +1,41 @@
+{
+  "label": "check:fast",
+  "steps": [
+    {
+      "label": "format-and-lint",
+      "command": ["bun", "run", "lint:biome"]
+    },
+    {
+      "label": "file-names",
+      "command": ["bun", "run", "lint:files"]
+    },
+    {
+      "label": "markdown",
+      "command": ["bun", "run", "lint:markdown"]
+    },
+    {
+      "label": "shell",
+      "command": ["bun", "run", "lint:scripts"]
+    },
+    {
+      "label": "managed-skills",
+      "command": ["bun", "run", "agents:check"]
+    },
+    {
+      "label": "project-skills",
+      "command": ["bun", "run", "lint:skills"]
+    },
+    {
+      "label": "binary-policy",
+      "command": ["bun", "run", "lint:binary-files"]
+    },
+    {
+      "label": "unused-code",
+      "command": ["bun", "run", "lint:knip"]
+    },
+    {
+      "label": "types",
+      "command": ["bun", "run", "typecheck"]
+    }
+  ]
+}

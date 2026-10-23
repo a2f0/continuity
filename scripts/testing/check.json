@@ -1,0 +1,25 @@
+{
+  "label": "check",
+  "steps": [
+    {
+      "label": "static",
+      "command": ["bun", "run", "check:fast"]
+    },
+    {
+      "label": "tests",
+      "command": ["bun", "run", "test"]
+    },
+    {
+      "label": "canon",
+      "command": ["bun", "run", "canon:check"]
+    },
+    {
+      "label": "genesis",
+      "command": ["bun", "run", "genesis:check"]
+    },
+    {
+      "label": "gallery",
+      "command": ["bun", "run", "site:build"]
+    }
+  ]
+}

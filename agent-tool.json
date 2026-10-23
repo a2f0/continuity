@@ -18,10 +18,60 @@
     ]
   },
   "merge": {
-    "requiredChecks": [{ "name": "CI gate", "workflow": "CI" }]
+    "requiredChecks": [
+      {
+        "name": "CI gate",
+        "workflow": "CI"
+      }
+    ]
   },
   "versions": {
     "packages": ["."]
   },
-  "pr": { "rejectClaudeBranding": true }
+  "pr": {
+    "rejectClaudeBranding": true
+  },
+  "branch": {
+    "types": [
+      "build",
+      "chore",
+      "ci",
+      "cleanup",
+      "docs",
+      "feat",
+      "fix",
+      "perf",
+      "refactor",
+      "revert",
+      "style",
+      "test"
+    ],
+    "exempt": ["main"],
+    "maxLength": 50
+  },
+  "hooks": {
+    "files": [
+      {
+        "source": "scripts/git/hooks/commit-msg",
+        "target": "commit-msg",
+        "executable": true
+      },
+      {
+        "source": "scripts/git/hooks/pre-commit",
+        "target": "pre-commit",
+        "executable": true
+      },
+      {
+        "source": "scripts/git/hooks/pre-push",
+        "target": "pre-push",
+        "executable": true
+      }
+    ]
+  },
+  "commits": {
+    "signatures": "none",
+    "signatureHeaderFallback": false,
+    "rejectCoauthors": true,
+    "subjects": false
+  }
 }
