@@ -93,6 +93,7 @@ jobs:
 
   gate:
     name: CI gate
+    timeout-minutes: 10
     if: always()
     needs: [lint, verify]
     runs-on: ubuntu-latest

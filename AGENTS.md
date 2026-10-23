@@ -103,7 +103,8 @@ Shipping rules on top of the shared skills:
   `node_modules/.bin/agent-tool pr merge '' "$REVIEWED_SHA" "$BASE_REF"`
   directly, because `bun run` drops empty arguments. Never use `gh pr merge`.
 - **Reset**: after returning to `main`, run `bun run hooks:install` so
-  merged hook changes take effect.
+  merged hook changes take effect. For the initial installer migration, inspect
+  existing copies and follow the adoption step in the development guide.
 - **Deploy**: follow [gallery deployment](docs/deployment.md) after merging a
   change to `genesis/`, `src/site/`, `site/`, or `wrangler.jsonc`. Deploy from
   reset `main` and compare the live index with the built artifact. Report a
