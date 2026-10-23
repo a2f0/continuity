@@ -7,6 +7,9 @@ attribution footers. Do not create GitHub issues without an explicit request.
 
 ## Validation
 
+Follow [development guidance](docs/development.md) for pinned setup, hooks,
+and script layout.
+
 For dependency changes, use the managed `update-dependencies` skill and
 [dependency maintenance guide](docs/dependency-upgrades.md).
 
@@ -99,11 +102,9 @@ Shipping rules on top of the shared skills:
 - **Merge**: run
   `node_modules/.bin/agent-tool pr merge '' "$REVIEWED_SHA" "$BASE_REF"`
   directly, because `bun run` drops empty arguments. Never use `gh pr merge`.
-- **Reset**: after returning to `main`, run `sh scripts/git/installHooks.sh` so
+- **Reset**: after returning to `main`, run `bun run hooks:install` so
   merged hook changes take effect.
-- **Deploy**: CI does not publish the gallery at continuity.tearleads.com.
-  After merging a change to `genesis/`, `src/site/`, `site/`, or
-  `wrangler.jsonc`, run `bun run site:deploy` from the reset `main`, then
-  prove the live index matches the build with
-  `curl -fsS https://continuity.tearleads.com/ | cmp - dist/index.html`.
-  Report a failed deploy separately from the merge.
+- **Deploy**: follow [gallery deployment](docs/deployment.md) after merging a
+  change to `genesis/`, `src/site/`, `site/`, or `wrangler.jsonc`. Deploy from
+  reset `main` and compare the live index with the built artifact. Report a
+  failed deploy separately from the merge.

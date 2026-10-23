@@ -27,13 +27,13 @@
     "agents:sync": "bun run agent-tool skills install --apply",
     "canon:check": "bun src/cli.ts validate",
     "canon:freshness": "bun src/cli.ts freshness",
-    "check": "sh scripts/checks/check.sh",
-    "check:fast": "sh scripts/checks/checkFast.sh",
+    "check": "agent-tool run-group scripts/testing/check.json",
+    "check:fast": "agent-tool run-group scripts/testing/check-fast.json",
     "genesis": "bun src/cli.ts generate",
     "genesis:check": "bun src/cli.ts check",
     "lint:biome": "biome check --error-on-warnings",
     "lint:binary-files": "bun scripts/checks/checkBinaryFiles.ts",
-    "lint:branch-name": "bun scripts/checks/lintBranchName.ts",
+    "lint:branch-name": "agent-tool branch check",
     "lint:files": "ls-lint",
     "lint:knip": "knip",
     "lint:markdown": "git ls-files -z -- '*.md' | xargs -0 bun --bun x markdownlint-cli2",
@@ -45,14 +45,15 @@
     "site:deploy": "bun run check && wrangler deploy",
     "site:dev": "bun src/site/build.ts && wrangler dev",
     "test": "bun test",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "hooks:install": "agent-tool hooks install --apply"
   },
   "lint-staged": {
     "*.{css,html,js,json,jsonc,jsx,mjs,cjs,ts,tsx}": "biome check --fix --error-on-warnings",
     "*.md": "bun --bun x markdownlint-cli2 --fix"
   },
   "devDependencies": {
-    "@a2f0/agent-tool": "0.1.17",
+    "@a2f0/agent-tool": "0.1.19",
     "@a2f0/ct-client": "0.1.5",
     "@biomejs/biome": "2.6.2",
     "@commitlint/cli": "21.2.4",

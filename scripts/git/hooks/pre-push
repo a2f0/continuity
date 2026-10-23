@@ -6,25 +6,13 @@ REPO_ROOT="$(git rev-parse --show-toplevel)"
 
 # A copied hook must match the checked-out version before it can gate a push.
 if ! cmp -s "$0" "$REPO_ROOT/scripts/git/hooks/pre-push"; then
-  echo "Error: pre-push hook is stale. Run sh scripts/git/installHooks.sh." >&2
+  echo "Error: pre-push hook is stale. Run bun run hooks:install." >&2
   exit 1
 fi
 
 cd "$REPO_ROOT"
 
-zero_sha="0000000000000000000000000000000000000000"
-
-# Lint every branch this push creates or updates.
-while read -r local_ref local_sha remote_ref remote_sha; do
-  : "$local_ref" "$remote_sha"
-  if [ "$local_sha" = "$zero_sha" ]; then
-    continue
-  fi
-  case "$remote_ref" in
-    refs/heads/*)
-      bun scripts/checks/lintBranchName.ts -- "${remote_ref#refs/heads/}"
-      ;;
-  esac
-done
+# Check every non-deleted destination branch named in Git's push tuples.
+bun run agent-tool branch check --pre-push
 
 bun run check
