@@ -130,7 +130,7 @@ test("trusted clicks flush with gallery attribution and GPC override", async () 
 test("download, navigation, and external links omit text and destinations", async () => {
   const { context, page, batches } = await openGallery("gpc");
   try {
-    // Keep trusted link clicks on the page so all three can flush together.
+    // Keep trusted link clicks on the page so they can flush together.
     await page.evaluate(() =>
       document.addEventListener("click", (event) => event.preventDefault()),
     );
@@ -139,11 +139,19 @@ test("download, navigation, and external links omit text and destinations", asyn
     await page
       .locator('footer a[href="https://github.com/a2f0/continuity"]')
       .click();
+    await page.locator("a.portrait").first().click();
+    await page.locator('.document a[aria-label^="Open "]').first().click();
+    await page.locator(".document a[download][aria-label]").first().click();
     const sent = page.waitForResponse(endpoint);
     await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
     await sent;
     expect(batches).toHaveLength(1);
-    expect(batches[0]?.events).toHaveLength(3);
+    expect(Object.keys(batches[0] ?? {}).sort()).toEqual([
+      "environment",
+      "events",
+      "site",
+    ]);
+    expect(batches[0]?.events).toHaveLength(6);
     for (const event of batches[0]?.events ?? []) {
       expect(event).toMatchObject({
         app: "gallery",
@@ -166,6 +174,10 @@ test("download, navigation, and external links omit text and destinations", asyn
       "github.com",
       "Source on GitHub",
       "Download manifest",
+      "Maya",
+      "Reyes",
+      "portrait",
+      "Driver’s license",
     ]) {
       expect(JSON.stringify(batches)).not.toContain(value);
     }
@@ -181,6 +193,7 @@ for (const privacy of ["dnt", "extension", "saved", "automation"] as const) {
       await page.locator("h1").click();
       await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
       await page.clock.runFor(6_000);
+      await page.waitForTimeout(200);
       expect(batches).toEqual([]);
     } finally {
       await context.close();
@@ -198,6 +211,7 @@ test("the extension clears clicks queued before opting out", async () => {
       window.dispatchEvent(new Event("pagehide"));
     });
     await page.clock.runFor(6_000);
+    await page.waitForTimeout(200);
     expect(batches).toEqual([]);
   } finally {
     await context.close();
@@ -211,6 +225,7 @@ for (const site of ["http://localhost:8787", "https://preview.example.com"]) {
       await page.locator("h1").click();
       await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
       await page.clock.runFor(6_000);
+      await page.waitForTimeout(200);
       expect(batches).toEqual([]);
     } finally {
       await context.close();
@@ -226,6 +241,7 @@ test("default preview builds are inert even on the production host", async () =>
     await page.locator("h1").click();
     await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
     await page.clock.runFor(6_000);
+    await page.waitForTimeout(200);
     expect(batches).toEqual([]);
   } finally {
     await context.close();

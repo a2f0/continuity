@@ -59,9 +59,9 @@ describe("asset gallery", () => {
       }
     }
     expect(html.match(/class="note"/g)?.length).toBe(gallery.notes.length);
-    expect(html).toContain(
+    expect(html.match(/<script\b[^>]*>[\s\S]*?<\/script>/g)).toEqual([
       '<script type="module" src="/click-tracking.js"></script>',
-    );
+    ]);
   });
 
   test("serves only existing local links and images", () => {

@@ -66,7 +66,7 @@ export function galleryPage(gallery: Gallery, tracking = false): string {
     ${
       tracking
         ? `<section id="privacy" aria-labelledby="privacy-title"><h2 id="privacy-title">Click analytics</h2>
-      <p>This gallery uses CT, operated by Tearleads, LLC, to understand clicks. CT records the time, element type, gallery name, and production environment. It does not record page text, form values, link destinations, query strings, or fragments. The page is always recorded as <code>/</code>.</p>
+      <p>This gallery uses CT, operated by Tearleads, LLC, to understand clicks. CT records a random identifier for each click, the time, element type, site and gallery name, and production environment. It does not assign a persistent visitor identifier; this gallery leaves event labels empty. It does not record page text, form values, link destinations, query strings, or fragments. The page is always recorded as <code>/</code>.</p>
       <p>The collector receives your IP address and approximate country, region, and city from Cloudflare. Click records are kept for 90 days and are available only through an authenticated dashboard.</p>
       <p>This gallery overrides Global Privacy Control. Do Not Track, the saved CT opt-out, and the <a href="https://github.com/a2f0/ct/tree/main/packages/extension">CT browser extension</a> still stop collection. Automated browsers are excluded. See <a href="https://github.com/a2f0/ct/blob/main/docs/privacy.md">CT privacy and opt-out instructions</a>.</p>
     </section>`
