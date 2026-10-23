@@ -1,5 +1,11 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { repoPath } from "../paths";
@@ -118,9 +124,21 @@ describe("asset gallery", () => {
     expect(html).toContain(
       '<meta name="robots" content="noindex, nofollow, noarchive">',
     );
+    // A canonical URL or sitemap would ask search engines to index the page.
+    expect(html).not.toContain('rel="canonical"');
+    expect(html).not.toContain('property="og:url"');
+    expect(existsSync(join(output, "sitemap.xml"))).toBe(false);
     expect(readFileSync(join(output, "_headers"), "utf8")).toContain(
       "/*\n  X-Robots-Tag: noindex, nofollow, noarchive",
     );
+  });
+
+  test("tints browser chrome with the page background", () => {
+    const paper = readFileSync(join(output, "style.css"), "utf8").match(
+      /--paper: (#[0-9a-f]{6});/,
+    )?.[1];
+    expect(paper).toBeDefined();
+    expect(html).toContain(`<meta name="theme-color" content="${paper}">`);
   });
 
   test("escapes note content rather than treating it as markup", () => {
