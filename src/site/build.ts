@@ -44,7 +44,10 @@ export function readGallery(root: string): Gallery {
   };
 }
 
-export function buildSite(output: string): Gallery {
+export async function buildSite(
+  output: string,
+  tracking = false,
+): Promise<Gallery> {
   const root = repoPath("genesis");
   const gallery = readGallery(root);
   rmSync(output, { recursive: true, force: true });
@@ -64,12 +67,26 @@ export function buildSite(output: string): Gallery {
       recursive: true,
     });
   }
-  writeFileSync(join(output, "index.html"), galleryPage(gallery));
+  if (tracking) {
+    const result = await Bun.build({
+      entrypoints: [repoPath("src", "site", "browser.ts")],
+      outdir: output,
+      naming: "click-tracking.js",
+      target: "browser",
+      minify: true,
+    });
+    if (!result.success)
+      throw new AggregateError(result.logs, "Gallery build failed");
+  }
+  writeFileSync(join(output, "index.html"), galleryPage(gallery, tracking));
   return gallery;
 }
 
 if (import.meta.main) {
-  const gallery = buildSite(repoPath("dist"));
+  const gallery = await buildSite(
+    repoPath("dist"),
+    process.argv.includes("--tracking"),
+  );
   console.log(
     `Built dist/: ${gallery.canon.characters.length} characters, ${gallery.assets.length} downloadable assets.`,
   );

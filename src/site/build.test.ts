@@ -13,8 +13,8 @@ const output = join(root, "public");
 let gallery: Gallery;
 let html: string;
 
-beforeAll(() => {
-  gallery = buildSite(output);
+beforeAll(async () => {
+  gallery = await buildSite(output, true);
   html = readFileSync(join(output, "index.html"), "utf8");
 });
 afterAll(() => rmSync(root, { recursive: true, force: true }));
@@ -59,7 +59,9 @@ describe("asset gallery", () => {
       }
     }
     expect(html.match(/class="note"/g)?.length).toBe(gallery.notes.length);
-    expect(html).not.toContain("<script");
+    expect(html).toContain(
+      '<script type="module" src="/click-tracking.js"></script>',
+    );
   });
 
   test("serves only existing local links and images", () => {

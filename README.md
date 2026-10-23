@@ -24,6 +24,7 @@ result as a pinned dependency.
 mise install                # Bun and ShellCheck, pinned in .mise.toml
 bun install --frozen-lockfile
 sh scripts/git/installHooks.sh
+bun x --no-install playwright install --with-deps chromium
 
 bun run canon:check         # validate the canon, report portrait status
 bun run genesis             # render canon into genesis/
@@ -121,6 +122,19 @@ Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` for deployment, or use
 Wrangler's authenticated session. The gallery is static HTML and CSS, built
 from the committed `genesis/` snapshot; run `bun run check` before publishing.
 `src/site/` builds the page and `site/` contains its stylesheet and headers.
+
+The production gallery initializes `@a2f0/ct-client` explicitly for clicks,
+with site `continuity`, app `gallery`, and environment `production`. Its small
+browser module runs only at the exact production origin; local previews,
+automation, and the published genesis data package do not initialize CT.
+`buildSite()` also defaults to tracking off; the production CLI opts in.
+The gallery remains usable with JavaScript disabled.
+
+The gallery overrides Global Privacy Control while honoring Do Not Track and
+CT's extension and saved opt-outs. The public
+[click analytics notice](https://continuity.tearleads.com/#privacy) explains
+the recorded fields, IP/geolocation, retention, and opt-out instructions.
+Browser tests intercept the collector and never submit production events.
 
 The hostname belongs to `terraform/stacks/prod/continuity` in the
 [tearleads repository](https://github.com/a2f0/tearleads). For its first setup,
