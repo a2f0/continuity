@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   cpSync,
@@ -44,6 +45,21 @@ export function readGallery(root: string): Gallery {
   };
 }
 
+// Favicons are rendered from assets/brand/logo.svg by the `favicons` target in
+// agent-tool.json, so no rendered icon is committed.
+function renderFavicons(output: string): void {
+  const result = spawnSync(
+    repoPath("node_modules", ".bin", "agent-tool"),
+    ["images", "build", "favicons", "--out", output],
+    { cwd: repoPath(), encoding: "utf8" },
+  );
+  if (result.status !== 0) {
+    throw new Error(
+      `Favicon rendering failed: ${result.error?.message ?? result.stderr.trim()}`,
+    );
+  }
+}
+
 export async function buildSite(
   output: string,
   tracking = false,
@@ -53,6 +69,7 @@ export async function buildSite(
   rmSync(output, { recursive: true, force: true });
   mkdirSync(output, { recursive: true });
   cpSync(repoPath("site"), output, { recursive: true });
+  renderFavicons(output);
   for (const asset of gallery.assets) {
     const destination = join(output, "genesis", asset.path);
     mkdirSync(join(destination, ".."), { recursive: true });

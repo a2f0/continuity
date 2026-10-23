@@ -106,6 +106,7 @@ Shipping rules on top of the shared skills:
   merged hook changes take effect. For the initial installer migration, inspect
   existing copies and follow the adoption step in the development guide.
 - **Deploy**: follow [gallery deployment](docs/deployment.md) after merging a
-  change to `genesis/`, `src/site/`, `site/`, or `wrangler.jsonc`. Deploy from
-  reset `main` and compare the live index with the built artifact. Report a
-  failed deploy separately from the merge.
+  change to `genesis/`, `src/site/`, `site/`, `assets/brand/`, the `images`
+  section of `agent-tool.json`, or `wrangler.jsonc`. Deploy from reset `main`
+  and compare the live index with the built artifact. Report a failed deploy
+  separately from the merge.

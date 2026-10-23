@@ -3,6 +3,7 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { repoPath } from "../paths";
+import { imageSize } from "../render/imageSize";
 import { buildSite, readGallery } from "./build";
 import { assetUrl } from "./html";
 import { galleryPage } from "./page";
@@ -91,6 +92,26 @@ describe("asset gallery", () => {
         `width="${asset.image.width}" height="${asset.image.height}"`,
       );
     }
+  });
+
+  test("renders and links favicons from the brand logo", () => {
+    expect(html).toContain('<link rel="icon" href="/favicon.ico" sizes="any">');
+    expect(html).toContain(
+      '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
+    );
+    expect(html).toContain(
+      '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
+    );
+    expect(readFileSync(join(output, "favicon.svg"))).toEqual(
+      readFileSync(repoPath("assets", "brand", "logo.svg")),
+    );
+    // An icon directory holding the 16, 32, and 48 pixel images.
+    expect([
+      ...readFileSync(join(output, "favicon.ico")).subarray(0, 6),
+    ]).toEqual([0, 0, 1, 0, 3, 0]);
+    expect(
+      imageSize(readFileSync(join(output, "apple-touch-icon.png"))),
+    ).toMatchObject({ width: 180, height: 180, mimeType: "image/png" });
   });
 
   test("opts the page and assets out of indexing", () => {
