@@ -6,7 +6,8 @@ avatars, family photos, household inventory, health trackers, and notes that
 seed
 [tearleads](https://github.com/a2f0/tearleads) for screenshots, demos, and
 import testing. The asset gallery is available at
-<https://continuity.tearleads.com>. See [Asset gallery](#asset-gallery).
+[continuity.tearleads.com](https://continuity.tearleads.com). See
+[Asset gallery](#asset-gallery).
 
 Everything is derived from one hand-maintained canon, so a character's name,
 birthday, address, face, and document numbers agree everywhere they appear. The
