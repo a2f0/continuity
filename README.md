@@ -3,11 +3,9 @@
 Canonical fictional characters, and the genesis data rendered from them:
 driver's licenses, passports, birth certificates, credit cards, contact cards,
 avatars, family photos, household inventory, health trackers, and notes that
-seed
-[tearleads](https://github.com/a2f0/tearleads) for screenshots, demos, and
-import testing. The asset gallery is available at
-[continuity.tearleads.com](https://continuity.tearleads.com). See
-[Asset gallery](#asset-gallery).
+seed [tearleads](https://github.com/a2f0/tearleads) for screenshots, demos, and
+import testing.
+This repo is available on the web at <https://continuity.tearleads.com>.
 
 Everything is derived from one hand-maintained canon, so a character's name,
 birthday, address, face, and document numbers agree everywhere they appear. The
@@ -21,6 +19,8 @@ result as a pinned dependency.
 
 ## Quick start
 
+Install [mise](https://mise.jdx.dev/), then:
+
 ```sh
 mise install                # Bun and ShellCheck, pinned in .mise.toml
 bun install --frozen-lockfile
@@ -30,6 +30,7 @@ bun x --no-install playwright install --with-deps chromium
 bun run canon:check         # validate the canon, report portrait status
 bun run genesis             # render canon into genesis/
 bun run check               # everything CI runs
+bun run site:dev            # preview the gallery at http://localhost:8787
 ```
 
 ## Layout
@@ -91,10 +92,10 @@ fictional people, issuers, and data. They render without specimen watermarks.
 
 Each character has a photographic portrait of a person who does not exist;
 until one does, documents use an illustrated placeholder drawn from canon.
-`bun run portraits` reports status. The `portrait-fidelity` skill, for Codex and
-Claude Code alike, generates, reviews, frames, and adopts portraits, through
-OpenAI's image API when `OPENAI_API_KEY` is set and Codex's built-in image
-generation otherwise. See [docs/portraits.md](docs/portraits.md).
+`bun run portraits` reports status, and `bun run portraits generate` fills
+placeholders through OpenAI's Images API when `OPENAI_API_KEY` is set. See
+[docs/portraits.md](docs/portraits.md) for generating, importing, and framing
+portraits.
 
 ## Keeping it current
 
@@ -110,9 +111,9 @@ tearleads pins and consumes this repository.
 
 ## Asset gallery
 
-[continuity.tearleads.com](https://continuity.tearleads.com) shows the cast,
-portraits, specimen documents, notes, and downloads on one scrollable page.
-The HTML and every asset response carry `noindex` directives.
+The gallery shows the cast, portraits, specimen documents, notes, and
+downloads on one scrollable page. The HTML and every asset response carry
+`noindex` directives, so it stays out of search indexes.
 
 ```sh
 bun run site:dev       # build the gallery and preview it with Wrangler
@@ -125,9 +126,7 @@ publication, and live verification. CI does not deploy the gallery.
 
 ## Development
 
-Repository conventions, validation commands, and shipping rules are in
-[AGENTS.md](AGENTS.md), with shared tooling and hook setup in
-[development](docs/development.md). PRs ship with the
-[`@a2f0/agent-tool`](https://github.com/a2f0/agent-tool) skills.
-See [dependency maintenance](docs/dependency-upgrades.md) for upgrade checks
-and active compatibility constraints.
+- [Development tooling](docs/development.md): pinned tools, hooks, branch
+  names, and validation.
+- [Dependency maintenance](docs/dependency-upgrades.md): upgrade checks and
+  active compatibility constraints.
