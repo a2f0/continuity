@@ -53,7 +53,7 @@
     "*.md": "bun --bun x markdownlint-cli2 --fix"
   },
   "devDependencies": {
-    "@a2f0/agent-tool": "0.1.21",
+    "@a2f0/agent-tool": "0.1.23",
     "@a2f0/ct-client": "0.1.5",
     "@biomejs/biome": "2.6.2",
     "@commitlint/cli": "21.2.4",
