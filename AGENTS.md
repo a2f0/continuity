@@ -21,8 +21,26 @@ For dependency changes, use the managed `update-dependencies` skill and
 - `bun run canon:check`: continuity rules alone, plus portrait status.
 - `bun run genesis:check`: the re-render alone (about 20 seconds).
 
-Wrap noisy commands with `bun run agent:run --label <name> -- <command>` and
-inspect failures with `bun run agent:logs <path>`.
+## Output capture
+
+Run finite, noisy commands, such as installs, builds, tests, linters, and Git
+commands that run hooks, through
+`bun run agent:run --label <name> -- <command> [args...]`, for example
+`bun run agent:run --label genesis -- bun run genesis:check`. It keeps complete
+output in a private log, preserves the exit status, and prints a compact
+receipt, with a bounded excerpt of the log on failure. Read more with
+`bun run agent:logs <log-path>`, raising `--tail-lines` or `--max-bytes` as
+needed, or with a targeted search of the log. A zero exit does not rule out
+warnings: inspect required warnings, timings, and artifacts before accepting a
+check. Run reviews, version preparation, audits, infrastructure previews, and
+run-group checks directly so their results stay visible, and run interactive
+tools and servers directly too. Never narrow a suite or silence warnings to
+reduce output.
+
+`bun run check` and `bun run check:fast` are run groups: run them directly, not
+through `agent:run`. They already record each step's private log, and
+`bun run agent-tool runs list` shows their reports. Run `bun run site:dev`
+directly; it starts a server.
 
 ## Code organization
 
