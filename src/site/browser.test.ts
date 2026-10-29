@@ -186,9 +186,26 @@ test("download, navigation, and external links omit text and destinations", asyn
   }
 }, 15_000);
 
-for (const privacy of ["dnt", "extension", "saved", "automation"] as const) {
-  test(`${privacy} prevents collection despite the GPC override`, async () => {
-    const { context, page, batches } = await openGallery(privacy);
+// Each case clicks and leaves the page; none may send a batch.
+const inertCases: readonly {
+  readonly name: string;
+  readonly privacy: Privacy;
+  readonly site?: string;
+}[] = [
+  ...(["dnt", "extension", "saved", "automation"] as const).map((privacy) => ({
+    name: `${privacy} prevents collection despite the GPC override`,
+    privacy,
+  })),
+  ...["http://localhost:8787", "https://preview.example.com"].map((site) => ({
+    name: `the production bundle stays inert at ${site}`,
+    privacy: "none" as const,
+    site,
+  })),
+];
+
+for (const { name, privacy, site } of inertCases) {
+  test(name, async () => {
+    const { context, page, batches } = await openGallery(privacy, site);
     try {
       await page.locator("h1").click();
       await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
@@ -217,21 +234,6 @@ test("the extension clears clicks queued before opting out", async () => {
     await context.close();
   }
 }, 15_000);
-
-for (const site of ["http://localhost:8787", "https://preview.example.com"]) {
-  test(`the production bundle stays inert at ${site}`, async () => {
-    const { context, page, batches } = await openGallery("none", site);
-    try {
-      await page.locator("h1").click();
-      await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
-      await page.clock.runFor(6_000);
-      await page.waitForTimeout(200);
-      expect(batches).toEqual([]);
-    } finally {
-      await context.close();
-    }
-  }, 15_000);
-}
 
 test("default preview builds are inert even on the production host", async () => {
   const { context, page, batches } = await openGallery("none", origin, preview);
