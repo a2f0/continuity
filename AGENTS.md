@@ -13,8 +13,9 @@ and script layout.
 For dependency changes, use the managed `update-dependencies` skill and
 [dependency maintenance guide](docs/dependency-upgrades.md).
 
-- `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed and
-  project skills, binary placement, Knip, and TypeScript.
+- `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed skills
+  and harness permissions, project skills, binary placement, Knip, and
+  TypeScript.
 - `bun run check`: `check:fast`, tests, canon consistency, and a full re-render
   proving `genesis/` matches canon byte for byte, then the static gallery build.
   The pre-push hook runs it.
@@ -23,12 +24,13 @@ For dependency changes, use the managed `update-dependencies` skill and
 
 ## Output capture
 
-Run finite, noisy commands, such as installs, builds, tests, linters, and Git
-commands that run hooks, through
+Run Bun tests through `bun run agent-tool bun test --log [-- args...]`, and
+other finite, noisy commands, such as installs, builds, linters, package
+scripts, and Git commands that run hooks, through
 `bun run agent:run --label <name> -- <command> [args...]`, for example
-`bun run agent:run --label genesis -- bun run genesis:check`. It keeps complete
-output in a private log, preserves the exit status, and prints a compact
-receipt, with a bounded excerpt of the log on failure. Read more with
+`bun run agent:run --label genesis -- bun run genesis:check`. Each keeps
+complete output in a private log, preserves the exit status, and prints a
+compact receipt, with a bounded excerpt of the log on failure. Read more with
 `bun run agent:logs <log-path>`, raising `--tail-lines` or `--max-bytes` as
 needed, or with a targeted search of the log. A zero exit does not rule out
 warnings: inspect required warnings, timings, and artifacts before accepting a
@@ -100,9 +102,14 @@ with `bun run agent-tool`. Title, required-check, and version policy is in
 not edit them; change the shared skill upstream instead. Project-owned skills,
 such as `portrait-fidelity`, live byte for byte in both directories;
 `bun run lint:skills` fails when the copies differ. After changing the
-pin, run `bun run agents:sync` and commit the lockfile, skills, and manifest
-together. `bun run agents:check`, part of `check:fast`, fails on missing,
-outdated, or edited managed skills.
+pin or `permissions.executables` in `agent-tool.json`, run
+`bun run agents:sync` and commit the lockfile, skills, manifest, and generated
+harness rules (`.claude/settings.json`, `.codex/rules/agent-tool.rules`, and
+`.agent-tool-permissions.json`) together. `bun run agents:check`, part of
+`check:fast`, fails on missing, outdated, or edited managed skills or harness
+rules. Run classified CLIs through
+`bun run agent-tool bun x <name> [-- args...]`: `commitlint` and
+`playwright` are `local`, and `wrangler` is `release` because it deploys.
 
 Shipping rules on top of the shared skills:
 
@@ -115,7 +122,7 @@ Shipping rules on top of the shared skills:
   `genesis/`, so a bump never requires regenerating.
 - **Titles**: PR titles and squash subjects follow `commitlint.config.mts`.
   Check them with
-  `printf '%s\n' "$TITLE" | bun x --no-install commitlint --config commitlint.config.mts`
+  `printf '%s\n' "$TITLE" | bun run agent-tool bun x commitlint -- --config commitlint.config.mts`
   and branch names with `bun run lint:branch-name <name>`.
 - **Merge**: run
   `node_modules/.bin/agent-tool pr merge '' "$REVIEWED_SHA" "$BASE_REF"`
