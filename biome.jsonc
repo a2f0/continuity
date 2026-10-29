@@ -44,6 +44,15 @@
             "skipIifes": true
           }
         }
+      },
+      "suspicious": {
+        // Shared shapes belong in a lower module (src/export/seedTypes.ts);
+        // a cycle means a dependency points the wrong way. Type-only imports
+        // count too: they tangle module ownership just the same.
+        "noImportCycles": {
+          "level": "error",
+          "options": { "ignoreTypes": false }
+        }
       }
     }
   },
@@ -55,6 +64,80 @@
           "complexity": {
             "noExcessiveCognitiveComplexity": "off",
             "noExcessiveLinesPerFunction": "off"
+          }
+        }
+      }
+    },
+    // Module boundaries from AGENTS.md "Code organization" and
+    // docs/development.md "Module layering". Tests may load the concrete world.
+    {
+      "includes": ["src/canon/**", "!**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "**/render/**",
+                      "**/export/**",
+                      "**/genesis/**",
+                      "**/site/**",
+                      "**/portraits/**",
+                      "**/canon/world"
+                    ],
+                    "message": "src/canon/ stays independent of rendering, exports, and the concrete world; pass World in."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/render/**", "!**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "**/genesis/**",
+                      "**/export/**",
+                      "**/site/**",
+                      "**/canon/world"
+                    ],
+                    "message": "Renderers take explicit inputs; genesis coordinates them, not the reverse."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/site/**", "!**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["**/canon/world"],
+                    "message": "src/site/ reads facts from the genesis/ snapshot, not canon/world.ts."
+                  }
+                ]
+              }
+            }
           }
         }
       }

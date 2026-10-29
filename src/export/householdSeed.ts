@@ -1,6 +1,6 @@
 import { findCharacter, firstName } from "../canon/derive";
 import type { World } from "../canon/types";
-import type { SeedFile } from "./tearleadsSeed";
+import type { SeedFile } from "./seedTypes";
 
 export interface HouseholdPhotoMetadata {
   readonly width: number;
