@@ -77,7 +77,7 @@
   "permissions": {
     "executables": {
       "commitlint": "local",
-      "playwright": "intake",
+      "playwright": "local",
       "wrangler": "release"
     }
   },

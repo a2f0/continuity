@@ -108,9 +108,8 @@ harness rules (`.claude/settings.json`, `.codex/rules/agent-tool.rules`, and
 `.agent-tool-permissions.json`) together. `bun run agents:check`, part of
 `check:fast`, fails on missing, outdated, or edited managed skills or harness
 rules. Run classified CLIs through
-`bun run agent-tool bun x <name> [-- args...]`: `commitlint` is `local`,
-`playwright` is `intake` because its `install` downloads browsers, and
-`wrangler` is `release` because it deploys.
+`bun run agent-tool bun x <name> [-- args...]`: `commitlint` and
+`playwright` are `local`, and `wrangler` is `release` because it deploys.
 
 Shipping rules on top of the shared skills:
 
