@@ -70,3 +70,16 @@ export function background(
     }),
   ].join("");
 }
+
+/** Front-only hills along the bottom edge, drawn over the guilloche. */
+export function landscape(input: LicenseInput): string {
+  const { palette } = input.jurisdiction;
+  const ridge =
+    "M0 46L6 42.5L11 44.2L18 38.6L24 42L30 39.8L37 43.4L45 37.2L52 41.6L58 39.4L66 43L73 38.4L80 41.8L85.6 40V53.98H0Z";
+  const front =
+    "M0 49.5L8 47.2L15 48.6L23 46L31 48.2L40 46.4L49 48.8L57 46.6L66 48.4L75 46.2L85.6 48V53.98H0Z";
+  return [
+    el("path", { d: ridge, fill: palette.secondary, opacity: 0.1 }),
+    el("path", { d: front, fill: palette.primary, opacity: 0.08 }),
+  ].join("");
+}
