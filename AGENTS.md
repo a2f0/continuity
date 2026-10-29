@@ -58,6 +58,8 @@ directly; it starts a server.
   helpers.
 - Keep tests beside the behavior they exercise. Use `genesis:check` to prove
   rendering refactors preserve output without regenerating tracked binaries.
+  Every character has a photo, so it never draws the placeholder portrait
+  (`src/render/placeholder*.ts`): compare that SVG across appearances instead.
 - `src/site/` packages the `genesis/` snapshot and static assets. Read facts
   from that snapshot; do not load `canon/world.ts` or render documents there.
 
