@@ -38,6 +38,24 @@ result evaluation, and command receipts come from the exact agent-tool pin.
 Keep public package command names stable and update all callers when moving
 internal scripts. Application commands remain in `src/` by domain.
 
+## Module layering
+
+Imports point down this list, never up:
+
+1. `src/canon/`: rules, derivations, and types. It takes `World` as an argument
+   and never imports the concrete `canon/world.ts`.
+2. `src/render/` and `src/export/`: renderers and exporters take explicit
+   inputs. Shapes shared between exporters live in their own module, such as
+   `src/export/seedTypes.ts`.
+3. `src/genesis/`: coordinates renderers and exporters into `genesis/`.
+4. `src/site/`: packages the `genesis/` snapshot; it never loads
+   `canon/world.ts` or renders documents.
+5. CLI entrypoints (`src/cli.ts`, `src/portraits/cli.ts`) load the world.
+
+Biome enforces the boundaries for non-test files (`style/noRestrictedImports`
+overrides in `biome.jsonc`) and rejects import cycles, including type-only
+ones (`suspicious/noImportCycles`). Tests may load the concrete world.
+
 README covers setup and normal use. [AGENTS.md](../AGENTS.md) owns agent policy;
 [dependency maintenance](dependency-upgrades.md) owns upgrade constraints;
 [deployment](deployment.md) owns publication and live verification. Canon,

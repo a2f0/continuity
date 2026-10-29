@@ -8,7 +8,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { join } from "node:path";
-import type { SeedSpec } from "../export/tearleadsSeed";
+import type { SeedSpec } from "../export/seedTypes";
 import { repoPath } from "../paths";
 import { imageSize } from "../render/imageSize";
 import { galleryPage } from "./page";

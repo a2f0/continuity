@@ -1,4 +1,4 @@
-import type { SeedSpec } from "../export/tearleadsSeed";
+import type { SeedSpec } from "../export/seedTypes";
 import type { canonSnapshot } from "../genesis/canonSnapshot";
 
 export type Snapshot = ReturnType<typeof canonSnapshot>;
