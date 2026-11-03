@@ -27,9 +27,12 @@ remain byte for byte unchanged after the full validation gate.
 
 Markdownlint brings two unresolved advisory groups:
 
-- `micromatch` uses `braces@3.0.3`, for which
-  [the stack-exhaustion advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm)
-  has no fixed release. Revisit when a compatible fixed owner is published.
+- `markdownlint` pins `re2js@2.8.6`, below the
+  [lookbehind DoS fix in 2.8.7](https://github.com/advisories/GHSA-gg6h-894w-4m9c).
+  The affected path requires the opt-in `LOOKBEHINDS` flag and repeated
+  matching. Markdownlint's front-matter compilation does not enable that flag.
+  Revisit when its owner updates the exact pin; any patch override needs
+  Markdownlint integration tests, not just a successful install.
 - `micromark-extension-math` requires KaTeX `^0.16.0`, below the
   [trust-bypass fix in 0.18.2](https://github.com/advisories/GHSA-238p-pmpm-9mq7).
   Revisit when Markdownlint supports that release; do not force a major
@@ -37,12 +40,23 @@ Markdownlint brings two unresolved advisory groups:
 
 These are development-tool dependencies. Keep configuration and glob input
 repository-controlled; that narrows exposure without resolving the advisories.
+The previously listed
+[braces advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) was withdrawn
+on October 23, 2026 as not practically exploitable and is no longer an active
+constraint.
 
 ## Wrangler
 
 Update Wrangler with its exact Miniflare dependency as one compatibility group.
 Do not override nested native or network dependencies independently without
-exercising their actual Miniflare integrations.
+exercising their actual Miniflare integrations. The current Miniflare pins
+`undici@7.29.1`, below the [7.30.1 security
+fixes](https://github.com/nodejs/undici/releases/tag/v7.30.1), including TLS
+validation and denial-of-service fixes. Revisit with a compatible Wrangler /
+Miniflare release after the complete remote preview below; an isolated Undici
+override or a bundle-only check is not sufficient. These dependencies are
+local development/deployment tooling, not included in the static gallery or
+the genesis package.
 
 The gallery Worker is `tearleads-continuity`; its hostname is managed in
 tearleads' Terraform stack. Before changing Wrangler, verify the account,
