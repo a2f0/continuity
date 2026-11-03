@@ -41,8 +41,9 @@ Markdownlint brings two unresolved advisory groups:
 These are development-tool dependencies. Keep configuration and glob input
 repository-controlled; that narrows exposure without resolving the advisories.
 The previously listed
-[braces advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) was
-withdrawn as not practically exploitable and is not an active constraint.
+[braces advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) was withdrawn
+on October 23, 2026 as not practically exploitable and is no longer an active
+constraint.
 
 ## Wrangler
 
