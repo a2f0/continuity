@@ -7,12 +7,14 @@
   // Managed skill formatting is owned upstream and checked by agents:check.
   "ignores": [
     ".agents/skills/cross-agent-review/SKILL.md",
+    ".agents/skills/open-issue/SKILL.md",
     ".agents/skills/open-pr/SKILL.md",
     ".agents/skills/reset/SKILL.md",
     ".agents/skills/ship-pr/SKILL.md",
     ".agents/skills/squash-merge/SKILL.md",
     ".agents/skills/update-dependencies/SKILL.md",
     ".claude/skills/cross-agent-review/SKILL.md",
+    ".claude/skills/open-issue/SKILL.md",
     ".claude/skills/open-pr/SKILL.md",
     ".claude/skills/reset/SKILL.md",
     ".claude/skills/ship-pr/SKILL.md",
