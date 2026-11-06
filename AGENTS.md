@@ -93,6 +93,22 @@ Binary files are allowed only as `assets/fonts/*.ttf`,
 3 MiB (`bun run lint:binary-files`). Regenerating images adds to history, so
 avoid churning renders without a reason.
 
+## State machines
+
+Make implicit state machines explicit when you write or change code: one closed
+state type (a discriminated union, enum, or sealed type) carrying each state's
+data, typed events, and one pure transition function, with effects run on
+entering a state and async work tagged so only the current request can finish.
+Follow the `explicit-state-machines` skill for what to convert, what to leave
+alone, and how to prove behavior did not change; `agent-tool state-machines`
+lists leads. Reviews flag new implicit machines.
+
+Here the code is pure build, render, and diff pipelines and one-shot CLIs, so
+there are no runtime machines today. Derived states are string-literal unions
+returned by one pure classifier, as `portraitStatus` in
+`src/portraits/sidecar.ts`; put a new one beside the data it reads. Status
+strings in `canon/` are fictional content, not state.
+
 ## Agent tooling and shipping
 
 Review, PR, merge, and version helpers come from the exact-pinned
