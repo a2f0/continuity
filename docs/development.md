@@ -5,6 +5,11 @@ installations under `~/.local/share/mise/installs` first on PATH; do not run
 `mise trust`. Install dependencies with `bun install --frozen-lockfile`, then
 run `bun run hooks:install`.
 
+`mise.lock` is committed; regenerate it with `mise lock` whenever `.mise.toml`
+changes. CI's `jdx/mise-action` steps run with `--locked`, and every workflow's
+mise-action `version` must read the lockfile format (format 4 needs mise
+2026.11.1+), so move those pins before the lock's format.
+
 ## Hooks and branches
 
 Tracked hooks live in `scripts/git/hooks/`. The shared installer handles copied
