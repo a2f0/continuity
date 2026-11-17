@@ -12,6 +12,7 @@ ls:
 
   scripts:
     .ts: camelCase
+    .test.ts: camelCase
     .sh: camelCase
 
   # Generated outputs and their attachment names are kebab-case: tearleads
