@@ -5,18 +5,25 @@ import { existsSync, readFileSync } from "node:fs";
 // expected: vendored fonts, portraits, and generated genesis output. Each must
 // match a `binaries.allow` glob in agent-tool.json, which the push gate's
 // binary guard reads too, and stay small enough to keep clones and history
-// light.
+// light. Run it from the repository root.
 //
 //   bun run lint:binary-files            check every tracked file as checked out
-//   bun run lint:binary-files --staged   check the staged version of staged files
+//   bun run lint:binary-files --staged   check the staged version of staged
+//                                        files against the staged agent-tool.json
 
 const MAX_BYTES = 3 * 1024 * 1024;
 const SNIFF_BYTES = 8000;
+const CONFIG = "agent-tool.json";
+
+const staged = process.argv.includes("--staged");
 
 function allowedPatterns(): string[] {
-  const config: unknown = JSON.parse(
-    readFileSync(new URL("../../agent-tool.json", import.meta.url), "utf8"),
-  );
+  // A commit is judged by the policy it commits, so an unstaged edit to the
+  // allowlist cannot approve a staged binary.
+  const source = staged
+    ? git(["show", `:${CONFIG}`]).toString("utf8")
+    : readFileSync(CONFIG, "utf8");
+  const config: unknown = JSON.parse(source);
   const allow =
     typeof config === "object" && config !== null && "binaries" in config
       ? (config.binaries as { allow?: unknown }).allow
@@ -72,7 +79,6 @@ function check(path: string, bytes: Buffer): string | undefined {
   return undefined;
 }
 
-const staged = process.argv.includes("--staged");
 const problems = listFiles(staged)
   .filter((path) => staged || existsSync(path))
   .flatMap((path) => {

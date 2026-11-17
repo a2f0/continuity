@@ -25,10 +25,10 @@ The pre-push hook is agent-tool's push gate
 ([hooks and branches](docs/development.md#hooks-and-branches)): shared trust
 guards, then the static steps `pushGate` declares in `agent-tool.json`. Keep
 tests, rendering, builds, and installs out of it; `lint:push-gate` rejects
-tests and installs. Before pushing, run `bun run check:fast` and the tests for
-the code you changed; CI runs the rest on Linux and macOS and is the authority.
-When a job fails, read it with `bun run agent-tool pr logs --head <head>` and
-push a reviewed fix.
+tests, builds, and installs. Before pushing, run `bun run check:fast` and the
+tests for the code you changed; CI runs the rest on Linux and macOS and is the
+authority. When a job fails, read it with
+`bun run agent-tool pr logs --head <head>` and push a reviewed fix.
 
 ## Output capture
 

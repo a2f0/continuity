@@ -28,8 +28,8 @@ static `check:fast` steps except the managed-skill check, which the guards
 already run, and the push-gate check. Tests, canon and genesis checks, and the
 gallery build run in CI. `bun run agent-tool runs list` shows each push's step
 timings. `bun run lint:push-gate`, part of `check:fast`, fails when the hook
-differs from the generated one or a declared step reaches a test runner or an
-install.
+differs from the generated one or a declared step reaches a test runner, a
+build, or an install.
 
 Branch names use the same Conventional Commits types and 50-character limit as
 commit headers, with `main` exempt. `bun run lint:branch-name <name>` validates
