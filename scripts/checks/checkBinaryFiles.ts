@@ -3,22 +3,36 @@ import { existsSync, readFileSync } from "node:fs";
 
 // Binary files belong here, unlike in tearleads, but only where they are
 // expected: vendored fonts, portraits, and generated genesis output. Each must
-// be a known type and stay small enough to keep clones and history light.
+// match a `binaries.allow` glob in agent-tool.json, which the push gate's
+// binary guard reads too, and stay small enough to keep clones and history
+// light.
 //
 //   bun run lint:binary-files            check every tracked file as checked out
 //   bun run lint:binary-files --staged   check the staged version of staged files
 
-const ALLOWED: readonly {
-  readonly prefix: string;
-  readonly extensions: readonly string[];
-}[] = [
-  { extensions: [".ttf"], prefix: "assets/fonts/" },
-  { extensions: [".jpg", ".png"], prefix: "assets/portraits/" },
-  { extensions: [".jpg"], prefix: "assets/household/" },
-  { extensions: [".jpg", ".png"], prefix: "genesis/" },
-];
 const MAX_BYTES = 3 * 1024 * 1024;
 const SNIFF_BYTES = 8000;
+
+function allowedPatterns(): string[] {
+  const config: unknown = JSON.parse(
+    readFileSync(new URL("../../agent-tool.json", import.meta.url), "utf8"),
+  );
+  const allow =
+    typeof config === "object" && config !== null && "binaries" in config
+      ? (config.binaries as { allow?: unknown }).allow
+      : undefined;
+  if (
+    !Array.isArray(allow) ||
+    allow.length === 0 ||
+    !allow.every((pattern) => typeof pattern === "string" && pattern)
+  ) {
+    throw new Error("agent-tool.json must list binaries.allow globs");
+  }
+  return allow;
+}
+
+const ALLOWED = allowedPatterns();
+const GLOBS = ALLOWED.map((pattern) => new Bun.Glob(pattern));
 
 function git(args: readonly string[]): Buffer {
   const result = spawnSync("git", args, { maxBuffer: 64 * 1024 * 1024 });
@@ -49,9 +63,8 @@ function check(path: string, bytes: Buffer): string | undefined {
   if (!isBinary(bytes)) {
     return undefined;
   }
-  const rule = ALLOWED.find((item) => path.startsWith(item.prefix));
-  if (!rule?.extensions.some((extension) => path.endsWith(extension))) {
-    return `${path}: binary files are only allowed as ${ALLOWED.map((item) => `${item.prefix}*{${item.extensions.join(",")}}`).join(", ")}`;
+  if (!GLOBS.some((glob) => glob.match(path))) {
+    return `${path}: binary files are only allowed as ${ALLOWED.join(", ")}`;
   }
   if (bytes.length > MAX_BYTES) {
     return `${path}: ${bytes.length} bytes exceeds the ${MAX_BYTES}-byte limit`;
