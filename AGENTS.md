@@ -14,13 +14,21 @@ For dependency changes, use the managed `update-dependencies` skill and
 [dependency maintenance guide](docs/dependency-upgrades.md).
 
 - `bun run check:fast`: Biome, ls-lint, Markdown, ShellCheck, managed skills
-  and harness permissions, project skills, binary placement, Knip, and
-  TypeScript.
+  and harness permissions, the push gate's declaration (`lint:push-gate`),
+  project skills, binary placement, Knip, and TypeScript.
 - `bun run check`: `check:fast`, tests, canon consistency, and a full re-render
   proving `genesis/` matches canon byte for byte, then the static gallery build.
-  The pre-push hook runs it.
 - `bun run canon:check`: continuity rules alone, plus portrait status.
 - `bun run genesis:check`: the re-render alone (about 20 seconds).
+
+The pre-push hook is agent-tool's push gate
+([hooks and branches](docs/development.md#hooks-and-branches)): shared trust
+guards, then the static steps `pushGate` declares in `agent-tool.json`. Keep
+tests, rendering, builds, and installs out of it; `lint:push-gate` rejects
+tests, builds, and installs. Before pushing, run `bun run check:fast` and the
+tests for the code you changed; CI runs the rest on Linux and macOS and is the
+authority. When a job fails, read it with
+`bun run agent-tool pr logs --head <head>` and push a reviewed fix.
 
 ## Output capture
 
@@ -87,11 +95,12 @@ directly; it starts a server.
 
 ## Binary files
 
-Binary files are allowed only as `assets/fonts/*.ttf`,
-`assets/portraits/*.{jpg,png}`, `assets/household/*.jpg`, and
-`genesis/**/*.{jpg,png}`, each at most
-3 MiB (`bun run lint:binary-files`). Regenerating images adds to history, so
-avoid churning renders without a reason.
+Binary files are allowed only where `binaries.allow` in `agent-tool.json` lists
+them: fonts under `assets/fonts/`, portraits under `assets/portraits/`,
+household JPEGs under `assets/household/`, and images under `genesis/`, each at
+most 3 MiB (`bun run lint:binary-files`). The push gate's binary guard reads the
+same list. Regenerating images adds to history, so avoid churning renders
+without a reason.
 
 ## State machines
 

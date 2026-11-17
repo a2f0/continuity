@@ -22,6 +22,10 @@
       "command": ["bun", "run", "agents:check"]
     },
     {
+      "label": "push-gate",
+      "command": ["bun", "run", "lint:push-gate"]
+    },
+    {
       "label": "project-skills",
       "command": ["bun", "run", "lint:skills"]
     },
