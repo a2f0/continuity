@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { basename, join } from "node:path";
+import { repoPath } from "../../src/paths";
 
 // Project-owned skills serve Codex and Claude Code alike, so each lives, byte
 // for byte, in both .agents/skills and .claude/skills. Edit one copy, then
@@ -7,7 +8,7 @@ import { basename, join } from "node:path";
 // .agent-tool-skills.json and checked by `bun run agents:check` instead.
 
 const ROOTS = [".agents/skills", ".claude/skills"] as const;
-const MANIFEST = ".agent-tool-skills.json";
+const MANIFEST = repoPath(".agent-tool-skills.json");
 
 const managed = new Set(
   Object.keys(
@@ -16,8 +17,9 @@ const managed = new Set(
 );
 
 function projectFiles(root: string): Map<string, Buffer> {
-  const entries = existsSync(root)
-    ? readdirSync(root, { recursive: true, encoding: "utf8" })
+  const directory = repoPath(root);
+  const entries = existsSync(directory)
+    ? readdirSync(directory, { recursive: true, encoding: "utf8" })
     : [];
   return new Map(
     entries
@@ -25,9 +27,9 @@ function projectFiles(root: string): Map<string, Buffer> {
         (path) =>
           !basename(path).startsWith(".") &&
           !managed.has(`${root}/${path}`) &&
-          statSync(join(root, path)).isFile(),
+          statSync(join(directory, path)).isFile(),
       )
-      .map((path) => [path, readFileSync(join(root, path))]),
+      .map((path) => [path, readFileSync(join(directory, path))]),
   );
 }
 

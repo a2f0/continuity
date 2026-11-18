@@ -1,6 +1,12 @@
 import { afterEach, describe, expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import {
+  copyFileSync,
+  mkdirSync,
+  mkdtempSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 
@@ -50,13 +56,18 @@ function repo(allow: string[]): string {
   const root = mkdtempSync(join(tmpdir(), "continuity-binaries-"));
   roots.push(root);
   git(root, "init", "--quiet");
+  mkdirSync(join(root, "scripts/checks"), { recursive: true });
+  copyFileSync(SCRIPT, join(root, "scripts/checks/checkBinaryFiles.ts"));
   writeAllow(root, allow);
   git(root, "add", "agent-tool.json");
   return root;
 }
 
 const check = (root: string, ...args: string[]) =>
-  run(root, process.execPath, [SCRIPT, ...args]);
+  run(dirname(root), process.execPath, [
+    join(root, "scripts/checks/checkBinaryFiles.ts"),
+    ...args,
+  ]);
 
 describe("binary file policy", () => {
   test("accepts tracked binaries the allowlist matches at any depth", () => {
