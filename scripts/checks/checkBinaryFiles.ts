@@ -1,15 +1,18 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 // Binary files belong here, unlike in tearleads, but only where they are
 // expected: vendored fonts, portraits, and generated genesis output. Each must
 // match a `binaries.allow` glob in agent-tool.json, which the push gate's
 // binary guard reads too, and stay small enough to keep clones and history
-// light. Run it from the repository root.
+// light.
 //
 //   bun run lint:binary-files            check every tracked file as checked out
 //   bun run lint:binary-files --staged   check the staged version of staged
 //                                        files against the staged agent-tool.json
+
+process.chdir(resolve(import.meta.dir, "../.."));
 
 const MAX_BYTES = 3 * 1024 * 1024;
 const SNIFF_BYTES = 8000;
