@@ -123,13 +123,13 @@ strings in `canon/` are fictional content, not state.
 Review, PR, merge, and version helpers come from the exact-pinned
 [`@a2f0/agent-tool`](https://github.com/a2f0/agent-tool) dev dependency; run it
 with `bun run agent-tool`. Title, required-check, and version policy is in
-`agent-tool.json`. The shared `cross-agent-review`, `open-pr`, `squash-merge`,
-`ship-pr`, `reset`, and `update-dependencies` skills are managed copies in
-`.agents/skills` and `.claude/skills`, tracked by `.agent-tool-skills.json`. Do
-not edit them; change the shared skill upstream instead. Project-owned skills,
-such as `portrait-fidelity`, live byte for byte in both directories;
-`bun run lint:skills` fails when the copies differ. After changing the
-pin or `permissions.executables` in `agent-tool.json`, run
+`agent-tool.json`. Shared skills, such as `ship-pr`, `update-dependencies`,
+`take-screenshots`, and `space-cleanup`, are managed copies in `.agents/skills`
+and `.claude/skills` that come from the pin; `.agent-tool-skills.json` lists
+every managed file. Do not edit them; change the shared skill upstream instead.
+Project-owned skills, such as `portrait-fidelity`, live byte for byte in both
+directories; `bun run lint:skills` fails when the copies differ. After changing
+the pin or `permissions.executables` in `agent-tool.json`, run
 `bun run agents:sync` and commit the lockfile, skills, manifest, and generated
 harness rules (`.claude/settings.json`, `.codex/rules/agent-tool.rules`, and
 `.agent-tool-permissions.json`) together. `bun run agents:check`, part of
