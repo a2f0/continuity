@@ -1,25 +1,33 @@
 # tearleads integration
 
-tearleads' screenshot run restores an encrypted backup built from a seed
-specification. Building the backup needs tearleads' client SDK and schema, so
-it stays in tearleads; this repository supplies the specification and its
+tearleads loads a seed specification into an account with its `tearleads
+seed` command, and its screenshot run seeds a fixture account the same way.
+Writing documents and organization groups needs tearleads' client SDK, so that
+stays in tearleads; this repository supplies the specification and its
 attachments.
 
 ## Contract
 
 `genesis/tearleads/seed.json` matches `SeedSpec` in tearleads'
-`packages/app/test/screenshot-seed/seedTypes.ts`:
+`packages/app/src/document-types/continuity/seedTypes.ts`:
 
-- `schemaVersion`: currently `2`; consumers must reject unsupported versions.
-- `password` and `identitySeedPhrase`: the backup password and the BIP39 phrase
-  the seeded identity is derived from. Both come from `canon/device/device.ts`.
+- `schemaVersion`: currently `3`; consumers must reject unsupported versions.
+- `identitySeedPhrase`: the BIP39 phrase of the fixture account tearleads'
+  screenshot run seeds and signs in as. It comes from `canon/device/device.ts`.
+  Version 3 dropped version 2's backup `password`.
 - `contacts`: the owner's address book as `firstName`, `lastName`, and
   `nickname` fields, with an `avatar` attachment for the `contact-avatar` slot.
+  Each contact's `id` is its canon character ID, stable across versions.
 - `notes`: the owner's notes.
 - `files`: wallet documents, family photos, two Alderforge tools, two Hearthmere
   appliances, and Maya's weight and blood pressure trackers. Tracker `rows` are
   first-class row fields; weights carry their own units and every measurement
   has an explicit time zone.
+- `groups`: organization groups, each a `name` and the contact `id`s of its
+  `members`. One group exists per label in the device's `tearleads.groups`,
+  holding everyone saved with that label; today that is `Family` with Maya's
+  mother, husband, and brother. tearleads gives each member an account, adds
+  them to the owner's roster, and then to the group.
 
 | Kind | Attachment slots |
 | --- | --- |
@@ -39,7 +47,8 @@ their non-payment numbers start with `0000` and the specimen CVV is `000`.
 
 `genesis/tearleads/expectations.json` lists the strings the screenshot run
 asserts on: a contact's display name, the first note's title and body line,
-and each wallet document's title and image count. Optional wallet kinds are
+each wallet document's title and image count, and each group's name with its
+members' roster names (`firstName lastName`). Optional wallet kinds are
 omitted when the device does not select them.
 
 ## Household photos and checks
@@ -63,7 +72,8 @@ replace/remove behavior. Its existing `receipt-image` slot remains separate.
 Canon validation rejects invalid dates, unknown people, duplicate IDs/serials,
 and invalid measurements. Genesis rejects missing, edited, or undersized photos.
 The manifest covers seed JSON, expectations, and every image. Consumers verify
-these hashes before building a backup and check restored rows and image counts.
+these hashes before writing any document and check the written rows and image
+counts.
 Expectations include every household image and inventory item plus the tracker
 rows, so screenshots can assert visible fields and plotted points.
 
@@ -84,12 +94,12 @@ history.
 
 The seeder reads `genesis/tearleads/seed.json` through package resolution and
 loads attachments relative to that file. Its `continuitySeed.test.ts` contract
-test checks document titles and image counts through the real SDK and encrypted
-backup path. The capture runner reads `expectations.json` and waits for the
-restored images to decode.
+test checks document titles and image counts against `expectations.json`, and
+the CLI's seed tests read every document back from a fresh device. The capture
+runner reads `expectations.json` and waits for the synced images to decode.
 
-Run `bun run build:website` in tearleads to regenerate the backup, capture the
-app, and stage the screenshots into the website. When adding a wallet kind,
+Run `bun run build:website` in tearleads to seed the capture accounts, capture
+the app, and stage the screenshots into the website. When adding a wallet kind,
 register its projector and editor in tearleads before adopting the new pin,
 and add its detail view to the screenshot capture and website gallery.
 

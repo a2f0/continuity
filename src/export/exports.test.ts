@@ -51,6 +51,38 @@ describe("buildTearleadsSeed", () => {
     expect(passport?.attachments[0]?.slot).toBe("passport-image");
   });
 
+  test("groups everyone saved with a group label under a stable ID", () => {
+    expect(seed.groups).toEqual([
+      {
+        name: "Family",
+        members: ["rosa-reyes", "daniel-okafor", "theo-reyes"],
+      },
+    ]);
+    const ids = seed.contacts.map((contact) => contact.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(ids).toContain("priya-natarajan");
+  });
+
+  test("refuses a group nobody belongs to or a member who is not a contact", () => {
+    const photos = loadHouseholdPhotos(world);
+    const lonely = {
+      ...world,
+      device: {
+        ...world.device,
+        tearleads: { ...world.device.tearleads, groups: ["Nope"] },
+      },
+    };
+    expect(() => buildTearleadsSeed(lonely, photos)).toThrow(
+      "No address-book entry has the group label Nope.",
+    );
+    expect(() =>
+      buildSeedExpectations({
+        ...seed,
+        groups: [{ name: "Family", members: ["maya-reyes"] }],
+      }),
+    ).toThrow("Group member maya-reyes is not a contact.");
+  });
+
   test("resolves computed notes from canon", () => {
     const gifts = seed.notes.find((note) => note.text.startsWith("Gift ideas"));
     expect(gifts?.text).toContain("Theo (June 2)");
@@ -65,9 +97,16 @@ describe("buildTearleadsSeed", () => {
       appliances,
       weight,
       bloodPressure,
+      groups,
       ...walletExpectations
     } = buildSeedExpectations(seed);
-    expect(schemaVersion).toBe(2);
+    expect(schemaVersion).toBe(3);
+    expect(groups).toEqual([
+      {
+        name: "Family",
+        members: ["Rosa Reyes", "Daniel Okafor", "Theo Reyes"],
+      },
+    ]);
     expect(photos).toHaveLength(2);
     expect(tools).toHaveLength(2);
     expect(appliances).toHaveLength(2);

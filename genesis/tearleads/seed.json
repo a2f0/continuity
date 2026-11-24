@@ -1,7 +1,8 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "contacts": [
     {
+      "id": "rosa-reyes",
       "avatar": {
         "file": "avatar-rosa-reyes.png",
         "mimeType": "image/png"
@@ -13,6 +14,7 @@
       }
     },
     {
+      "id": "daniel-okafor",
       "avatar": {
         "file": "avatar-daniel-okafor.png",
         "mimeType": "image/png"
@@ -23,6 +25,7 @@
       }
     },
     {
+      "id": "theo-reyes",
       "avatar": {
         "file": "avatar-theo-reyes.png",
         "mimeType": "image/png"
@@ -33,6 +36,7 @@
       }
     },
     {
+      "id": "priya-natarajan",
       "avatar": {
         "file": "avatar-priya-natarajan.png",
         "mimeType": "image/png"
@@ -43,6 +47,7 @@
       }
     },
     {
+      "id": "sam-whitfield",
       "avatar": {
         "file": "avatar-sam-whitfield.png",
         "mimeType": "image/png"
@@ -53,6 +58,7 @@
       }
     },
     {
+      "id": "hana-kobayashi",
       "avatar": {
         "file": "avatar-hana-kobayashi.png",
         "mimeType": "image/png"
@@ -63,6 +69,7 @@
       }
     },
     {
+      "id": "marcus-bell",
       "avatar": {
         "file": "avatar-marcus-bell.png",
         "mimeType": "image/png"
@@ -371,6 +378,16 @@
       "attachments": []
     }
   ],
+  "groups": [
+    {
+      "name": "Family",
+      "members": [
+        "rosa-reyes",
+        "daniel-okafor",
+        "theo-reyes"
+      ]
+    }
+  ],
   "identitySeedPhrase": "furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just spring",
   "notes": [
     {
@@ -391,6 +408,5 @@
     {
       "text": "Home codes\nBuilding door: 4417#\nStorage unit 22-B: 3-9-14\nGuest Wi-Fi: AlderCrest-3B / pepper-loves-the-beach"
     }
-  ],
-  "password": "screenshot-seed"
+  ]
 }

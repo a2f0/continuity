@@ -19,11 +19,13 @@ import {
   householdExpectations,
   householdFiles,
 } from "./householdSeed";
-import type { SeedFile, SeedSpec } from "./seedTypes";
+import type { SeedFile, SeedGroup, SeedSpec } from "./seedTypes";
 
-/** Strings tearleads' screenshot run asserts on after restoring the seed. */
+/** Strings tearleads' screenshot run asserts on after loading the seed. */
 export interface SeedExpectations extends HouseholdExpectations {
-  readonly schemaVersion: 2;
+  readonly schemaVersion: 3;
+  /** Each group with its members' roster names in place of contact IDs. */
+  readonly groups: readonly SeedGroup[];
   readonly contact: { readonly displayName: string };
   readonly note: { readonly title: string; readonly bodyLine: string };
   readonly driversLicense?: {
@@ -129,16 +131,29 @@ function walletFiles(world: World): SeedFile[] {
   return files;
 }
 
+/** One group per configured label, holding everyone saved with it. */
+function organizationGroups(world: World): SeedGroup[] {
+  return world.device.tearleads.groups.map((name) => {
+    const members = world.device.addressBook
+      .filter((entry) => entry.labels?.includes(name))
+      .map((entry) => entry.character);
+    if (!members.length)
+      throw new Error(`No address-book entry has the group label ${name}.`);
+    return { name, members };
+  });
+}
+
 export function buildTearleadsSeed(
   world: World,
   photos: ReadonlyMap<string, HouseholdPhotoMetadata>,
 ): SeedSpec {
   const { device } = world;
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     contacts: device.addressBook.map((entry) => {
       const character = findCharacter(world, entry.character);
       return {
+        id: character.id,
         avatar: {
           file: TEARLEADS_FILES.avatar(character.id),
           mimeType: "image/png",
@@ -151,9 +166,9 @@ export function buildTearleadsSeed(
       };
     }),
     files: [...walletFiles(world), ...householdFiles(world, photos)],
+    groups: organizationGroups(world),
     identitySeedPhrase: device.tearleads.identitySeedPhrase,
     notes: device.notes.map((note) => ({ text: resolveNoteText(world, note) })),
-    password: device.tearleads.backupPassword,
   };
 }
 
@@ -194,9 +209,18 @@ export function buildSeedExpectations(seed: SeedSpec): SeedExpectations {
         imageCount: card.attachments.length,
       }
     : undefined;
+  const rosterName = (id: string) => {
+    const member = seed.contacts.find((item) => item.id === id);
+    if (!member) throw new Error(`Group member ${id} is not a contact.`);
+    return `${member.fields.firstName} ${member.fields.lastName}`;
+  };
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     ...householdExpectations(seed.files),
+    groups: seed.groups.map((group) => ({
+      name: group.name,
+      members: group.members.map(rosterName),
+    })),
     ...(birthCertificate ? { birthCertificate } : {}),
     ...(creditCard ? { creditCard } : {}),
     contact: {

@@ -32,6 +32,21 @@ export function checkDevice(world: World, device: Device): string[] {
       "the tearleads identity seed phrase must be a valid 24-word BIP39 phrase",
     );
   }
+  const labels = new Set(
+    device.addressBook.flatMap((entry) => entry.labels ?? []),
+  );
+  for (const group of device.tearleads.groups) {
+    if (!labels.has(group)) {
+      problems.push(
+        `the tearleads group ${group} labels no address book entry`,
+      );
+    }
+  }
+  problems.push(
+    ...duplicates(device.tearleads.groups).map(
+      (group) => `the tearleads groups list ${group} more than once`,
+    ),
+  );
   // tearleads' screenshot run asserts on the first note and on a contact it
   // can find by full name.
   if (device.notes.length === 0) {
