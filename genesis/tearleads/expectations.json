@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "photos": [
     {
       "title": "Sunday dinner at Mom's.jpg",
@@ -160,6 +160,16 @@
       }
     ]
   },
+  "groups": [
+    {
+      "name": "Family",
+      "members": [
+        "Rosa Reyes",
+        "Daniel Okafor",
+        "Theo Reyes"
+      ]
+    }
+  ],
   "birthCertificate": {
     "imageCount": 1,
     "title": "Birth Certificate Maya Elena Reyes"

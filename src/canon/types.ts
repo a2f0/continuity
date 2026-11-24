@@ -266,9 +266,13 @@ export interface Device {
   readonly household: Household;
   readonly owner: string;
   readonly tearleads: {
-    readonly backupPassword: string;
     /** A valid BIP39 phrase; the seeded identity is derived from it. */
     readonly identitySeedPhrase: string;
+    /**
+     * Address-book labels that become groups in the owner's organization.
+     * Everyone saved with the label joins the group and the roster.
+     */
+    readonly groups: readonly string[];
   };
   readonly addressBook: readonly AddressBookEntry[];
   readonly notes: readonly Note[];

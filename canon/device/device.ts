@@ -7,10 +7,11 @@ export const device: Device = {
   household,
   owner: "maya-reyes",
   tearleads: {
-    // tearleads' screenshot run reads both values from the generated seed.
-    backupPassword: "screenshot-seed",
+    // tearleads' screenshot run signs in with this phrase from the seed.
     identitySeedPhrase:
       "furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just slim furnace very nurse royal tourist connect just spring",
+    // Maya's mother, husband, and brother share a Family group.
+    groups: ["Family"],
   },
   addressBook: [
     { character: "rosa-reyes", nickname: "Mom", labels: ["Family"] },
