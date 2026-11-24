@@ -205,6 +205,29 @@ describe("validateWorld", () => {
     );
   });
 
+  test("requires each tearleads group to be a distinct address book label", () => {
+    const broken: World = {
+      ...world,
+      device: {
+        ...world.device,
+        tearleads: {
+          ...world.device.tearleads,
+          groups: ["Family", "Nope", "Family"],
+        },
+      },
+    };
+    const problems = validateWorld(broken);
+    expect(problems).toContain(
+      "the tearleads group Nope labels no address book entry",
+    );
+    expect(problems).toContain(
+      "the tearleads groups list Family more than once",
+    );
+    expect(problems).not.toContain(
+      "the tearleads group Family labels no address book entry",
+    );
+  });
+
   test("requires what the screenshot run asserts on", () => {
     const broken: World = {
       ...world,

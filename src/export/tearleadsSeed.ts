@@ -24,11 +24,8 @@ import type { SeedFile, SeedGroup, SeedSpec } from "./seedTypes";
 /** Strings tearleads' screenshot run asserts on after loading the seed. */
 export interface SeedExpectations extends HouseholdExpectations {
   readonly schemaVersion: 3;
-  /** Each group's name and its members' roster names, in seed order. */
-  readonly groups: readonly {
-    readonly name: string;
-    readonly members: readonly string[];
-  }[];
+  /** Each group with its members' roster names in place of contact IDs. */
+  readonly groups: readonly SeedGroup[];
   readonly contact: { readonly displayName: string };
   readonly note: { readonly title: string; readonly bodyLine: string };
   readonly driversLicense?: {

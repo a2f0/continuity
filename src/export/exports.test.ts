@@ -63,6 +63,26 @@ describe("buildTearleadsSeed", () => {
     expect(ids).toContain("priya-natarajan");
   });
 
+  test("refuses a group nobody belongs to or a member who is not a contact", () => {
+    const photos = loadHouseholdPhotos(world);
+    const lonely = {
+      ...world,
+      device: {
+        ...world.device,
+        tearleads: { ...world.device.tearleads, groups: ["Nope"] },
+      },
+    };
+    expect(() => buildTearleadsSeed(lonely, photos)).toThrow(
+      "No address-book entry has the group label Nope.",
+    );
+    expect(() =>
+      buildSeedExpectations({
+        ...seed,
+        groups: [{ name: "Family", members: ["maya-reyes"] }],
+      }),
+    ).toThrow("Group member maya-reyes is not a contact.");
+  });
+
   test("resolves computed notes from canon", () => {
     const gifts = seed.notes.find((note) => note.text.startsWith("Gift ideas"));
     expect(gifts?.text).toContain("Theo (June 2)");
