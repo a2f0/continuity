@@ -262,14 +262,16 @@ export interface SharedNote extends Note {
 
 export type FolderAccess = "read" | "write";
 
+/** A group's access to a folder; the group is one of `tearleads.groups`. */
+export interface FolderGrant {
+  readonly group: string;
+  readonly access: FolderAccess;
+}
+
 /** A folder under the owner's root, opened to device groups. */
 export interface SharedFolder {
   readonly name: string;
-  /** Each grant names a group from the device's `tearleads.groups`. */
-  readonly grants: readonly {
-    readonly group: string;
-    readonly access: FolderAccess;
-  }[];
+  readonly grants: readonly FolderGrant[];
   readonly notes: readonly SharedNote[];
 }
 

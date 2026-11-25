@@ -3,6 +3,17 @@ import { duplicates } from "./identifiers";
 
 const FOLDER_ACCESS: readonly FolderAccess[] = ["read", "write"];
 
+// RFC 2606 reserves these names, as for canon email addresses.
+const RESERVED_HOST =
+  /^(?:(?:[a-z0-9-]+\.)+(?:example|test)|(?:[a-z0-9-]+\.)*example\.(?:com|net|org))$/;
+
+/** An https URL on a reserved domain, so no real site is named. */
+function fictionalUrl(value: string): boolean {
+  if (!URL.canParse(value)) return false;
+  const url = new URL(value);
+  return url.protocol === "https:" && RESERVED_HOST.test(url.hostname);
+}
+
 function blank(value: string | undefined): boolean {
   return value !== undefined && value.trim() === "";
 }
@@ -19,10 +30,15 @@ function checkPasscode(passcode: Passcode): string[] {
   ] as const) {
     if (blank(value)) problems.push(`${where} has a blank ${field}`);
   }
-  if (passcode.url !== undefined && !URL.canParse(passcode.url)) {
-    problems.push(`${where} URL ${passcode.url} is not absolute`);
+  if (passcode.url !== undefined && !fictionalUrl(passcode.url)) {
+    problems.push(
+      `${where} URL ${passcode.url} must be https on a reserved example domain`,
+    );
   }
-  // tearleads stores tags as one comma-separated field.
+  // tearleads stores tags as one comma-separated field, left out when blank.
+  if (passcode.tags?.length === 0) {
+    problems.push(`${where} lists no tags; leave tags out instead`);
+  }
   for (const tag of passcode.tags ?? []) {
     if (!tag.trim() || tag.includes(",")) {
       problems.push(`${where} tag "${tag}" must be a non-empty word`);

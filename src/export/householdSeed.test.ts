@@ -8,7 +8,7 @@ test("household seed supplies photos, two makes, equipment identifiers, and date
   const assets = loadHouseholdPhotos(world);
   const seed = buildTearleadsSeed(world, assets);
   const expected = buildSeedExpectations(seed);
-  expect(seed.schemaVersion).toBe(3);
+  expect(seed.schemaVersion).toBe(4);
   expect(assets.size).toBe(11);
   expect(expected.photos).toHaveLength(2);
   expect(expected.tools).toHaveLength(2);

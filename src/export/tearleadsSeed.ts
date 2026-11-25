@@ -43,7 +43,7 @@ interface FolderExpectation {
 
 /** Strings tearleads' screenshot run asserts on after loading the seed. */
 export interface SeedExpectations extends HouseholdExpectations {
-  readonly schemaVersion: 3;
+  readonly schemaVersion: 4;
   /** Each group with its members' roster names in place of contact IDs. */
   readonly groups: readonly SeedGroup[];
   readonly passcodes: readonly PasscodeExpectation[];
@@ -207,7 +207,7 @@ export function buildTearleadsSeed(
 ): SeedSpec {
   const { device } = world;
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     contacts: device.addressBook.map((entry) => {
       const character = findCharacter(world, entry.character);
       return {
@@ -278,7 +278,7 @@ export function buildSeedExpectations(seed: SeedSpec): SeedExpectations {
     return `${member.fields.firstName} ${member.fields.lastName}`;
   };
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     ...householdExpectations(seed.files),
     groups: seed.groups.map((group) => ({
       name: group.name,

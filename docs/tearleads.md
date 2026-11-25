@@ -11,7 +11,9 @@ attachments.
 `genesis/tearleads/seed.json` matches `SeedSpec` in tearleads'
 `packages/app/src/document-types/continuity/seedTypes.ts`:
 
-- `schemaVersion`: currently `3`; consumers must reject unsupported versions.
+- `schemaVersion`: currently `4`; consumers must reject unsupported versions.
+  Version 4 added `folders`, passcode files with attribute rows, and
+  attachment `avatar` flags, which a version 3 consumer would refuse or drop.
 - `identitySeedPhrase`: the BIP39 phrase of the fixture account tearleads'
   screenshot run seeds and signs in as. It comes from `canon/device/device.ts`.
   Version 3 dropped version 2's backup `password`.

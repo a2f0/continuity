@@ -48,18 +48,21 @@ export interface SeedFolderNote {
   readonly additions: readonly SeedNoteAddition[];
 }
 
+/** A group's access to a folder, by the group's name. */
+export interface SeedFolderGrant {
+  readonly group: string;
+  readonly access: "read" | "write";
+}
+
 /** A folder under the owner's root, and the groups it is shared with. */
 export interface SeedFolder {
   readonly name: string;
-  readonly grants: readonly {
-    readonly group: string;
-    readonly access: "read" | "write";
-  }[];
+  readonly grants: readonly SeedFolderGrant[];
   readonly notes: readonly SeedFolderNote[];
 }
 
 export interface SeedSpec {
-  readonly schemaVersion: 3;
+  readonly schemaVersion: 4;
   readonly identitySeedPhrase: string;
   readonly contacts: readonly SeedContact[];
   readonly notes: readonly { readonly text: string }[];

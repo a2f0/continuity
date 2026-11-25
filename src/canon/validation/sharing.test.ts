@@ -42,7 +42,42 @@ describe("passcodes", () => {
     ]);
   });
 
-  test("require absolute URLs, plain tags, and distinct attributes", () => {
+  test("reject blank URLs and notes", () => {
+    expect(
+      validateWorld(withPasscodes([{ ...safe, url: " ", notes: "\n" }])),
+    ).toEqual([
+      "passcode safe has a blank url",
+      "passcode safe has a blank notes",
+      "passcode safe URL   must be https on a reserved example domain",
+    ]);
+  });
+
+  test("keep URLs on https and reserved example domains", () => {
+    for (const url of [
+      "https://account.kestrelwatch.example",
+      "https://router.test",
+      "https://portal.example.com",
+    ]) {
+      expect(validateWorld(withPasscodes([{ ...safe, url }]))).toEqual([]);
+    }
+    for (const url of [
+      "http://account.kestrelwatch.example",
+      "javascript:alert(1)",
+      "https://kestrelwatch.com",
+    ]) {
+      expect(validateWorld(withPasscodes([{ ...safe, url }]))).toEqual([
+        `passcode safe URL ${url} must be https on a reserved example domain`,
+      ]);
+    }
+  });
+
+  test("leave out an empty tag list", () => {
+    expect(validateWorld(withPasscodes([{ ...safe, tags: [] }]))).toEqual([
+      "passcode safe lists no tags; leave tags out instead",
+    ]);
+  });
+
+  test("require fictional URLs, plain tags, and distinct attributes", () => {
     expect(
       validateWorld(
         withPasscodes([
@@ -59,7 +94,7 @@ describe("passcodes", () => {
         ]),
       ),
     ).toEqual([
-      "passcode safe URL kestrelwatch is not absolute",
+      "passcode safe URL kestrelwatch must be https on a reserved example domain",
       'passcode safe tag "home, work" must be a non-empty word',
       "passcode safe has an attribute without a name or value",
       "passcode safe lists the attribute Code more than once",
@@ -86,6 +121,38 @@ describe("shared folders", () => {
       "folder Family grants Work, which is not a group",
       "folder Family grants Family more than once",
     ]);
+  });
+
+  test("grant only read or write access", () => {
+    const admin = {
+      group: "Family",
+      access: "admin",
+    } as unknown as SharedFolder["grants"][number];
+    expect(
+      validateWorld(withFolders([{ ...family, grants: [admin] }])),
+    ).toEqual(
+      expect.arrayContaining(["folder Family grants unknown access admin"]),
+    );
+  });
+
+  test("reject an empty addition", () => {
+    const [note] = family.notes;
+    if (!note) throw new Error("The Family folder has no note.");
+    expect(
+      validateWorld(
+        withFolders([
+          {
+            ...family,
+            notes: [
+              {
+                ...note,
+                additions: [{ author: "rosa-reyes", text: "  " }],
+              },
+            ],
+          },
+        ]),
+      ),
+    ).toEqual(["note thanksgiving has an empty addition"]);
   });
 
   test("let only members of a writing group add to a note", () => {

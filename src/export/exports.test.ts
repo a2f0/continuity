@@ -164,7 +164,7 @@ describe("buildTearleadsSeed", () => {
       folders,
       ...walletExpectations
     } = buildSeedExpectations(seed);
-    expect(schemaVersion).toBe(3);
+    expect(schemaVersion).toBe(4);
     expect(groups).toEqual([
       {
         name: "Family",
