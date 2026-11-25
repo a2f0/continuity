@@ -46,10 +46,12 @@ export function householdFiles(
         kind,
         fields: { equipmentType, make, model, serialNumber },
         attachments: [
-          ...photos.map((id) => ({
+          // The first photo is the item's avatar.
+          ...photos.map((id, index) => ({
             file: `household-${id}.jpg`,
             mimeType: "image/jpeg",
             slot: "equipment-photos",
+            ...(index === 0 ? { avatar: true as const } : {}),
           })),
           ...(receipt
             ? [
@@ -85,6 +87,8 @@ interface ImageExpectation {
   readonly title: string;
   readonly imageCount: number;
   readonly fields: Readonly<Record<string, string>>;
+  /** The attachment shown as the document's avatar, when it has one. */
+  readonly avatar?: string;
 }
 interface TrackerExpectation {
   readonly title: string;
@@ -111,12 +115,14 @@ export function householdExpectations(
           ?.split("_")
           .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
           .join(" ");
+        const avatar = file.attachments.find((item) => item.avatar)?.file;
         return {
           title: requiredTitle(
             kind === "image" ? fileName : [typeLabel, make, model].join(" "),
           ),
           imageCount: file.attachments.length,
           fields: file.fields,
+          ...(avatar ? { avatar } : {}),
         };
       });
   const tracker = (kind: string) => {

@@ -21,7 +21,14 @@ export function checkIds(world: World): string[] {
     ["character", world.characters.map((character) => character.id)],
     ["jurisdiction", world.jurisdictions.map((item) => item.id)],
     ["passport issuer", world.passportIssuers.map((item) => item.id)],
-    ["note", world.device.notes.map((note) => note.id)],
+    [
+      "note",
+      [
+        ...world.device.notes,
+        ...world.device.tearleads.folders.flatMap((folder) => folder.notes),
+      ].map((note) => note.id),
+    ],
+    ["passcode", world.device.passcodes.map((passcode) => passcode.id)],
   ];
   return groups.flatMap(([kind, ids]) => [
     ...ids

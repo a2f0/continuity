@@ -14,6 +14,7 @@ import {
   checkIssuers,
   checkUniqueDocumentNumbers,
 } from "./validation/identifiers";
+import { checkFolders, checkPasscodes } from "./validation/sharing";
 
 export function validateWorld(world: World): readonly string[] {
   if (!isIsoDate(world.asOf)) {
@@ -42,6 +43,8 @@ export function validateWorld(world: World): readonly string[] {
     ...checkUniqueDocumentNumbers(world),
     ...checkDevice(world, world.device),
     ...checkNotes(world),
+    ...checkPasscodes(world),
+    ...checkFolders(world),
     ...checkHousehold(world),
   ];
 }

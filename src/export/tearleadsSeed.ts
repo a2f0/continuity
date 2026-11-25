@@ -12,20 +12,42 @@ import {
   birthCertificateFields,
   creditCardFields,
 } from "../canon/documentFields";
-import type { World } from "../canon/types";
+import type { Passcode, World } from "../canon/types";
 import {
   type HouseholdExpectations,
   type HouseholdPhotoMetadata,
   householdExpectations,
   householdFiles,
 } from "./householdSeed";
-import type { SeedFile, SeedGroup, SeedSpec } from "./seedTypes";
+import type { SeedFile, SeedFolder, SeedGroup, SeedSpec } from "./seedTypes";
+
+interface PasscodeExpectation {
+  readonly title: string;
+  readonly fields: Readonly<Record<string, string>>;
+  readonly attributeCount: number;
+}
+
+interface FolderNoteExpectation {
+  readonly title: string;
+  /** The note once every addition is in. */
+  readonly text: string;
+  /** Roster names of the members who add to it, in order. */
+  readonly authors: readonly string[];
+}
+
+interface FolderExpectation {
+  readonly name: string;
+  readonly grants: SeedFolder["grants"];
+  readonly notes: readonly FolderNoteExpectation[];
+}
 
 /** Strings tearleads' screenshot run asserts on after loading the seed. */
 export interface SeedExpectations extends HouseholdExpectations {
   readonly schemaVersion: 3;
   /** Each group with its members' roster names in place of contact IDs. */
   readonly groups: readonly SeedGroup[];
+  readonly passcodes: readonly PasscodeExpectation[];
+  readonly folders: readonly FolderExpectation[];
   readonly contact: { readonly displayName: string };
   readonly note: { readonly title: string; readonly bodyLine: string };
   readonly driversLicense?: {
@@ -131,6 +153,42 @@ function walletFiles(world: World): SeedFile[] {
   return files;
 }
 
+/** A passcode as tearleads stores it: blank fields are left out. */
+function passcodeFile(passcode: Passcode): SeedFile {
+  const fields = Object.fromEntries(
+    Object.entries({
+      title: passcode.title,
+      username: passcode.username,
+      password: passcode.password,
+      url: passcode.url,
+      notes: passcode.notes,
+      tags: passcode.tags?.join(", "),
+    }).filter((entry): entry is [string, string] => entry[1] !== undefined),
+  );
+  const rows = (passcode.attributes ?? []).map((attribute) => ({
+    name: attribute.name,
+    value: attribute.value,
+    ...(attribute.protected ? { protected: "true" } : {}),
+  }));
+  return {
+    kind: "passcode",
+    fields,
+    attachments: [],
+    ...(rows.length ? { rows } : {}),
+  };
+}
+
+function sharedFolders(world: World): SeedFolder[] {
+  return world.device.tearleads.folders.map((folder) => ({
+    name: folder.name,
+    grants: folder.grants,
+    notes: folder.notes.map((note) => ({
+      text: resolveNoteText(world, note),
+      additions: note.additions,
+    })),
+  }));
+}
+
 /** One group per configured label, holding everyone saved with it. */
 function organizationGroups(world: World): SeedGroup[] {
   return world.device.tearleads.groups.map((name) => {
@@ -165,8 +223,13 @@ export function buildTearleadsSeed(
         },
       };
     }),
-    files: [...walletFiles(world), ...householdFiles(world, photos)],
+    files: [
+      ...walletFiles(world),
+      ...householdFiles(world, photos),
+      ...world.device.passcodes.map(passcodeFile),
+    ],
     groups: organizationGroups(world),
+    folders: sharedFolders(world),
     identitySeedPhrase: device.tearleads.identitySeedPhrase,
     notes: device.notes.map((note) => ({ text: resolveNoteText(world, note) })),
   };
@@ -220,6 +283,21 @@ export function buildSeedExpectations(seed: SeedSpec): SeedExpectations {
     groups: seed.groups.map((group) => ({
       name: group.name,
       members: group.members.map(rosterName),
+    })),
+    passcodes: seed.files
+      .filter((file) => file.kind === "passcode")
+      .map(({ fields, rows }) => {
+        const { title = "" } = fields;
+        return { title, fields, attributeCount: rows?.length ?? 0 };
+      }),
+    folders: seed.folders.map((folder) => ({
+      name: folder.name,
+      grants: folder.grants,
+      notes: folder.notes.map((note) => ({
+        title: note.text.split("\n")[0] ?? "",
+        text: [note.text, ...note.additions.map(({ text }) => text)].join("\n"),
+        authors: note.additions.map(({ author }) => rosterName(author)),
+      })),
     })),
     ...(birthCertificate ? { birthCertificate } : {}),
     ...(creditCard ? { creditCard } : {}),

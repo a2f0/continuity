@@ -7,6 +7,8 @@ export interface SeedAttachment {
   readonly file: string;
   readonly mimeType: string;
   readonly slot?: string;
+  /** Marks the photo the document shows as its avatar; at most one. */
+  readonly avatar?: true;
 }
 
 export interface SeedContact {
@@ -33,6 +35,29 @@ export interface SeedGroup {
   readonly members: readonly string[];
 }
 
+/** A line a group member adds to a folder note under their own account. */
+export interface SeedNoteAddition {
+  /** The member's contact ID. */
+  readonly author: string;
+  readonly text: string;
+}
+
+/** A folder note: the owner writes `text`, then each addition follows. */
+export interface SeedFolderNote {
+  readonly text: string;
+  readonly additions: readonly SeedNoteAddition[];
+}
+
+/** A folder under the owner's root, and the groups it is shared with. */
+export interface SeedFolder {
+  readonly name: string;
+  readonly grants: readonly {
+    readonly group: string;
+    readonly access: "read" | "write";
+  }[];
+  readonly notes: readonly SeedFolderNote[];
+}
+
 export interface SeedSpec {
   readonly schemaVersion: 3;
   readonly identitySeedPhrase: string;
@@ -40,4 +65,5 @@ export interface SeedSpec {
   readonly notes: readonly { readonly text: string }[];
   readonly files: readonly SeedFile[];
   readonly groups: readonly SeedGroup[];
+  readonly folders: readonly SeedFolder[];
 }
