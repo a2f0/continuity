@@ -29,6 +29,68 @@ describe("buildTearleadsSeed", () => {
       "appliance",
       "weight",
       "blood_pressure",
+      ...world.device.passcodes.map(() => "passcode"),
+    ]);
+  });
+
+  test("marks each equipment item's first photo as its avatar", () => {
+    for (const file of seed.files.filter(
+      (item) => item.kind === "tool" || item.kind === "appliance",
+    )) {
+      const photos = file.attachments.filter(
+        (item) => item.slot === "equipment-photos",
+      );
+      expect(photos[0]?.avatar).toBe(true);
+      expect(
+        file.attachments.filter((item) => item.avatar === true),
+      ).toHaveLength(1);
+    }
+    expect(
+      seed.files
+        .filter((file) => file.kind !== "tool" && file.kind !== "appliance")
+        .flatMap((file) => file.attachments)
+        .some((item) => item.avatar),
+    ).toBe(false);
+  });
+
+  test("writes passcodes with tags joined and protected attributes", () => {
+    const passcode = (name: string) =>
+      seed.files.find(
+        ({ kind, fields: { title } }) => kind === "passcode" && title === name,
+      );
+    const alarm = passcode("Alarm system");
+    expect(alarm).toEqual({
+      kind: "passcode",
+      fields: {
+        title: "Alarm system",
+        username: "maya.reyes",
+        password: "2580",
+        url: "https://account.kestrelwatch.example",
+        notes: "Kestrel Watch panel by the front door.",
+        tags: "home",
+      },
+      attachments: [],
+      rows: [
+        { name: "Monitoring account", value: "KW-20817" },
+        { name: "Duress code", value: "2581", protected: "true" },
+      ],
+    });
+    const garage = passcode("Garage door");
+    expect(garage?.rows).toBeUndefined();
+    expect(Object.keys(garage?.fields ?? {})).not.toContain("username");
+  });
+
+  test("shares the Family folder with its group for writing", () => {
+    expect(seed.folders).toHaveLength(1);
+    const [family] = seed.folders;
+    expect(family?.name).toBe("Family");
+    expect(family?.grants).toEqual([{ group: "Family", access: "write" }]);
+    const [note] = family?.notes ?? [];
+    expect(note?.text.split("\n")[0]).toBe("Thanksgiving at Mom's");
+    expect(note?.additions.map(({ author }) => author)).toEqual([
+      "rosa-reyes",
+      "daniel-okafor",
+      "theo-reyes",
     ]);
   });
 
@@ -98,15 +160,52 @@ describe("buildTearleadsSeed", () => {
       weight,
       bloodPressure,
       groups,
+      passcodes,
+      folders,
       ...walletExpectations
     } = buildSeedExpectations(seed);
-    expect(schemaVersion).toBe(3);
+    expect(schemaVersion).toBe(4);
     expect(groups).toEqual([
       {
         name: "Family",
         members: ["Rosa Reyes", "Daniel Okafor", "Theo Reyes"],
       },
     ]);
+    expect(passcodes.map(({ title }) => title)).toEqual(
+      world.device.passcodes.map(({ title }) => title),
+    );
+    expect(
+      passcodes.find(({ title }) => title === "Alarm system")?.attributeCount,
+    ).toBe(2);
+    expect(folders).toEqual([
+      {
+        name: "Family",
+        grants: [{ group: "Family", access: "write" }],
+        notes: [
+          {
+            title: "Thanksgiving at Mom's",
+            text: [
+              "Thanksgiving at Mom's",
+              "Thursday, November 26. Dinner at 4.",
+              "- Maya: flan and the folding chairs",
+              "- Rosa: turkey is ordered from Juniper Market; I'll pick it up Wednesday",
+              "- Daniel: cider, and I'll set up the long table",
+              "- Theo: pumpkin empanadas and the playlist",
+            ].join("\n"),
+            authors: ["Rosa Reyes", "Daniel Okafor", "Theo Reyes"],
+          },
+        ],
+      },
+    ]);
+    expect(tools.map(({ avatar }) => avatar)).toEqual([
+      "household-drill.jpg",
+      "household-circular-saw.jpg",
+    ]);
+    expect(appliances.map(({ avatar }) => avatar)).toEqual([
+      "household-washing-machine.jpg",
+      "household-refrigerator.jpg",
+    ]);
+    expect(photos.some((photo) => "avatar" in photo)).toBe(false);
     expect(photos).toHaveLength(2);
     expect(tools).toHaveLength(2);
     expect(appliances).toHaveLength(2);

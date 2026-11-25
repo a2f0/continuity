@@ -53,13 +53,4 @@ export const notes: readonly Note[] = [
       "- Check brake pads before the Lake Kestrel ride",
     ].join("\n"),
   },
-  {
-    id: "home-codes",
-    text: [
-      "Home codes",
-      "Building door: 4417#",
-      "Storage unit 22-B: 3-9-14",
-      "Guest Wi-Fi: AlderCrest-3B / pepper-loves-the-beach",
-    ].join("\n"),
-  },
 ];

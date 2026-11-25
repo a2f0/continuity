@@ -13,6 +13,8 @@ it, and `bun run canon:check` enforces its continuity rules.
 | `canon/places/*.ts` | Fictional issuers: a `Jurisdiction` or `PassportIssuer` |
 | `canon/device/device.ts` | The owner, address book, wallet, and tearleads identity |
 | `canon/device/notes.ts` | The owner's notes |
+| `canon/device/passcodes.ts` | The owner's passcodes |
+| `canon/device/folders.ts` | Folders shared with groups, and their notes |
 
 The schema lives in `src/canon/types.ts`. Canon stores facts, and
 `src/canon/derive.ts` computes everything that follows from them:
@@ -72,7 +74,9 @@ the portrait stale.
 
 ### Change what the device holds
 
-Edit `canon/device/device.ts` or `canon/device/notes.ts`. The first note, and
+Edit `canon/device/device.ts`, `notes.ts`, `passcodes.ts`, or `folders.ts`.
+Passcode IDs and titles are unique, and only members of a group a folder
+grants `write` may add to its notes. The first note, and
 the first address book entry without a nickname, are the ones tearleads'
 screenshot run asserts on; `genesis/tearleads/expectations.json` records them,
 so tearleads can read them instead of hard-coding strings.

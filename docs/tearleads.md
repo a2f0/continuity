@@ -11,7 +11,9 @@ attachments.
 `genesis/tearleads/seed.json` matches `SeedSpec` in tearleads'
 `packages/app/src/document-types/continuity/seedTypes.ts`:
 
-- `schemaVersion`: currently `3`; consumers must reject unsupported versions.
+- `schemaVersion`: currently `4`; consumers must reject unsupported versions.
+  Version 4 added `folders`, passcode files with attribute rows, and
+  attachment `avatar` flags, which a version 3 consumer would refuse or drop.
 - `identitySeedPhrase`: the BIP39 phrase of the fixture account tearleads'
   screenshot run seeds and signs in as. It comes from `canon/device/device.ts`.
   Version 3 dropped version 2's backup `password`.
@@ -20,14 +22,25 @@ attachments.
   Each contact's `id` is its canon character ID, stable across versions.
 - `notes`: the owner's notes.
 - `files`: wallet documents, family photos, two Alderforge tools, two Hearthmere
-  appliances, and Maya's weight and blood pressure trackers. Tracker `rows` are
-  first-class row fields; weights carry their own units and every measurement
-  has an explicit time zone.
+  appliances, Maya's weight and blood pressure trackers, and her passcodes.
+  Tracker `rows` are first-class row fields; weights carry their own units and
+  every measurement has an explicit time zone. Passcode fields are tearleads'
+  `title`, `username`, `password`, `url`, `notes`, and comma-joined `tags`,
+  with blank ones left out; each extra attribute is a row of `name`, `value`,
+  and `protected: "true"` when it is masked.
 - `groups`: organization groups, each a `name` and the contact `id`s of its
   `members`. One group exists per label in the device's `tearleads.groups`,
   holding everyone saved with that label; today that is `Family` with Maya's
   mother, husband, and brother. tearleads gives each member an account, adds
   them to the owner's roster, and then to the group.
+- `folders`: folders tearleads creates under the owner's root, from
+  `tearleads.folders` in `canon/device/folders.ts`. Each `grants` a group
+  `read` or `write` access and holds `notes`. A note's `text` is the owner's;
+  each of its `additions` is a line a group member (by contact `id`) appends
+  as themselves, in order, so the note has several authors. Today a `Family`
+  folder that the Family group can write holds Maya's Thanksgiving plan, with
+  a line each from Rosa, Daniel, and Theo. Canon validation lets only members
+  of a group that can write add to a folder's notes.
 
 | Kind | Attachment slots |
 | --- | --- |
@@ -37,6 +50,11 @@ attachments.
 | `credit_card` | `credit-card-front-image`, `credit-card-back-image` |
 | `tool`, `appliance` | `equipment-photos` (repeatable), `receipt-image` |
 | `image` | Unslotted attachment |
+| `passcode` | None |
+
+An attachment with `avatar: true` is the photo the document shows as its
+avatar. Each tool and appliance marks its first `equipment-photos` photo; the
+seeder points the document's `avatarPhotoSlotId` field at that photo's slot.
 
 Attachment `file` values are names beside `seed.json`. Household photos use
 `household-<id>.jpg` names to avoid collisions with wallet images. Birth
@@ -49,7 +67,10 @@ their non-payment numbers start with `0000` and the specimen CVV is `000`.
 asserts on: a contact's display name, the first note's title and body line,
 each wallet document's title and image count, and each group's name with its
 members' roster names (`firstName lastName`). Optional wallet kinds are
-omitted when the device does not select them.
+omitted when the device does not select them. Each passcode lists its title,
+fields, and attribute count; each tool and appliance names its `avatar` file;
+and each folder lists its grants and, per note, its title, the full text once
+every addition is in, and the roster names of the members who add to it.
 
 ## Household photos and checks
 

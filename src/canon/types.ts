@@ -248,6 +248,51 @@ export interface Note {
   readonly text: string | ((context: CanonContext) => string);
 }
 
+/** A line a group member adds to a shared note, signed in as themselves. */
+export interface NoteAddition {
+  /** The character who writes it: a member of a group that can write. */
+  readonly author: string;
+  readonly text: string;
+}
+
+/** A shared note: the owner writes `text`, then each addition follows. */
+export interface SharedNote extends Note {
+  readonly additions: readonly NoteAddition[];
+}
+
+export type FolderAccess = "read" | "write";
+
+/** A group's access to a folder; the group is one of `tearleads.groups`. */
+export interface FolderGrant {
+  readonly group: string;
+  readonly access: FolderAccess;
+}
+
+/** A folder under the owner's root, opened to device groups. */
+export interface SharedFolder {
+  readonly name: string;
+  readonly grants: readonly FolderGrant[];
+  readonly notes: readonly SharedNote[];
+}
+
+/** A password-manager entry on the owner's device. */
+export interface Passcode {
+  /** Stable kebab-case ID. */
+  readonly id: string;
+  readonly title: string;
+  readonly username?: string;
+  readonly password: string;
+  readonly url?: string;
+  readonly notes?: string;
+  readonly tags?: readonly string[];
+  /** Extra named values; protected ones stay masked until revealed. */
+  readonly attributes?: readonly {
+    readonly name: string;
+    readonly value: string;
+    readonly protected?: boolean;
+  }[];
+}
+
 export interface AddressBookEntry {
   readonly character: string;
   /** How the owner saved this person, e.g. "Mom". Shown instead of the name. */
@@ -273,9 +318,12 @@ export interface Device {
      * Everyone saved with the label joins the group and the roster.
      */
     readonly groups: readonly string[];
+    /** Folders tearleads creates under the root and shares with groups. */
+    readonly folders: readonly SharedFolder[];
   };
   readonly addressBook: readonly AddressBookEntry[];
   readonly notes: readonly Note[];
+  readonly passcodes: readonly Passcode[];
   readonly wallet: readonly WalletDocument[];
 }
 

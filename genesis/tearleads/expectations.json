@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "photos": [
     {
       "title": "Sunday dinner at Mom's.jpg",
@@ -35,7 +35,8 @@
         "make": "Alderforge",
         "model": "AF-D18",
         "serialNumber": "AF26-D18-004217"
-      }
+      },
+      "avatar": "household-drill.jpg"
     },
     {
       "title": "Circular Saw Alderforge AF-CS165",
@@ -45,7 +46,8 @@
         "make": "Alderforge",
         "model": "AF-CS165",
         "serialNumber": "AF26-CS-001832"
-      }
+      },
+      "avatar": "household-circular-saw.jpg"
     }
   ],
   "appliances": [
@@ -57,7 +59,8 @@
         "make": "Hearthmere",
         "model": "HM-W8",
         "serialNumber": "HM25-W8-008614"
-      }
+      },
+      "avatar": "household-washing-machine.jpg"
     },
     {
       "title": "Refrigerator Hearthmere HM-R320",
@@ -67,7 +70,8 @@
         "make": "Hearthmere",
         "model": "HM-R320",
         "serialNumber": "HM25-R3-006209"
-      }
+      },
+      "avatar": "household-refrigerator.jpg"
     }
   ],
   "weight": {
@@ -167,6 +171,91 @@
         "Rosa Reyes",
         "Daniel Okafor",
         "Theo Reyes"
+      ]
+    }
+  ],
+  "passcodes": [
+    {
+      "title": "Garage door",
+      "fields": {
+        "title": "Garage door",
+        "password": "7302",
+        "notes": "Keypad left of the garage door; press Enter after the code.",
+        "tags": "home"
+      },
+      "attributeCount": 0
+    },
+    {
+      "title": "Home safe",
+      "fields": {
+        "title": "Home safe",
+        "password": "28-61-03",
+        "notes": "Bedroom closet safe. Passports and the spare car key live here.",
+        "tags": "home"
+      },
+      "attributeCount": 0
+    },
+    {
+      "title": "Building door",
+      "fields": {
+        "title": "Building door",
+        "password": "4417#",
+        "tags": "home"
+      },
+      "attributeCount": 0
+    },
+    {
+      "title": "Storage unit 22-B",
+      "fields": {
+        "title": "Storage unit 22-B",
+        "password": "3-9-14",
+        "notes": "Combination padlock; turn right first.",
+        "tags": "home"
+      },
+      "attributeCount": 0
+    },
+    {
+      "title": "Guest Wi-Fi",
+      "fields": {
+        "title": "Guest Wi-Fi",
+        "username": "AlderCrest-3B",
+        "password": "pepper-loves-the-beach",
+        "tags": "home, network"
+      },
+      "attributeCount": 0
+    },
+    {
+      "title": "Alarm system",
+      "fields": {
+        "title": "Alarm system",
+        "username": "maya.reyes",
+        "password": "2580",
+        "url": "https://account.kestrelwatch.example",
+        "notes": "Kestrel Watch panel by the front door.",
+        "tags": "home"
+      },
+      "attributeCount": 2
+    }
+  ],
+  "folders": [
+    {
+      "name": "Family",
+      "grants": [
+        {
+          "group": "Family",
+          "access": "write"
+        }
+      ],
+      "notes": [
+        {
+          "title": "Thanksgiving at Mom's",
+          "text": "Thanksgiving at Mom's\nThursday, November 26. Dinner at 4.\n- Maya: flan and the folding chairs\n- Rosa: turkey is ordered from Juniper Market; I'll pick it up Wednesday\n- Daniel: cider, and I'll set up the long table\n- Theo: pumpkin empanadas and the playlist",
+          "authors": [
+            "Rosa Reyes",
+            "Daniel Okafor",
+            "Theo Reyes"
+          ]
+        }
       ]
     }
   ],

@@ -80,7 +80,10 @@ export function checkDevice(world: World, device: Device): string[] {
 }
 
 export function checkNotes(world: World): string[] {
-  return world.device.notes.flatMap((note) => {
+  return [
+    ...world.device.notes,
+    ...world.device.tearleads.folders.flatMap((folder) => folder.notes),
+  ].flatMap((note) => {
     try {
       return resolveNoteText(world, note).trim()
         ? []

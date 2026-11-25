@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "contacts": [
     {
       "id": "rosa-reyes",
@@ -203,7 +203,8 @@
         {
           "file": "household-drill.jpg",
           "mimeType": "image/jpeg",
-          "slot": "equipment-photos"
+          "slot": "equipment-photos",
+          "avatar": true
         },
         {
           "file": "household-drill-detail.jpg",
@@ -229,7 +230,8 @@
         {
           "file": "household-circular-saw.jpg",
           "mimeType": "image/jpeg",
-          "slot": "equipment-photos"
+          "slot": "equipment-photos",
+          "avatar": true
         },
         {
           "file": "household-saw-receipt.jpg",
@@ -250,7 +252,8 @@
         {
           "file": "household-washing-machine.jpg",
           "mimeType": "image/jpeg",
-          "slot": "equipment-photos"
+          "slot": "equipment-photos",
+          "avatar": true
         },
         {
           "file": "household-washer-receipt.jpg",
@@ -271,7 +274,8 @@
         {
           "file": "household-refrigerator.jpg",
           "mimeType": "image/jpeg",
-          "slot": "equipment-photos"
+          "slot": "equipment-photos",
+          "avatar": true
         },
         {
           "file": "household-fridge-receipt.jpg",
@@ -376,6 +380,78 @@
         }
       ],
       "attachments": []
+    },
+    {
+      "kind": "passcode",
+      "fields": {
+        "title": "Garage door",
+        "password": "7302",
+        "notes": "Keypad left of the garage door; press Enter after the code.",
+        "tags": "home"
+      },
+      "attachments": []
+    },
+    {
+      "kind": "passcode",
+      "fields": {
+        "title": "Home safe",
+        "password": "28-61-03",
+        "notes": "Bedroom closet safe. Passports and the spare car key live here.",
+        "tags": "home"
+      },
+      "attachments": []
+    },
+    {
+      "kind": "passcode",
+      "fields": {
+        "title": "Building door",
+        "password": "4417#",
+        "tags": "home"
+      },
+      "attachments": []
+    },
+    {
+      "kind": "passcode",
+      "fields": {
+        "title": "Storage unit 22-B",
+        "password": "3-9-14",
+        "notes": "Combination padlock; turn right first.",
+        "tags": "home"
+      },
+      "attachments": []
+    },
+    {
+      "kind": "passcode",
+      "fields": {
+        "title": "Guest Wi-Fi",
+        "username": "AlderCrest-3B",
+        "password": "pepper-loves-the-beach",
+        "tags": "home, network"
+      },
+      "attachments": []
+    },
+    {
+      "kind": "passcode",
+      "fields": {
+        "title": "Alarm system",
+        "username": "maya.reyes",
+        "password": "2580",
+        "url": "https://account.kestrelwatch.example",
+        "notes": "Kestrel Watch panel by the front door.",
+        "tags": "home"
+      },
+      "attachments": [],
+      "rows": [
+        {
+          "name": "Monitoring account",
+          "value": "KW-20817"
+        },
+        {
+          "name": "Duress code",
+          "value": "2581",
+          "protected": "true"
+        }
+      ]
     }
   ],
   "groups": [
@@ -385,6 +461,36 @@
         "rosa-reyes",
         "daniel-okafor",
         "theo-reyes"
+      ]
+    }
+  ],
+  "folders": [
+    {
+      "name": "Family",
+      "grants": [
+        {
+          "group": "Family",
+          "access": "write"
+        }
+      ],
+      "notes": [
+        {
+          "text": "Thanksgiving at Mom's\nThursday, November 26. Dinner at 4.\n- Maya: flan and the folding chairs",
+          "additions": [
+            {
+              "author": "rosa-reyes",
+              "text": "- Rosa: turkey is ordered from Juniper Market; I'll pick it up Wednesday"
+            },
+            {
+              "author": "daniel-okafor",
+              "text": "- Daniel: cider, and I'll set up the long table"
+            },
+            {
+              "author": "theo-reyes",
+              "text": "- Theo: pumpkin empanadas and the playlist"
+            }
+          ]
+        }
       ]
     }
   ],
@@ -404,9 +510,6 @@
     },
     {
       "text": "Bike maintenance\n- Chain replaced at 2,140 mi (August)\n- Marcus says go tubeless before gravel season\n- Check brake pads before the Lake Kestrel ride"
-    },
-    {
-      "text": "Home codes\nBuilding door: 4417#\nStorage unit 22-B: 3-9-14\nGuest Wi-Fi: AlderCrest-3B / pepper-loves-the-beach"
     }
   ]
 }
