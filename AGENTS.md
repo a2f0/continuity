@@ -132,9 +132,8 @@ the shared skill upstream instead. Project-owned skills, such as
 `bun run lint:skills` fails when the copies differ. After changing the pin or
 `permissions.executables` in `agent-tool.json`, run
 `bun run agents:sync` and commit the lockfile, skills, manifest, and generated
-harness rules (`.claude/settings.json`, `.codex/rules/agent-tool.rules`,
-`.gemini/policies/agent-tool.toml`, and `.agent-tool-permissions.json`)
-together. `bun run agents:check`, part of
+harness rules (`.claude/settings.json`, `.codex/rules/agent-tool.rules`, and
+`.agent-tool-permissions.json`) together. `bun run agents:check`, part of
 `check:fast`, fails on missing, outdated, or edited managed skills or harness
 rules. Run classified CLIs through
 `bun run agent-tool bun x <name> [-- args...]`: `commitlint` and
@@ -142,8 +141,9 @@ rules. Run classified CLIs through
 
 Shipping rules on top of the shared skills:
 
-- **Reviewer**: prefer the other agent's CLI (Codex from Claude Code, Claude
-  from Codex), then the remaining CLIs, and report any fallback.
+- **Reviewer**: prefer an independent model/provider from the author across
+  Antigravity CLI (`agy`), Claude Code, Codex, and OpenCode, and report any
+  fallback.
 - **Base integration**: merge the pinned base OID; never rebase or force-push.
 - **Versions**: the root package ships one patch past its version on the merge
   base. Before each review, run
